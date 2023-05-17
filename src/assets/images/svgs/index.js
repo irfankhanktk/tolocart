@@ -1,0 +1,7 @@
+export { default as playstore } from './playstore.svg'
+export { default as applestore } from './apple-store.svg'
+export { default as visa } from './visa.svg'
+export { default as footer_log } from './footer-logo.svg'
+export { default as footer_twitter } from './twitter-footer.svg'
+export { default as footer_insta } from './insta-footer.svg'
+export { default as fb_footer } from './fb-footer.svg'
