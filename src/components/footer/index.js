@@ -2,7 +2,7 @@ import React from 'react';
 import { applestore, fb_footer, footer_insta, footer_log, footer_twitter, playstore, visa } from '../../assets/images/svgs';
 const Footer = () => {
     return (
-        <div className='mt-5'>
+        <div>
             <div className='p-5 d-md-flex flex-row justify-content-between' style={{ background: '#FF5A0024' }}>
                 <div>
                     <p style={{

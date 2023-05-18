@@ -1,11 +1,10 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import { home_bg } from '../../assets/images';
 import AboutHome from '../../components/about-home';
 import CustomerHomeCard from '../../components/customer-home-card/index';
+import FrequentlyQuestion from '../../components/frequently-question/index';
 import HomeServices from '../../components/home-services/index';
-import { Container } from 'react-bootstrap';
-import CateryCard from '../../components/category-card';
-import CompaignCard from '../../components/compaign-card';
 const Home = () => {
 
     return (
@@ -19,39 +18,7 @@ const Home = () => {
                 <CustomerHomeCard style={{ flexDirection: 'column' }} descriptionBg={'#1BB504DE'} />
                 <CustomerHomeCard style={{ flexDirection: 'column' }} descriptionBg={'#FF5A00'} />
             </Container>
-            <div className='mx-5'>
-                <div className='card-container' style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                    {[
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                    ]?.map((item, index) => (
-                        <CateryCard title={item?.title} border={item?.border} bg={item?.bg} />
-                    ))}
-                </div>
-            </div>
-            <div className='mx-5'>
-                <div className='card-container' style={{ display: 'flex', justifyContent: 'space-between', overflow: 'scroll', flexWrap: 'nowrap' }}>
-                    {[
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-
-                    ]?.map((item, index) => (
-                        <CompaignCard title={item?.title} bg={item?.bg} />
-                    ))}
-                </div>
-            </div>
+            <FrequentlyQuestion />
         </div>
     );
 };

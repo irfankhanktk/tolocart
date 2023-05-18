@@ -10,11 +10,11 @@ const CompaignCard = ({
     Need`
 }) => {
     return (
-        <div className='col-6 mt-5 px-1'>
+        <div className='col-md-8 col-sm-10 mt-5 px-1'>
             <div className='p-1' style={{ ...style, background: `${bg}` }}>
-                <p className='text-start' style={{ fontSize: '32px', color: '#000' }}>{title}</p>
-                <div className='p-3 d-flex rounded justify-content-between align-items-center'>
-                    <p className='text-start' style={{ fontSize: '24px', color: '#000' }}>{description}</p>
+                <p className='text-start font-size-heavy' style={{ color: '#000' }}>{title}</p>
+                <div className='p-3 d-sm-flex rounded justify-content-between align-items-center'>
+                    <p className='text-start font-size-heading'>{description}</p>
                     <img className='w-50 h-75' src={image} alt='image here' />
                 </div>
             </div>
