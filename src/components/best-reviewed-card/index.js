@@ -23,14 +23,12 @@ const BestReviewedCard = ({
                 <p className='font-size-normal m-0'>{title}</p>
                 <p className='font-size-small color-white-50 m-0'>{3.5} oz</p>
                 <p className='font-size-small' style={{ color: '#1F9F0C' }}>In stock</p>
-                <div className='d-flex justify-content-between align-items-center'>
-                    <div className='bg-info rounded px-2 py-1 h-auto'>
+                <div className='position-relative d-flex justify-content-between align-items-center'>
+                    <div className='bg-info rounded px-3 py-1 h-auto'>
                         <span>23$</span>
+                        <span className='font-size-small position-absolute translate-middle-y mt-1'>34</span>
                     </div>
-                    <div class="position-relative">
-                        <span className='position-absolute top-0 start-0'>3</span>
-                        <img className='img-fluid' src={review_plus} alt='image here' />
-                    </div>
+                    <img className='img-fluid' src={review_plus} alt='image here' />
                 </div>
             </div>
         </div>
