@@ -1,9 +1,6 @@
 import React from 'react';
 import { home_bg } from '../../assets/images';
-import AboutHome from '../../components/about-home';
-import CustomerHomeCard from '../../components/customer-home-card/index';
-import HomeServices from '../../components/home-services/index';
-import { Container } from 'react-bootstrap';
+import BestReviewedCard from '../../components/best-reviewed-card';
 import CateryCard from '../../components/category-card';
 import CompaignCard from '../../components/compaign-card';
 import FrequentlyQuestion from '../../components/frequently-question/index';
@@ -72,44 +69,45 @@ const About = () => {
                         slidesToScroll={1}
                         className='card-slider'
                         responsive={[
-                        {
-                            breakpoint: 1200,
-                            settings: {
-                                slidesToShow: 4,
+                            {
+                                breakpoint: 1200,
+                                settings: {
+                                    slidesToShow: 4,
+                                },
                             },
+                            {
+                                breakpoint: 992,
+                                settings: {
+                                    slidesToShow: 3,
+                                },
                             },
-                          {
-                            breakpoint: 992,
-                            settings: {
-                              slidesToShow: 3,
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 2,
+                                },
                             },
-                          },
-                          {
-                            breakpoint: 768,
-                            settings: {
-                              slidesToShow: 2,
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                },
                             },
-                          },
-                          {
-                            breakpoint: 480,
-                            settings: {
-                              slidesToShow: 1,
-                            },
-                          },
                         ]}
-                        >
-                            {/* className='card-slider'> */}
+                    >
+                        {/* className='card-slider'> */}
                         {[
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
+                            { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
+                            { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
+                            { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
+                            { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
                         ].map((item, index) => (
-                        <BestReviewedCard key={index} title={item?.title} bg={item?.bg} />
+                            <BestReviewedCard key={index} title={item?.title} bg={item?.bg} />
                         ))}
                     </Slider>
                 </div>
             </div>
+
             <FrequentlyQuestion />
         </div>
     );
