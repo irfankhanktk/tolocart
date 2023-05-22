@@ -1,0 +1,127 @@
+
+.csm-product-card{
+    border: 1px solid #E2E2E2;
+    border-radius: 18px;
+    padding: 12px 18px 19px 18px;
+    margin: 0px 10px;
+}
+.rating-title .rating-number{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+    color: #030303;
+}
+.product-title{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px !important;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+    color: #181725;
+    margin-top: 11px;
+    margin-bottom: 7px;
+}
+.product-weight{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #7C7C7C;
+    margin-bottom: 8px;
+}
+.stock-product{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #1F9F0C;
+}
+
+.arrow-label {
+    position: absolute;
+    display: inline-block;
+    rotate: -90deg;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    right: 10px;
+  }
+  
+  .arrow-label::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -30%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-bottom: 11px solid #FF008A;
+    rotate: -90deg;
+  }
+  
+  .arrow-label span {
+    padding: 5px 10px;
+    background: #FF008A;
+    color: #fff;
+  }
+  .product-price{
+    background: #FFD600 ;
+    border-radius: 5px;
+    padding: 7px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: #181725;
+    gap: 7px;
+  }
+  .product-price span{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+    color: #181725;
+  }
+  .product-price p{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1px;
+    color: #181725;
+  }
+  .discount-price h3{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #7C7C7C;
+  }
+  

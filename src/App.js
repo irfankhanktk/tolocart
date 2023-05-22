@@ -7,7 +7,6 @@ import Contact from './pages/contact';
 import Home from './pages/home';
 import './App.css'
 import Footer from './components/footer';
-
 const App = () => {
 
   return (
