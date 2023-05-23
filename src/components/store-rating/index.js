@@ -3,6 +3,7 @@ import { laptop_home, review_img, review_plus, vegetable } from '../../assets/im
 import './style.css'
 import { store_heart, store_star, tick } from '../../assets/images/svgs';
 import { Row } from 'react-bootstrap';
+import RatingStars from '../rating-stars/index';
 const StoreRating = ({
     image = laptop_home,
     title = 'GNN Mart',
@@ -18,8 +19,7 @@ const StoreRating = ({
                 <p className='title'>{title}</p>
                 <p className='description'>{description}</p>
                 <div className='d-flex gap-1'>
-                    {[1, 2, 3, 4, 5]?.map((item, index) => <img className='image-fluid' src={store_star} />)}
-                    <span className='rating'>(0)</span>
+                    <RatingStars />
                 </div>
             </div>
             <div className='col-6'>
