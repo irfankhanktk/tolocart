@@ -1,5 +1,8 @@
 import React from 'react';
-import { home_bg } from '../../assets/images';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import { home_bg, laptop_home, vegetable } from '../../assets/images';
 import BestReviewedCard from '../../components/best-reviewed-card';
 import CateryCard from '../../components/category-card';
 import CompaignCard from '../../components/compaign-card';
@@ -71,13 +74,13 @@ const About = () => {
                         ]}
                     >
                     {[
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
-                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
-                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
-                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
+                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2', image: laptop_home },
+                        { title: 'Retail', bg: '#53B1751A', border: '#53B175B2', image: vegetable },
+                        { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A', image: laptop_home },
+                        { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2', image: vegetable },
 
                     ]?.map((item, index) => (
-                        <CompaignCard title={item?.title} bg={item?.bg} />
+                        <CompaignCard title={item?.title} bg={item?.bg} image={item?.image} />
                     ))}
                     </Slider>
                 </div>

@@ -7,11 +7,15 @@ import Contact from './pages/contact';
 import Home from './pages/home';
 import './App.css'
 import Footer from './components/footer';
+import Drawer from './components/drawer';
 const App = () => {
 
   return (
     <Router>
       <div>
+        <Drawer title="My Drawer">
+
+        </Drawer>
         <TopMenu />
         {/* <Sidebar /> */}
         <Routes>
@@ -20,6 +24,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
+
       </div>
     </Router>)
 }

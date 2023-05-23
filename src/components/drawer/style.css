@@ -1,0 +1,41 @@
+/* Drawer.css */
+.drawer {
+  width: 300px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  transition: transform 0.3s ease;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.closed {
+  transform: translateX(-100%);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.down {
+  transform: rotate(0deg);
+}
+
+.up {
+  transform: rotate(-180deg);
+}
+
+.drawer-content {
+  padding: 10px;
+}
