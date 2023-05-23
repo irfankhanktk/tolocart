@@ -1,0 +1,25 @@
+.card-bg{
+    background: rgba(255, 90, 0, 0.86);
+    border: 1px solid #F2F3F2;
+    border-radius: 8px;
+    padding: 20px 14px;
+}
+.discount-offer{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #FAFF00;
+}
+.product-title-name{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    color: #FFFFFF;
+    width: 60%;
+    margin: 0 auto;
+    padding: 35px 0px;
+}

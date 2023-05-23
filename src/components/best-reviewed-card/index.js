@@ -37,7 +37,7 @@ const BestReviewedCard = ({
                         </div>
                         <h3 className='m-0'><del>$12.67</del></h3>
                     </div>
-                    <a href='#'>
+                    <a href='#' className='add-to-cart-img'>
                         <img className='img-fluid' src={review_plus} alt='image here' />
                     </a>
                 </div>

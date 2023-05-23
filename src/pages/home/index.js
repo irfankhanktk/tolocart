@@ -13,10 +13,10 @@ const Home = () => {
             <p className='home-bg'>Tolocart Everyday Needs</p>
             <HomeServices />
             <AboutHome />
-            <Container className='d-flex  flex-wrap justify-content-between over-flow:hidden'>
+            <Container className='container row justify-content-around d-flex align-items-center mx-auto'>
                 <CustomerHomeCard style={{ flexDirection: 'column-reverse' }} descriptionBg={'#FF5A00'} />
                 <CustomerHomeCard style={{ flexDirection: 'column' }} descriptionBg={'#1BB504DE'} />
-                <CustomerHomeCard style={{ flexDirection: 'column' }} descriptionBg={'#FF5A00'} />
+                <CustomerHomeCard style={{ flexDirection: 'column-reverse' }} descriptionBg={'#FF5A00'} />
             </Container>
             <FrequentlyQuestion />
         </div>
