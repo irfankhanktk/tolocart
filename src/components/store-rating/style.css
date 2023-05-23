@@ -1,0 +1,43 @@
+.title {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #030303;
+  margin: 0px;
+}
+.description {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+.rating {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 18px;
+  /* or 225% */
+
+  display: flex;
+  align-items: center;
+
+  color: #9d9a9a;
+}
+.status {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+}
