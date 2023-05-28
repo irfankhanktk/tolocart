@@ -7,14 +7,15 @@ import BestReviewedCard from '../../components/best-reviewed-card';
 import CateryCard from '../../components/category-card';
 import CompaignCard from '../../components/compaign-card';
 import FrequentlyQuestion from '../../components/frequently-question/index';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
+import PopularItemCard from '../../components/popular-item-card';
 const About = () => {
 
     return (
-        <div>
+        <>
+        <div className='container-fluid'>
             <img src={home_bg} style={{ width: '100%' }} />
+        </div>
+        <div>                                                                   
             <p className='home-bg font-size-heavy'>Choose your best category</p>
             <div className='mx-5'>
                 <div className='card-container' style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
@@ -135,8 +136,61 @@ const About = () => {
                     </Slider>
                 </div>
             </div>
+
+            <p className='home-bg heading-title'>Popular Items Nearby</p>
+            <div className='mx-3'>
+                <div className='card-container' >
+                    <Slider
+                        dots={false}
+                        infinite={false}
+                        speed={500}
+                        slidesToShow={3}
+                        slidesToScroll={1}
+                        className='card-slider'
+                        responsive={[
+                            {
+                                breakpoint: 1200,
+                                settings: {
+                                    slidesToShow: 3,
+                                },
+                            },
+                            {
+                                breakpoint: 992,
+                                settings: {
+                                    slidesToShow: 2,
+                                },
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 2,
+                                },
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                },
+                            },
+                        ]}
+                    >
+                        {[
+                            { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
+                            { title: 'Retail', bg: '#53B1751A', border: '#53B175B2' },
+                            { title: 'Electronic', bg: '#D3B0E01A', border: '##D3B0E01A' },
+                            { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
+                            { title: 'Groceries', bg: '#F8A44C1A', border: '#F8A44CB2' },
+                        ].map((item, index) => (
+                            <PopularItemCard key={index} title={item?.title} bg={item?.bg} />
+                        ))}
+                    </Slider>
+                </div>
+            </div>
+            {/* <PopularItemCard/> */}
             <FrequentlyQuestion />
         </div>
+        </>
     );
 };
+
 export default About;

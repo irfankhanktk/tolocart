@@ -1,0 +1,68 @@
+.main-container {
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.popularItemCard {
+  border: 1px solid #E2E2E2;
+  border-radius: 10px;
+  padding: 17px 13px;
+}
+.popularItem-title{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 18px;
+  color: #030303;
+  margin-bottom: 13px;
+}
+.popularItem-price h2{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 18px;
+  color: #000000;
+  margin-top: 13px
+}
+.popularItem-price h4{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #B8B8B8;
+  margin: 0;
+}
+
+.arrow-label-off {
+  position: absolute;
+  display: inline-block;
+  rotate: 0deg;
+  color: #fff;
+  font-weight: 600;
+  left: -1px;
+  top: -10px;
+}
+
+.arrow-label-off::before {
+  content: "";
+  position: absolute;
+  top: 23px;
+  left: 84%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 12px solid #FF008A;
+  rotate: 90deg;
+}
+
+.arrow-label-off span {
+  padding: 5px 10px;
+  background: #FF008A;
+  color: #fff;
+  font-size: 13px;
+}

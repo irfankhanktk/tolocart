@@ -5,6 +5,7 @@ import AboutHome from '../../components/about-home';
 import CustomerHomeCard from '../../components/customer-home-card/index';
 import FrequentlyQuestion from '../../components/frequently-question/index';
 import HomeServices from '../../components/home-services/index';
+import PopularItemCard from '../../components/popular-item-card';
 const Home = () => {
 
     return (
@@ -18,6 +19,7 @@ const Home = () => {
                 <CustomerHomeCard style={{ flexDirection: 'column' }} descriptionBg={'#1BB504DE'} />
                 <CustomerHomeCard style={{ flexDirection: 'column-reverse' }} descriptionBg={'#FF5A00'} />
             </Container>
+            
             <FrequentlyQuestion />
         </div>
     );
