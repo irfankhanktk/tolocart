@@ -1,0 +1,19 @@
+.product--details-title {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #181725;
+  background-color: #181725;
+}
+.custom-modal .modal-dialog {
+  width: auto !important;
+  max-width: 90% !important;
+  margin: 30px auto;
+}
+.product-img {
+  border: 1px solid #e2e2e2;
+  margin-top: 50px;
+}
