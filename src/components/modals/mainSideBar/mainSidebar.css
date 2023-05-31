@@ -1,7 +1,12 @@
 .custom-modal {
-    margin: 0 !important;
-  }
-  
-  .custom-modal-content {
-    margin: 0 !important;
-  }
+  margin: 0 !important;
+  display: flex !important;
+  height: 100vh !important;
+  overflow-y: auto;
+  overflow-y: auto;
+}
+
+.custom-modal-content {
+  margin: 0 !important;
+  height: 100% !important;
+}
