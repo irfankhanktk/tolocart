@@ -7,21 +7,20 @@ import Contact from './pages/contact';
 import Home from './pages/home';
 import './App.css'
 import Footer from './components/footer';
-import Drawer from './components/drawer';
+import SideDasboard from './pages/sideDashboard';
+// import Drawer from './components/drawer';
 const App = () => {
 
   return (
     <Router>
+      <TopMenu />
       <div>
-        <Drawer title="My Drawer">
-
-        </Drawer>
-        <TopMenu />
         {/* <Sidebar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/SideDashboard" element={<SideDasboard/>} />
         </Routes>
         <Footer />
 

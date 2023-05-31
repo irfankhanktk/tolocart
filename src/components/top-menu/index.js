@@ -1,48 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { PrimaryButton } from '../buttons';
+import "./topmenu.css"
+import { logo_main } from '../../assets/images';
+import MainSideBar from '../modals/mainSideBar';
 
 export function TopMenu() {
+    const [showModal, setShowModal] = useState(false);
+
+    const handleModalOpen = () => {
+        setShowModal(true);
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+    };
     return (
-        <div className="container-fluid">
-            <Navbar bg="light" expand="lg" collapseOnSelect>
-                <LinkContainer to="/">
-                    <Navbar.Brand>React App</Navbar.Brand>
-                </LinkContainer>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav" style={{ justifyContent: 'space-between' }}>
+        <>
 
-                    <Nav className="mr-auto">
-                        <LinkContainer to="/about">
-                            <Nav.Link>About</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/contact">
-                            <Nav.Link>Contact</Nav.Link>
-                        </LinkContainer>
-                    </Nav>
-                    <div className='d-flex flex-row'>
-                        <Nav className="ml-auto">
-                            <Form className='me-2'>
-                                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            </Form>
-
-                            {/* <LinkContainer to="/login"> */}
-                            {/* <Nav.Link>Login</Nav.Link> */}
-                            <PrimaryButton className={'px-4 me-2'} title={'Log in'}
-                                style={{ background: '#E9EBF2', border: 0, color: '#000000', borderRadius: '10px', }} />
-                            {/* </LinkContainer> */}
-                            {/* <LinkContainer to="/logout"> */}
-                            {/* <Nav.Link>Logout</Nav.Link> */}
-                            <PrimaryButton className={'px-4'} title={'Sign up'}
-                                style={{ background: '#FF5A00', border: 0, color: '#FFFFFF', borderRadius: '10px', }} />
-                            {/* </LinkContainer> */}
-                        </Nav>
-                    </div>
-                </Navbar.Collapse>
-
-            </Navbar>
+    <header id="header" className="header d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-between">
+            <i className="fa fa-bars" aria-hidden="true" onClick={handleModalOpen} data-bs-toggle="modal" data-bs-target="#exampleModal" style={{fontSize: '30px', cursor: 'pointer'}}></i>
+            <a href="#" className="logo d-flex align-items-center">
+                <img src={logo_main} alt="tolocart"/>
+            </a>
         </div>
+        <div className="search-bar">
+            <form className="search-form d-flex align-items-center" method="get" action="">
+                <input type="text" name="input" placeholder="Search Groceris stores" title="Enter search keyword"/>
+                <button type="submit" title="Search"><i className="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+        </div>
+        <nav className="header-nav ms-auto">
+            <ul className="d-flex align-items-center">
+                <li className="nav-item d-block d-lg-none">
+                    <a className="nav-link nav-icon search-bar-toggle " href="#">
+                        <i className="bi bi-search"></i>
+                    </a>
+                </li>
+                <li className="nav-item dropdown d-flex flex-column">
+                    <a className="takeaway active" href="#">
+                        Pickup
+                    </a>
+                    <a className="takeaway" href="#">
+                        Delivery
+                    </a>
+                </li>
+                <li className="nav-item dropdown">
+                    <a className="nav-link nav-icon nav-address" href="#">
+                        <span><i className="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <span>Ygnacio, CA</span>
+                    </a>
+                </li>
+                <li className="nav-item dropdown pe-3">
+                    <a className="nav-link nav-login-btn " href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-2">
+                        <span>Log in</span>
+                    </a>
+                </li>
+                <li className="nav-item dropdown pe-3">
+                    <a className=" nav-cart-btn d-flex gap-2" href="#">
+                        <span><i className="fa fa-cart-arrow-down" aria-hidden="true"></i></span>
+                        <span>0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <MainSideBar showModal={showModal} handleModalClose={handleModalClose}/>
+        </>
     );
 }
 

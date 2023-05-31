@@ -1,0 +1,92 @@
+.modal-wrapper{
+    padding: 10px 40px 25px 40px;
+}
+.signup-title{  
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 29px;
+    color: #181725;
+    border-bottom: 2px solid #000;
+}
+.privacy-policy{
+    font-family: 'Gilroy-Medium';
+    font-size: 14px;
+    line-height: 110.1%;
+    letter-spacing: 0.05em;
+    color: #7C7C7C;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.privacy-policy a,
+.privacy-policy a:hover
+{
+    color: rgb(16, 182, 16);
+    text-decoration: none;
+}
+
+.input-field{
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 29px;
+    text-decoration-line: underline;
+    color: #7C7C7C;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.social-links{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #828282;
+    text-align: center;
+    display: block;
+    margin-bottom: 50px;
+}
+.continue-with-links a{
+    background: rgba(246, 246, 246, 0.35);
+    border-radius: 10px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    text-decoration-line: underline;
+    color: #212121;
+    padding: 20px;
+    margin-bottom: 31px;
+}
+.social-links:hover,
+.continue-with-links a:hover{
+    color: #212121;
+}
+.custom-close-header{
+    border-bottom: none !important;
+}
+.modal-dialog{
+    max-width: 450px !important;
+}
+
+@media(max-width:480px){
+    .modal-wrapper{
+        padding: 10px 20px 30px 20px;
+    }
+}
+  
+  
+  
+  

@@ -1,0 +1,110 @@
+.login-btn{
+    background: #FF5A00;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #FFF9FF;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+.login-btn:hover{
+    color: #FFF9FF;
+}
+.forgot-password{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 108.1%;
+    letter-spacing: 0.05em;
+    text-decoration-line: underline;
+    color: #181725;
+}
+.forgot-password span{
+   color: rgb(16, 182, 16);;
+}
+.verify-code{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 15px;
+    text-decoration-line: underline;
+    color: #7C7C7C;
+}
+.social-login-links {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #828282;
+    text-align: center;
+    display: block;
+    margin-bottom: 15px;
+}
+.continue-with-login-links a {
+    background: rgba(246, 246, 246, 0.35);
+    border-radius: 10px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    text-decoration-line: underline;
+    color: #212121;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+.login-input-field {
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 29px;
+    text-decoration-line: underline;
+    color: #7C7C7C;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.nav-item .nav-link.active{
+    border: none;
+    color: #000 !important;
+    padding-bottom: 0px !important;
+}
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    border-color: none !important;
+    border: none !important;
+    outline: none !important;
+    border-bottom: 1px solid #000;
+    color: #000 !important;
+}
+.nav-item .nav-link{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    text-decoration-line: underline;
+    color: #7C7C7C;
+}
+.nav-tabs .nav-link {
+    margin-bottom: 0 !important;
+}

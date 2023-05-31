@@ -6,12 +6,16 @@ import CustomerHomeCard from '../../components/customer-home-card/index';
 import FrequentlyQuestion from '../../components/frequently-question/index';
 import HomeServices from '../../components/home-services/index';
 import PopularItemCard from '../../components/popular-item-card';
+import LoginModal from '../../components/modals/login-modal';
+import SignupModal from '../../components/modals/signup-modal';
 const Home = () => {
 
     return (
         <div>
             <img src={home_bg} style={{ width: '100%' }} />
             <p className='home-bg'>Tolocart Everyday Needs</p>
+            <LoginModal/>
+            <SignupModal/>
             <HomeServices />
             <AboutHome />
             <Container className='container row justify-content-around d-flex align-items-center mx-auto'>

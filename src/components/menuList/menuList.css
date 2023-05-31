@@ -1,0 +1,17 @@
+.menu-list-title h2{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 59px;
+    color: #181725;
+}
+
+.menu-list-title h3{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 39px;
+    color: #FF5A00;
+}

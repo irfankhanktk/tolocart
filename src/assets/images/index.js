@@ -4,3 +4,6 @@ export { default as laptop_home } from './about-laptop.png';
 export { default as review_img } from './brest-review-img.png';
 export { default as review_plus } from './review-plus.png';
 export { default as popular_img } from './popular-image.png';
+export { default as fb } from './facebook.png';
+export { default as google } from './google.png';
+export { default as logo_main } from './tolocart-logo.png';
