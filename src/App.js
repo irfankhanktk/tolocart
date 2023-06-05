@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import "./App.css";
 import Footer from "./components/footer";
 import SideDasboard from "./pages/store-dashboard";
+import ProductDetailsModal from "./components/modals/product-details-modal/index";
 // import Drawer from './components/drawer';
 const App = () => {
   return (
@@ -19,12 +20,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/market-place" element={<MarketPlace />} />
           <Route path="/stores" element={<Stores />} />
-<<<<<<< HEAD
           <Route path="/store-dashboard" element={<SideDasboard />} />
-=======
-          <Route path="/SideDashboard" element={<SideDasboard />} />
-          <Route path="/productDetail" element={<ProductDetailsModal/>} />
->>>>>>> 17d3a87ffe91756768dd8f88abc3238446db69ba
+          <Route path="/productDetail" element={<ProductDetailsModal />} />
         </Routes>
         <Footer />
       </div>
