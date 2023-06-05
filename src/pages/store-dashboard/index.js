@@ -6,6 +6,7 @@ const StoreDashboard = () => {
   return (
     <>
       <div className="container-fluid">
+        <StoreCardHeader />
         <div className="row">
           <div className="col-md-2">
             <SideMenu />
