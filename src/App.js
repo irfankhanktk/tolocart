@@ -2,13 +2,14 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import { TopMenu } from "./components/top-menu";
-import About from "./pages/about";
+import MarketPlace from "./pages/market-place";
 import Stores from "./pages/stores";
 import Home from "./pages/home";
 import "./App.css";
 import Footer from "./components/footer";
-import SideDasboard from "./pages/sideDashboard";
-import ProductDetailsModal from "./components/modals/product-details-modal";
+import SideDasboard from "./pages/store-dashboard";
+import ProductDetailsModal from "./components/modals/product-details-modal/index";
+// import Drawer from './components/drawer';
 const App = () => {
   return (
     <Router>
@@ -17,10 +18,10 @@ const App = () => {
         {/* <Sidebar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/market-place" element={<MarketPlace />} />
           <Route path="/stores" element={<Stores />} />
-          <Route path="/SideDashboard" element={<SideDasboard />} />
-          <Route path="/productDetail" element={<ProductDetailsModal/>} />
+          <Route path="/store-dashboard" element={<SideDasboard />} />
+          <Route path="/productDetail" element={<ProductDetailsModal />} />
         </Routes>
         <Footer />
       </div>
