@@ -104,7 +104,11 @@
     line-height: 29px;
     text-decoration-line: underline;
     color: #7C7C7C;
+    cursor: pointer;
 }
 .nav-tabs .nav-link {
     margin-bottom: 0 !important;
+}
+.continue-with-login-links a img{
+    width: 20px;
 }
