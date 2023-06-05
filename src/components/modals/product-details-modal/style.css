@@ -17,3 +17,110 @@
   border: 1px solid #e2e2e2;
   margin-top: 50px;
 }
+
+
+.singleproduct-title h2{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+  color: #181725;
+}
+
+.lb-price{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  color: #7C7C7C;
+  margin-bottom: 3px;
+}
+.stock-product{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #1F9F0C;
+}
+.satisfaction-gurantee a{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #5468FF;
+}
+.satisfaction-gurantee i{
+  font-size: 10px;
+}
+.custom-dropdown{
+  background: transparent !important;
+  color: #000 !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between ;
+  align-items: center;
+  border: none !important;
+  font-family: 'Gilroy' !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 16px !important; 
+  line-height: 18px !important;
+  color: #181725 !important;
+}
+.custom-dropdown-menu{
+  position: relative !important;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: translate(0px, 0px) !important;
+  border: none !important;
+}
+.dropdown-toggle::after {
+  display: none !important;
+}
+.custom-accordion-item{
+  border-right: none !important;
+  border-left: none !important;
+  border-radius: unset !important;
+  outline: none !important;
+}
+.custom-accordion-button{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  border-left: 0 !important;
+  border-right: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.item-title h2{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+}
+.item-title a{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FF5A00;
+  text-decoration: none;
+}
+.item-title a:hover{
+  color: #FF5A00;
+}
+.accordion-button:not(.collapsed) {
+  color: #000 !important;
+  background-color: transparent !important;
+  box-shadow: unset !important;
+}

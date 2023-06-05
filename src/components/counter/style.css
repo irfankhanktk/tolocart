@@ -1,0 +1,16 @@
+.counter-button{
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  color: #FF5A00;
+}
+.quantity-pro{
+  border: 1px solid #E2E2E2;
+  border-radius: 17px;
+  display: flex;
+  padding: 13px;
+  font-size: 20px;
+  width: 50px;
+  align-items: center;
+  justify-content: center;
+}

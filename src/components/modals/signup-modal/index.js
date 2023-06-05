@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
 import "./signup.css"; // Import the CSS file
-import { google } from "../../../assets/images";
+import { fb, google } from "../../../assets/images";
 
 const SignupModal = ({ show, setShow }) => {
   return (
@@ -28,11 +28,12 @@ const SignupModal = ({ show, setShow }) => {
             </a>
 
             <div className="continue-with-links">
-              <a href="#">
+              <a href="#" className="d-flex gap-3 align-items-center justify-content-center">
                 {" "}
                 <img src={google} /> Continue with Google
               </a>
-              <a href="#"> Continue with Facebook</a>
+              <a href="#" className="d-flex gap-3 align-items-center justify-content-center"> 
+              <img src={fb} /> Continue with Facebook</a>
             </div>
           </div>
         </Modal.Body>

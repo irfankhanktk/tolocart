@@ -8,7 +8,7 @@ import Home from "./pages/home";
 import "./App.css";
 import Footer from "./components/footer";
 import SideDasboard from "./pages/sideDashboard";
-// import Drawer from './components/drawer';
+import ProductDetailsModal from "./components/modals/product-details-modal";
 const App = () => {
   return (
     <Router>
@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/stores" element={<Stores />} />
           <Route path="/SideDashboard" element={<SideDasboard />} />
+          <Route path="/productDetail" element={<ProductDetailsModal/>} />
         </Routes>
         <Footer />
       </div>

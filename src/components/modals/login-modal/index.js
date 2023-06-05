@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
 import "./login.css"; // Import the CSS file
+import { fb, google } from "../../../assets/images";
 const LoginModal = ({ show, setShow }) => {
   return (
     <div>
@@ -8,7 +9,7 @@ const LoginModal = ({ show, setShow }) => {
         <Modal.Header closeButton className="custom-close-header">
           {/* <Modal.Title>Login</Modal.Title> */}
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="p-0">
           <div className="modal-wrapper">
             <Tab.Container defaultActiveKey="email">
               <span className="signup-title">Log in</span>
@@ -43,8 +44,8 @@ const LoginModal = ({ show, setShow }) => {
                       Or connect with social media
                     </a>
                     <div className="continue-with-login-links">
-                      <a href="#"> Continue with Google</a>
-                      <a href="#"> Continue with Facebook</a>
+                      <a href="#" className="d-flex gap-3 align-items-center justify-content-center"> <img src={google} />  Continue with Google</a>
+                      <a href="#" className="d-flex gap-3 align-items-center justify-content-center"> <img src={fb} /> Continue with Facebook</a>
                     </div>
                     <a href="#" className="forgot-password">
                       Forgot Password? <span>Reset it</span>{" "}
@@ -71,8 +72,8 @@ const LoginModal = ({ show, setShow }) => {
                         Or connect with social media
                       </a>
                       <div className="continue-with-login-links">
-                        <a href="#"> Continue with Google</a>
-                        <a href="#"> Continue with Facebook</a>
+                        <a href="#" className="d-flex gap-3 align-items-center justify-content-center"><img src={google} /> Continue with Google</a>
+                        <a href="#" className="d-flex gap-3 align-items-center justify-content-center"><img src={fb} /> Continue with Facebook</a>
                       </div>
                     </div>
                   </Form>
