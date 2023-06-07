@@ -10,10 +10,11 @@ const BestReviewedCard = ({
   description = `Fresh
     FOOD every one
     Need`,
+  onClick = () => {},
 }) => {
   return (
     // <div className='col-md-2 col-sm-10 mt-5 px-1'>
-    <div className="col-md-12 position-relative">
+    <div onClick={onClick} className="col-md-12 position-relative">
       <div className="csm-product-card ">
         <div className="d-flex align-items-center gap-2 rating-title">
           <img src={review_start} alt="image here" />

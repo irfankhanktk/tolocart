@@ -9,7 +9,9 @@ import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
+import { useNavigate } from "react-router-dom";
 const MarketPlace = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="container-fluid">
@@ -41,6 +43,7 @@ const MarketPlace = () => {
               { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
             ]?.map((item, index) => (
               <CateryCard
+                onClick={() => navigate("/product-detail")}
                 title={item?.title}
                 border={item?.border}
                 bg={item?.bg}
@@ -170,6 +173,7 @@ const MarketPlace = () => {
                 { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
               ].map((item, index) => (
                 <BestReviewedCard
+                  onClick={() => navigate("/product-detail")}
                   key={index}
                   title={item?.title}
                   bg={item?.bg}
@@ -237,6 +241,7 @@ const MarketPlace = () => {
                 { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
               ].map((item, index) => (
                 <PopularItemCard
+                  onClick={() => navigate("/product-detail")}
                   key={index}
                   title={item?.title}
                   bg={item?.bg}

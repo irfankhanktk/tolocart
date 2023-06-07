@@ -7,9 +7,11 @@ import { logo_main } from "../../assets/images";
 import MainSideBar from "../modals/mainSideBar";
 import LoginModal from "../modals/login-modal";
 import SignupModal from "../modals/signup-modal";
+import CheckoutModal from "../modals/checkout-modal";
 
 export function TopMenu() {
   const [showModal, setShowModal] = useState(false);
+  const [checkoutModal, setCheckoutModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [showSignupModal, setSignupModal] = useState(false);
 
@@ -98,7 +100,11 @@ export function TopMenu() {
               </a>
             </li>
             <li className="nav-item dropdown pe-3">
-              <a className=" nav-cart-btn d-flex gap-2" href="#">
+              <a
+                onClick={() => setCheckoutModal(true)}
+                className=" nav-cart-btn d-flex gap-2"
+                href="#"
+              >
                 <span>
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                 </span>
@@ -111,6 +117,7 @@ export function TopMenu() {
       <MainSideBar showModal={showModal} handleModalClose={handleModalClose} />
       <LoginModal show={loginModal} setShow={setLoginModal} />
       <SignupModal show={showSignupModal} setShow={setSignupModal} />
+      <CheckoutModal show={checkoutModal} setShow={setCheckoutModal} />
     </>
   );
 }

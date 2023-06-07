@@ -3,7 +3,9 @@ import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import "./menuList.css"; // Import the CSS file
 import BestReviewedCard from "../best-reviewed-card";
+import { useNavigate } from "react-router-dom";
 const MenuList = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="menuList container-fluid">
@@ -15,7 +17,7 @@ const MenuList = () => {
         </div>
         <div className="row">
           <div className="col-md-3">
-            <BestReviewedCard />
+            <BestReviewedCard onClick={() => navigate("/product-detail")} />
           </div>
           <div className="col-md-3">
             <BestReviewedCard />
