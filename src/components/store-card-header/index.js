@@ -6,6 +6,7 @@ import {
   vegetable,
 } from "../../assets/images";
 import "./style.css";
+//
 import { store_heart } from "../../assets/svgs";
 const StoreCardHeader = ({
   image = laptop_home,
