@@ -18,3 +18,4 @@ export { default as question } from "./question.png";
 export { default as shopping_beg } from "./shopping-bag.png";
 export { default as logo } from "./tolocart-logo.png";
 export { default as user_profile_img } from "./user-profile-img.png";
+export { default as Checkout_img } from "./checkout-product.png";

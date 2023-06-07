@@ -1,0 +1,112 @@
+.card-product{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 15px 0px 10px 0px;
+}
+.title_heading h2{
+  font-family: 'Gilroy-Bold';
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #181725;
+  font-weight: 600;
+}
+.title_heading h3{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #7C7C7C;
+}
+.add-instruction{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.checkout-price {
+  background: transparent;
+  border-radius: 5px;
+  padding: 7px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #181725;
+  gap: 7px;
+}
+.checkout-price span {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1px;
+  color: #181725;
+}
+.checkout-price p {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1px;
+  color: #181725;
+}
+.gift-order h2{
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #7C7C7C;
+}
+
+
+input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    width: 30px;
+    height: 15px;
+    background: #ccc;
+    border-radius: 50px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+input:checked[type="checkbox"] {
+    background: #7da6ff;
+}
+
+input[type="checkbox"]::after {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+input:checked[type="checkbox"]::after {
+    left: 58%;
+}

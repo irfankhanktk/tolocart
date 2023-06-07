@@ -9,6 +9,7 @@ import "./App.css";
 import Footer from "./components/footer";
 import SideDasboard from "./pages/store-dashboard";
 import ProductDetailsModal from "./components/modals/product-details-modal/index";
+import CheckoutModal from "./components/modals/checkout-modal";
 // import Drawer from './components/drawer';
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/stores" element={<Stores />} />
           <Route path="/store-dashboard" element={<SideDasboard />} />
           <Route path="/productDetail" element={<ProductDetailsModal />} />
+          <Route path="/checkoutDetail" element={<CheckoutModal />} />
         </Routes>
         <Footer />
       </div>

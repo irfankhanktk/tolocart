@@ -8,9 +8,10 @@ import "./style.css";
 import CompaignCard from "../../compaign-card";
 import BestReviewedCard from "../../best-reviewed-card";
 import ProductCounter from "../../counter";
+import CheckoutModal from "../checkout-modal";
 
 const ProductDetailsModal = () => {
-  // const [showModal, setShowModal] = useState(false);
+   const [checkoutModal, setCheckoutModal] = useState(false);
 
   // const handleModalOpen = () => {
   //   setShowModal(true);
@@ -176,7 +177,9 @@ const ProductDetailsModal = () => {
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </div>
-            <a href="#" className="login-btn">
+            <a href="#" className="login-btn"
+            onClick={() => setCheckoutModal(true)}
+            >
               Add To Basket
             </a>
           </div>
@@ -209,6 +212,7 @@ const ProductDetailsModal = () => {
           </div>
         </div>
       </div>
+      <CheckoutModal show={checkoutModal} setShow={setCheckoutModal}/>
     </>
   );
 };
