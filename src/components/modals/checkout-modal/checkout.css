@@ -71,5 +71,28 @@
     color: #7C7C7C;
 }
 .Checkout-modal-wrapper{
-    padding: 20px 30px;
+    padding: 0px 30px 20px 30px;
+}
+.custom-header_title{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 18px;
+    text-align: center;
+    color: #181725;
+}
+.custom-header_address{
+    font-family: 'Glory';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0px;
+}
+.custom-close-btn .btn-close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

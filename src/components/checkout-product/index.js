@@ -32,7 +32,7 @@ const CheckoutProduct = ({
                 </div>
                 <div className='col-md-12 d-flex align-items-center justify-content-between'>
                     <div className='gift-order'>
-                        <h2><i class="fa fa-gift" aria-hidden="true"></i> Make this order a gift</h2>
+                        <h2><i class="fa fa-gift" aria-hidden="true" style={{color:'#000'}}></i> Make this order a gift</h2>
                     </div>
                     <div class="check-box">
                         <input type="checkbox"/>

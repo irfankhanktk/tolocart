@@ -13,12 +13,64 @@ const CheckoutModal = ({ show, setShow }) => {
       <Modal show={show} onHide={setShow} centered>
         <Modal.Header
           closeButton
-          className="custom-close-header">
+          className="custom-close-header custom-close-btn d-flex flex-column align-items-start p-2">
+            <h2 className="custom-header_title">GNN Mart Shopping</h2>
+            <h3 className="custom-header_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Ygnacio, CA</h3>
         </Modal.Header>
         <Modal.Body className="p-0">
           <div className="Checkout-modal-wrapper">
-
-            <CheckoutProduct/>
+          <div className="card-container">
+            <Slider
+              dots={false}
+              infinite={false}
+              speed={500}
+              slidesToShow={1}
+              slidesToScroll={1}
+              className="card-slider"
+              responsive={[
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 1,
+                  },
+                },
+                {
+                  breakpoint: 992,
+                  settings: {
+                    slidesToShow: 1,
+                  },
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 1,
+                  },
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                  },
+                },
+              ]}
+            >
+              {/* className='card-slider'> */}
+              {[
+                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
+                { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
+                { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
+                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
+                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
+              ].map((item, index) => (
+                <CheckoutProduct
+                  key={index}
+                  title={item?.title}
+                  bg={item?.bg}
+                />
+              ))}
+            </Slider>
+          </div>
+            {/* <CheckoutProduct/> */}
             {/* suggestion items start */}
             <div className="mb-0 ms-0 me-0" style={{marginTop:'11px'}}>
               <h2 className="suggestion-title">Suggested items</h2>
