@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -9,9 +11,40 @@ import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
-import { useNavigate } from "react-router-dom";
+import { setCategories } from "../../store/reducers/category-slice";
+import {
+  useGetCategoriesQuery,
+  useGetOffersWithShopDetailsQuery,
+} from "./../../store/api";
 const MarketPlace = () => {
   const navigate = useNavigate();
+  const state = useSelector((state) => state); // assuming your category slice name is 'categories'
+  const dispatch = useDispatch();
+  const {
+    data: main_categories,
+    isLoading,
+    isError,
+    error,
+  } = useGetCategoriesQuery();
+  const {
+    data: offers_with_shop_details,
+    isLoading: offers_loading,
+    isError: isOffersError,
+    error: offerError,
+  } = useGetOffersWithShopDetailsQuery();
+  React.useEffect(() => {
+    if (main_categories) {
+      dispatch(setCategories(main_categories));
+    }
+  }, [main_categories, dispatch]);
+
+  if (isLoading) {
+    return <div className="d-flex bg-info">Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching categories: {error}</div>;
+  }
   return (
     <>
       <div className="container-fluid">
@@ -28,25 +61,12 @@ const MarketPlace = () => {
               flexWrap: "wrap",
             }}
           >
-            {[
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-            ]?.map((item, index) => (
+            {main_categories?.data?.map((item, index) => (
               <CateryCard
-                onClick={() => navigate("/product-detail")}
+                onClick={() => navigate(`/product-detail/${item?.id}`)}
                 title={item?.title}
-                border={item?.border}
-                bg={item?.bg}
+                // border={item?.border}
+                // bg={item?.bg}
               />
             ))}
           </div>
@@ -90,36 +110,13 @@ const MarketPlace = () => {
                 },
               ]}
             >
-              {[
-                {
-                  title: "Groceries",
-                  bg: "#F8A44C1A",
-                  border: "#F8A44CB2",
-                  image: laptop_home,
-                },
-                {
-                  title: "Retail",
-                  bg: "#53B1751A",
-                  border: "#53B175B2",
-                  image: vegetable,
-                },
-                {
-                  title: "Electronic",
-                  bg: "#D3B0E01A",
-                  border: "##D3B0E01A",
-                  image: laptop_home,
-                },
-                {
-                  title: "Groceries",
-                  bg: "#F8A44C1A",
-                  border: "#F8A44CB2",
-                  image: vegetable,
-                },
-              ]?.map((item, index) => (
+              {offers_with_shop_details?.data?.map((item, index) => (
                 <CompaignCard
+                  item={item}
                   title={item?.title}
-                  bg={item?.bg}
-                  image={item?.image}
+                  description={item?.vendorShop?.name}
+                  // bg={item?.bg}
+                  // image={item?.image}
                 />
               ))}
             </Slider>
