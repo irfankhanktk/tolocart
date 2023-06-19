@@ -4,6 +4,7 @@ const initialState = {
   userInfo: null,
   language: "en",
   location: undefined,
+  vehicle: {},
   notifications: [],
   unreadNotification: 0,
 };
@@ -14,6 +15,9 @@ export const userSlice = createSlice({
   reducers: {
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
+    },
+    setVehicle: (state, action) => {
+      state.vehicle = action.payload;
     },
     setLanguage: (state, action) => {
       state.language = action.payload;
@@ -42,6 +46,7 @@ export const {
   setLanguage,
   setLocation,
   setNotifications,
+  setVehicle,
   // demoAsync
 } = userSlice.actions;
 

@@ -3,3 +3,7 @@
   border-radius: 10px;
   overflow: hidden;
 }
+.store-card-img {
+  height: 75px;
+  width: 100%;
+}

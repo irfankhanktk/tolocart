@@ -1,50 +1,70 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { home_bg, laptop_home, vegetable } from "../../assets/images";
+import { home_bg } from "../../assets/images";
 import BestReviewedCard from "../../components/best-reviewed-card";
 import CateryCard from "../../components/category-card";
 import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
-import { setCategories } from "../../store/reducers/category-slice";
+import Loader from "../../components/loader/index";
 import {
-  useGetCategoriesQuery,
-  useGetOffersWithShopDetailsQuery,
-} from "./../../store/api";
+  getCategories,
+  getPopularItems,
+  getPopularProducts,
+  getPopularShops,
+  getRecommendedProducts,
+  getShopCompaignBanners,
+  getShopOffersWithShopDetails,
+} from "../../services/api/api-actions";
+import { UTILS } from "../../utils";
 const MarketPlace = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state); // assuming your category slice name is 'categories'
-  const dispatch = useDispatch();
-  const {
-    data: main_categories,
-    isLoading,
-    isError,
-    error,
-  } = useGetCategoriesQuery();
-  const {
-    data: offers_with_shop_details,
-    isLoading: offers_loading,
-    isError: isOffersError,
-    error: offerError,
-  } = useGetOffersWithShopDetailsQuery();
-  React.useEffect(() => {
-    if (main_categories) {
-      dispatch(setCategories(main_categories));
+  const { category } = useSelector((state) => state);
+  const [loading, setLoading] = React.useState(true);
+  const [homeData, setHomeData] = React.useState({
+    categories: [],
+    popularShops: [],
+    popularProducts: [],
+    compaignBanners: [],
+    popularProducts: [],
+    recommended: [],
+  });
+  const getHomeData = async () => {
+    try {
+      const res = await Promise.all([
+        getCategories(3),
+        getPopularShops(),
+        getShopCompaignBanners(),
+        getPopularItems(),
+        getRecommendedProducts(),
+      ]);
+
+      setHomeData({
+        categories: res[0].data,
+        popularShops: res[1].data,
+        compaignBanners: res[2].data,
+        popularProducts: res[3].data,
+        recommended: res[4].data,
+      });
+    } catch (error) {
+      console.log("error=>>", error);
+      alert(UTILS.returnError(error));
+    } finally {
+      setLoading(false);
     }
-  }, [main_categories, dispatch]);
-
-  if (isLoading) {
-    return <div className="d-flex bg-info">Loading...</div>;
+  };
+  React.useEffect(() => {
+    getHomeData();
+  }, []);
+  if (loading) {
+    return <Loader />;
   }
 
-  if (isError) {
-    return <div>Error fetching categories: {error}</div>;
-  }
   return (
     <>
       <div className="container-fluid">
@@ -61,8 +81,9 @@ const MarketPlace = () => {
               flexWrap: "wrap",
             }}
           >
-            {main_categories?.data?.map((item, index) => (
+            {homeData?.categories?.map((item, index) => (
               <CateryCard
+                key={index}
                 onClick={() => navigate(`/product-detail/${item?.id}`)}
                 title={item?.title}
                 // border={item?.border}
@@ -110,7 +131,7 @@ const MarketPlace = () => {
                 },
               ]}
             >
-              {offers_with_shop_details?.data?.map((item, index) => (
+              {homeData?.compaignBanners?.map((item, index) => (
                 <CompaignCard
                   item={item}
                   title={item?.title}
@@ -162,18 +183,11 @@ const MarketPlace = () => {
               ]}
             >
               {/* className='card-slider'> */}
-              {[
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-                { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              ].map((item, index) => (
+              {homeData?.popularProducts?.map((item, index) => (
                 <BestReviewedCard
-                  onClick={() => navigate("/product-detail")}
+                  onClick={() => navigate(`/product-detail/${item?.id}`)}
                   key={index}
-                  title={item?.title}
-                  bg={item?.bg}
+                  item={item}
                 />
               ))}
             </Slider>
@@ -181,15 +195,8 @@ const MarketPlace = () => {
         </div>
         <p className="home-bg heading-title">Popular store in Ygnico by Area</p>
         <div className="d-md-flex flex-wrap">
-          {[
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-            { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-            { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-          ].map((item, index) => (
-            <StoreCard key={index} title={item?.title} bg={item?.bg} />
+          {homeData?.popularShops?.map((item, index) => (
+            <StoreCard key={index} item={item} />
           ))}
         </div>
 
@@ -230,18 +237,11 @@ const MarketPlace = () => {
                 },
               ]}
             >
-              {[
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-                { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              ].map((item, index) => (
+              {homeData?.popularProducts?.map((item, index) => (
                 <PopularItemCard
-                  onClick={() => navigate("/product-detail")}
+                  onClick={() => navigate(`/product-detail/${item?.id}`)}
                   key={index}
-                  title={item?.title}
-                  bg={item?.bg}
+                  item={item}
                 />
               ))}
             </Slider>

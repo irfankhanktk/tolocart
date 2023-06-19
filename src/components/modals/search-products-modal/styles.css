@@ -1,0 +1,13 @@
+.search-modal-wrapper {
+  padding: 10px 40px 25px 40px;
+}
+.search-signup-title {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 29px;
+  color: #181725;
+  margin-bottom: 40px;
+  text-align: center;
+}

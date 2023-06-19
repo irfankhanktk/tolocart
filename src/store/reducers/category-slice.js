@@ -1,5 +1,4 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { useGetCategoriesQuery } from "../api";
 
 // export const fetchCategories = createAsyncThunk(
 //   "categories/fetch",

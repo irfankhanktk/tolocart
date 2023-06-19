@@ -1,19 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { api } from "./api";
+// import { api } from "./api";
 import categorySlice from "./reducers/category-slice";
+import userSlice from "./reducers/user-reducer";
+import cartSlice from "./reducers/cart-slice";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     category: categorySlice,
-    [api.reducerPath]: api.reducer,
+    user: userSlice,
+    cart: cartSlice,
+    // [api.reducerPath]: api.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

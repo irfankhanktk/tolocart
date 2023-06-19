@@ -5,7 +5,13 @@ import AboutHome from "../../components/about-home";
 import CustomerHomeCard from "../../components/customer-home-card/index";
 import FrequentlyQuestion from "../../components/frequently-question/index";
 import HomeServices from "../../components/home-services/index";
+import { useDispatch } from "react-redux";
+import { getVehicleDetails } from "../../services/api/api-actions";
 const Home = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getVehicleDetails());
+  }, []);
   return (
     <div>
       <img src={home_bg} style={{ width: "100%" }} />

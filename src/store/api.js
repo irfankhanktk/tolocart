@@ -8,13 +8,13 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_URLS.base_url }),
   endpoints: (builder) => ({
     getCategories: builder.query({
-      query: (id = 3) => `${API_URLS.main_categories.get_categories}${id}`,
+      query: (id = 3) => `${API_URLS.main_categories.get_categories}${3}`,
     }),
     getOffersWithShopDetails: builder.query({
       query: () => `${API_URLS.product.get_remmmended}`,
     }),
     getRecommendedProducts: builder.query({
-      query: (params) => `${API_URLS.product.get_remmmended}ShopType=store`,
+      query: (params) => `${API_URLS.product.get_remmmended}ShopType=Store`,
     }),
   }),
 });

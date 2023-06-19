@@ -1,96 +1,88 @@
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import BestReviewedCard from "../../components/best-reviewed-card";
+import ProductCounter from "../../components/counter";
+import Loader from "../../components/loader";
+import CheckoutModal from "../../components/modals/checkout-modal";
 import {
-  Button,
-  Modal,
-  Nav,
-  Tab,
-  Form,
-  Row,
-  Col,
-  accordion,
-} from "react-bootstrap";
-import { cross_icon, gray_heart, share } from "../../../assets/svgs";
-import { apple } from "../../../assets/images";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.js";
+  getProductDetails,
+  getSuggestedItems,
+} from "../../services/api/api-actions";
+import { UTILS, returnImage } from "../../utils";
 import "./style.css";
-import CompaignCard from "../../compaign-card";
-import BestReviewedCard from "../../best-reviewed-card";
-import ProductCounter from "../../counter";
-import CheckoutModal from "../checkout-modal";
-import { useGetRecommendedProductsQuery } from "../../../store/api";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAddToCart } from "../../store/reducers/cart-slice";
 
-const ProductDetailsModal = () => {
+const ProductDetails = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const [checkoutModal, setCheckoutModal] = useState(false);
-  const {
-    data: recommended_products,
-    isLoading,
-    isError,
-    error,
-  } = useGetRecommendedProductsQuery();
-  // const handleModalOpen = () => {
-  //   setShowModal(true);
-  // };
+  const [loading, setLoading] = React.useState(true);
 
-  // const handleModalClose = () => {
-  //   setShowModal(false);
-  // };
-
+  const [productDetails, setProductDetails] = React.useState({
+    data: {},
+    recommended_products: [],
+  });
+  const handleAddToCart = (item) => {
+    try {
+      dispatch(setAddToCart(item));
+      alert("Item is added successfully in your cart");
+      // Continue with any other logic after successful addToCart
+    } catch (error) {
+      // Handle the error
+      console.error("Error adding item to cart:", error.message);
+      alert(UTILS.returnError(error));
+      // Display an error message to the user or perform any other error handling action
+    }
+  };
+  const getDetails = async () => {
+    try {
+      setLoading(true);
+      const res = await Promise.all([
+        getProductDetails(id),
+        getSuggestedItems(id),
+      ]);
+      setProductDetails({
+        data: res[0]?.data,
+        recommended_products: res[1]?.data[0]?.vendorShop?.products || [],
+      });
+    } catch (error) {
+      console.log("error=>>", error);
+      alert(UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+  React.useEffect(() => {
+    getDetails();
+  }, [id]);
+  if (loading) {
+    return <Loader />;
+  }
   return (
-    // <div>
-    //   <Button variant="primary" onClick={handleModalOpen}>
-    //     Product Details
-    //   </Button>
-
-    //   <Modal
-    //     show={showModal}
-    //     className="custom-modal"
-    //     onHide={handleModalClose}
-    //   >
-
-    //     <Modal.Body>
-    //       <img
-    //         src={cross_icon}
-    //         alt="cross"
-    //         className="position-absolute"
-    //         style={{ height: "45px", width: "45px" }}
-    //       />
-    //       <div className="px-3 d-flex flex-row">
-    //         <div className="col-md-4 px-md-3">
-    //           <img
-    //             src={apple}
-    //             alt="apple"
-    //             className="product-img"
-    //             style={{ height: "300px", width: "400px" }}
-    //           />
-    //         </div>
-    //         <div className="col-md-4 px-md-5 d-flex justify-content-between flex-row">
-    //           <p className="product-details-title">Red Apple</p>
-    //           <div className="d-flex flex-row gap-3">
-    //             <img src={share} style={{ height: "25px", width: "25px" }} />
-    //             <img
-    //               src={gray_heart}
-    //               style={{ height: "25px", width: "25px" }}
-    //             />
-    //           </div>
-    //         </div>
-    //         <div className="col-md-4 px-md-3"></div>
-    //       </div>
-    //     </Modal.Body>
-    //   </Modal>
-    // </div>
     <>
       <div className="container">
         <div className="row" style={{ marginTop: "50px" }}>
           <div className="col-md-4 d-flex align-items-center justify-content-end">
-            <img src={apple} style={{ width: "100%" }} />
+            <div
+              className="d-flex align-items-center p-3 rounded"
+              style={{
+                width: "100%",
+                height: "300px",
+                border: "1px solid #E2E2E2",
+              }}
+            >
+              <img
+                className="rounded w-100 h-100"
+                src={returnImage(productDetails?.data?.imagePath)}
+              />
+            </div>
           </div>
           <div className="col-md-4">
             <div className="singleproduct-wrap">
               <div className="singleproduct-title d-flex align-items-center justify-content-between mb-2">
-                <h2>Red Apple</h2>
+                <h2>{productDetails?.data?.name}</h2>
                 <div className="icon-list d-flex align-items-center gap-3">
                   <i
                     class="fa fa-share-alt"
@@ -108,9 +100,9 @@ const ProductDetailsModal = () => {
               <p className="lb-price">$3.49/lb</p>
               <h6 className="stock-product">In stock</h6>
               <div className="add-product-counter d-flex align-items-center justify-content-between">
-                <ProductCounter />
+                <ProductCounter item={productDetails?.data} />
                 <div className="product-price h-auto ">
-                  <span>$2</span>
+                  <span>${productDetails?.data?.price}</span>
                   <p className="mb-2">49</p>
                 </div>
               </div>
@@ -149,9 +141,7 @@ const ProductDetailsModal = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div class="accordion-body">
-                      Apples are nutritious. Apples may be good for weight loss.
-                      apples may be good for your heart. As part of a healtful
-                      and varied diet.
+                      {productDetails?.data?.description}
                     </div>
                   </div>
                 </div>
@@ -321,7 +311,7 @@ const ProductDetailsModal = () => {
             <a
               href="#"
               className="login-btn"
-              onClick={() => setCheckoutModal(true)}
+              onClick={() => handleAddToCart(productDetails?.data)}
             >
               Add To Basket
             </a>
@@ -336,32 +326,16 @@ const ProductDetailsModal = () => {
             </div>
           </div>
 
-          {recommended_products?.data?.map((item, index) => (
-            <div className="col-md-2">
+          {productDetails?.recommended_products?.map((item, index) => (
+            <div key={index} className="col-md-3">
               <BestReviewedCard
-                onClick={() => navigate("/product-detail")}
-                key={index}
+                item={item}
+                onClick={() => navigate(`/product-detail/${item?.id}`)}
                 title={item?.title}
                 // bg={item?.bg}
               />
             </div>
           ))}
-
-          {/* <div className="col-md-2">
-            <BestReviewedCard />
-          </div>
-          <div className="col-md-2">
-            <BestReviewedCard />
-          </div>
-          <div className="col-md-2">
-            <BestReviewedCard />
-          </div>
-          <div className="col-md-2">
-            <BestReviewedCard />
-          </div>
-          <div className="col-md-2">
-            <BestReviewedCard />
-          </div> */}
         </div>
       </div>
       <CheckoutModal show={checkoutModal} setShow={setCheckoutModal} />
@@ -369,4 +343,4 @@ const ProductDetailsModal = () => {
   );
 };
 
-export default ProductDetailsModal;
+export default ProductDetails;
