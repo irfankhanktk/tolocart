@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
-import "./mainSidebar.css"; // Import the CSS file
+import { Modal } from "react-bootstrap";
 import {
   bell,
   credit_card,
   discount_voucher,
-  google,
   info,
   location,
   profile,
@@ -13,6 +11,7 @@ import {
   shopping_beg,
   user_profile_img,
 } from "../../../assets/images";
+import "./mainSidebar.css"; // Import the CSS file
 
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
@@ -27,14 +26,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
         onHide={handleModalClose}
         className="sidebar-modal m-0"
       >
-        {/* <Modal.Header closeButton className="custom-close-header">
-                </Modal.Header> */}
-        {/* <Modal.Body className='vh-100'> */}
-        {/* <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog sidebar-modal m-0">
-                    <div className="modal-content vh-100"> */}
-
-        <div className="modal-body bg-white">
+        <div className="modal-body">
           <div className="user-profile d-flex align-items-center gap-3 mb-5">
             <div className="user-profile-img">
               <img src={user_profile_img} alt="user-profile" />

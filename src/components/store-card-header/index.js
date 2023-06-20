@@ -1,31 +1,22 @@
 import React from "react";
-import {
-  laptop_home,
-  review_img,
-  review_plus,
-  vegetable,
-} from "../../assets/images";
+import { vegetable } from "../../assets/images";
 import "./style.css";
 //
 import { store_heart } from "../../assets/svgs";
-const StoreCardHeader = ({
-  image = laptop_home,
-  title = "GNN Mart",
-  style,
-  bg = "#7246EF",
-  imgHeight = "233px",
-  description = `Fresh
-    FOOD every one
-    Need`,
-}) => {
+import { returnImage } from "../../utils";
+const StoreCardHeader = ({ item, imgHeight }) => {
+  const containerStyle = {
+    backgroundImage: `url(${returnImage(item?.image)})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    width: "100%",
+    height: imgHeight,
+  };
   return (
-    <div
-      className="w-100 d-flex justify-content-between align-items-center p-2"
-      style={{ ...style, background: `${bg}` }}
-    >
-      <p className="store-title font-size-heavy">{title}</p>
-      <div className="d-flex align-items-start">
-        <img src={vegetable} alt="pic here" height={imgHeight} />
+    <div style={containerStyle} className="w-100">
+      <div className="d-flex h-100 px-2 align-items-center flex-row justify-content-between">
+        <p className="store-title font-size-heading">{item?.name}</p>
         <img src={store_heart} alt="pic here" />
       </div>
     </div>

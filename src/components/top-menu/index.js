@@ -1,23 +1,45 @@
 import React, { useState } from "react";
-import { Form, FormControl, Nav, Navbar } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { PrimaryButton } from "../buttons";
-import "./topmenu.css";
+import { useSelector } from "react-redux";
 import { logo_main } from "../../assets/images";
-import MainSideBar from "../modals/mainSideBar";
-import LoginModal from "../modals/login-modal";
-import SignupModal from "../modals/signup-modal";
+import { getSearchProducts } from "../../services/api/api-actions";
 import CheckoutModal from "../modals/checkout-modal";
+import LoginModal from "../modals/login-modal";
+import MainSideBar from "../modals/mainSideBar";
+import SearchProductsModal from "../modals/search-products-modal";
+import SignupModal from "../modals/signup-modal";
+import "./topmenu.css";
 import PlaceOrderModal from "../modals/placeOrder-modal";
 import TrackOrderModal from "../modals/trackOrder-modal";
 
 export function TopMenu() {
+  const { cart } = useSelector((s) => s);
   const [showModal, setShowModal] = useState(false);
   const [checkoutModal, setCheckoutModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [showSignupModal, setSignupModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [searchTerm, setSearchTerm] = React.useState("");
   const [placeOrderModal, setPlaceOrderModal] = useState(false);
   const [trackOrderModal, setTrackOrderModal] = useState(false);
+  const [searchLoading, setSearchLoading] = React.useState(false);
+  const [searchResults, setSearchResults] = React.useState([]);
+
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault(); // Prevents the default form submission behavior
+      setShowSearchModal(true);
+      setSearchLoading(true);
+      const res = await getSearchProducts(searchTerm);
+      setSearchResults(res?.data || []);
+      // Perform any necessary actions with the search input here
+      // For example, you can access the search value using event.target.elements.search.value
+
+      // Open the search modal
+    } catch (error) {
+    } finally {
+      setSearchLoading(false);
+    }
+  };
 
   const handleModalOpen = () => {
     setShowModal(true);
@@ -45,16 +67,20 @@ export function TopMenu() {
         <div className="search-bar">
           <form
             className="search-form d-flex align-items-center"
-            method="get"
-            action=""
+            onSubmit={handleSubmit}
           >
             <input
               type="text"
-              name="input"
+              name="search"
               placeholder="Search Groceris stores"
               title="Enter search keyword"
+              onChange={(e) => setSearchTerm(e?.target?.value)}
             />
-            <button type="submit" title="Search">
+            <button
+              type="submit"
+              title="Search"
+              onClick={() => setShowSearchModal(true)}
+            >
               <i className="fa fa-search" aria-hidden="true"></i>
             </button>
           </form>
@@ -128,7 +154,7 @@ export function TopMenu() {
                 <span>
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                 </span>
-                <span>0</span>
+                <span>{cart?.cart?.length}</span>
               </a>
             </li>
           </ul>
@@ -138,6 +164,12 @@ export function TopMenu() {
       <LoginModal show={loginModal} setShow={setLoginModal} />
       <SignupModal show={showSignupModal} setShow={setSignupModal} />
       <CheckoutModal show={checkoutModal} setShow={setCheckoutModal} />
+      <SearchProductsModal
+        searchResults={searchResults || []}
+        show={showSearchModal}
+        setShow={setShowSearchModal}
+        loading={searchLoading}
+      />
       <PlaceOrderModal show={placeOrderModal} setShow={setPlaceOrderModal}/>
       <TrackOrderModal show={trackOrderModal} setShow={setTrackOrderModal}/>
     </>

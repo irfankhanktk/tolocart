@@ -1,17 +1,71 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { home_bg, laptop_home, vegetable } from "../../assets/images";
+import { home_bg } from "../../assets/images";
 import BestReviewedCard from "../../components/best-reviewed-card";
 import CateryCard from "../../components/category-card";
 import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
-import { useNavigate } from "react-router-dom";
+import Loader from "../../components/loader/index";
+import "./style.css";
+import {
+  getCategories,
+  getPopularItems,
+  getPopularProducts,
+  getPopularShops,
+  getRecommendedProducts,
+  getShopCompaignBanners,
+  getShopOffersWithShopDetails,
+} from "../../services/api/api-actions";
+import { UTILS } from "../../utils";
 const MarketPlace = () => {
   const navigate = useNavigate();
+  const { category } = useSelector((state) => state);
+  const [loading, setLoading] = React.useState(true);
+  const [homeData, setHomeData] = React.useState({
+    categories: [],
+    popularShops: [],
+    popularProducts: [],
+    compaignBanners: [],
+    popularProducts: [],
+    recommended: [],
+  });
+  const getHomeData = async () => {
+    try {
+      const res = await Promise.all([
+        getCategories(3),
+        getPopularShops(),
+        getShopCompaignBanners(),
+        getPopularItems(),
+        getRecommendedProducts(),
+      ]);
+
+      setHomeData({
+        categories: res[0].data,
+        popularShops: res[1].data,
+        compaignBanners: res[2].data,
+        popularProducts: res[3].data,
+        recommended: res[4].data,
+      });
+    } catch (error) {
+      console.log("error=>>", error);
+      alert(UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+  React.useEffect(() => {
+    getHomeData();
+  }, []);
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="container-fluid">
@@ -28,25 +82,14 @@ const MarketPlace = () => {
               flexWrap: "wrap",
             }}
           >
-            {[
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-              { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-              { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-            ]?.map((item, index) => (
+            {homeData?.categories?.map((item, index) => (
               <CateryCard
-                onClick={() => navigate("/product-detail")}
-                title={item?.title}
-                border={item?.border}
-                bg={item?.bg}
+                key={index}
+                onClick={() => navigate(`/product-detail/${item?.id}`)}
+                // title={item?.title}
+                item={item}
+                // border={item?.border}
+                // bg={item?.bg}
               />
             ))}
           </div>
@@ -90,36 +133,13 @@ const MarketPlace = () => {
                 },
               ]}
             >
-              {[
-                {
-                  title: "Groceries",
-                  bg: "#F8A44C1A",
-                  border: "#F8A44CB2",
-                  image: laptop_home,
-                },
-                {
-                  title: "Retail",
-                  bg: "#53B1751A",
-                  border: "#53B175B2",
-                  image: vegetable,
-                },
-                {
-                  title: "Electronic",
-                  bg: "#D3B0E01A",
-                  border: "##D3B0E01A",
-                  image: laptop_home,
-                },
-                {
-                  title: "Groceries",
-                  bg: "#F8A44C1A",
-                  border: "#F8A44CB2",
-                  image: vegetable,
-                },
-              ]?.map((item, index) => (
+              {homeData?.compaignBanners?.map((item, index) => (
                 <CompaignCard
+                  item={item}
                   title={item?.title}
-                  bg={item?.bg}
-                  image={item?.image}
+                  description={item?.vendorShop?.name}
+                  // bg={item?.bg}
+                  // image={item?.image}
                 />
               ))}
             </Slider>
@@ -165,18 +185,11 @@ const MarketPlace = () => {
               ]}
             >
               {/* className='card-slider'> */}
-              {[
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-                { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              ].map((item, index) => (
+              {homeData?.popularProducts?.map((item, index) => (
                 <BestReviewedCard
-                  onClick={() => navigate("/product-detail")}
+                  onClick={() => navigate(`/product-detail/${item?.id}`)}
                   key={index}
-                  title={item?.title}
-                  bg={item?.bg}
+                  item={item}
                 />
               ))}
             </Slider>
@@ -184,16 +197,12 @@ const MarketPlace = () => {
         </div>
         <p className="home-bg heading-title">Popular store in Ygnico by Area</p>
         <div className="d-md-flex flex-wrap">
-          {[
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-            { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-            { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-            { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-          ].map((item, index) => (
-            <StoreCard key={index} title={item?.title} bg={item?.bg} />
+          {homeData?.popularShops?.slice(0, 9).map((item, index) => (
+            <StoreCard key={index} item={item} />
           ))}
+          <div className="w-100 text-center">
+            <span className="show_all">Show All</span>
+          </div>
         </div>
 
         <p className="home-bg heading-title">Popular Items Nearby</p>
@@ -233,18 +242,11 @@ const MarketPlace = () => {
                 },
               ]}
             >
-              {[
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-                { title: "Electronic", bg: "#D3B0E01A", border: "##D3B0E01A" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-              ].map((item, index) => (
+              {homeData?.popularProducts?.map((item, index) => (
                 <PopularItemCard
-                  onClick={() => navigate("/product-detail")}
+                  onClick={() => navigate(`/product-detail/${item?.id}`)}
                   key={index}
-                  title={item?.title}
-                  bg={item?.bg}
+                  item={item}
                 />
               ))}
             </Slider>
