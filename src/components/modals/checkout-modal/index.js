@@ -8,9 +8,35 @@ import "slick-carousel/slick/slick.css";
 import BestReviewedCard from "../../best-reviewed-card";
 import CheckoutProduct from "../../checkout-product";
 import { useSelector } from "react-redux";
+import { UTILS } from "../../../utils";
+import { getSuggestedItems } from "../../../services/api/api-actions";
+import Loader from "../../loader";
 
 const CheckoutModal = ({ show, setShow }) => {
   const { cart } = useSelector((s) => s);
+  const [relatedProducts, setRelatedProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const getRelatedItems = async () => {
+    try {
+      setLoading(true);
+      if (cart?.cart?.length) {
+        const res = await getSuggestedItems(
+          cart?.cart?.map((x) => x?.id).join()
+        );
+        setRelatedProducts(
+          res?.data?.map((item) => item?.vendorShop?.products || [])?.flat()
+        );
+      }
+    } catch (error) {
+      console.log("error=>>", error);
+      alert(UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+  React.useEffect(() => {
+    getRelatedItems();
+  }, [cart?.length]);
   return (
     <Modal show={show} onHide={setShow} centered>
       <Modal.Header
@@ -72,61 +98,51 @@ const CheckoutModal = ({ show, setShow }) => {
             <h3 className="suggestion-line">
               Add these top picks to your order
             </h3>
-            <div className="card-container">
-              <Slider
-                dots={false}
-                infinite={false}
-                speed={500}
-                slidesToShow={2}
-                slidesToScroll={1}
-                className="card-slider"
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 2,
+            {loading ? (
+              <Loader style={{ height: "200px" }} />
+            ) : (
+              <div className="card-container">
+                <Slider
+                  dots={false}
+                  infinite={false}
+                  speed={500}
+                  slidesToShow={2}
+                  slidesToScroll={1}
+                  className="card-slider"
+                  responsive={[
+                    {
+                      breakpoint: 1200,
+                      settings: {
+                        slidesToShow: 2,
+                      },
                     },
-                  },
-                  {
-                    breakpoint: 992,
-                    settings: {
-                      slidesToShow: 2,
+                    {
+                      breakpoint: 992,
+                      settings: {
+                        slidesToShow: 2,
+                      },
                     },
-                  },
-                  {
-                    breakpoint: 768,
-                    settings: {
-                      slidesToShow: 2,
+                    {
+                      breakpoint: 768,
+                      settings: {
+                        slidesToShow: 2,
+                      },
                     },
-                  },
-                  {
-                    breakpoint: 480,
-                    settings: {
-                      slidesToShow: 1,
+                    {
+                      breakpoint: 480,
+                      settings: {
+                        slidesToShow: 1,
+                      },
                     },
-                  },
-                ]}
-              >
-                {/* className='card-slider'> */}
-                {[
-                  { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                  { title: "Retail", bg: "#53B1751A", border: "#53B175B2" },
-                  {
-                    title: "Electronic",
-                    bg: "#D3B0E01A",
-                    border: "##D3B0E01A",
-                  },
-                  { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                  { title: "Groceries", bg: "#F8A44C1A", border: "#F8A44CB2" },
-                ].map((item, index) => (
-                  <BestReviewedCard
-                    key={index}
-                    title={item?.title}
-                    bg={item?.bg}
-                  />
-                ))}
-              </Slider>
-            </div>
+                  ]}
+                >
+                  {/* className='card-slider'> */}
+                  {relatedProducts?.map((item, index) => (
+                    <BestReviewedCard key={index} item={item} />
+                  ))}
+                </Slider>
+              </div>
+            )}
           </div>
           {/* suggestion items end */}
 

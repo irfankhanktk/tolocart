@@ -12,6 +12,7 @@ import FrequentlyQuestion from "../../components/frequently-question/index";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
 import Loader from "../../components/loader/index";
+import "./style.css";
 import {
   getCategories,
   getPopularItems,
@@ -85,7 +86,8 @@ const MarketPlace = () => {
               <CateryCard
                 key={index}
                 onClick={() => navigate(`/product-detail/${item?.id}`)}
-                title={item?.title}
+                // title={item?.title}
+                item={item}
                 // border={item?.border}
                 // bg={item?.bg}
               />
@@ -195,9 +197,12 @@ const MarketPlace = () => {
         </div>
         <p className="home-bg heading-title">Popular store in Ygnico by Area</p>
         <div className="d-md-flex flex-wrap">
-          {homeData?.popularShops?.map((item, index) => (
+          {homeData?.popularShops?.slice(0, 9).map((item, index) => (
             <StoreCard key={index} item={item} />
           ))}
+          <div className="w-100 text-center">
+            <span className="show_all">Show All</span>
+          </div>
         </div>
 
         <p className="home-bg heading-title">Popular Items Nearby</p>

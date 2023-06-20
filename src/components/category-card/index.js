@@ -1,7 +1,9 @@
 import React from "react";
 import { laptop_home } from "../../assets/images";
+import { returnImage } from "../../utils";
 
 const CateryCard = ({
+  item,
   image = laptop_home,
   title = "Groceries",
   style,
@@ -20,9 +22,14 @@ const CateryCard = ({
           borderColor: `${border}`,
         }}
       >
-        <img className="w-100" src={image} alt="image here" />
+        <img
+          className="w-100"
+          src={returnImage(item?.image)}
+          style={{ height: "137px" }}
+          alt="image here"
+        />
       </div>
-      <p className="text-center category-title">{title}</p>
+      <p className="text-center category-title">{item?.title}</p>
     </div>
   );
 };
