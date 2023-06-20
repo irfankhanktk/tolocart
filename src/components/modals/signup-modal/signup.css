@@ -10,6 +10,22 @@
     color: #181725;
     border-bottom: 2px solid #000;
 }
+.sign-up-btn{
+    background: #FF5A00;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #FFF9FF;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
 .privacy-policy{
     font-family: 'Gilroy-Medium';
     font-size: 14px;

@@ -37,7 +37,7 @@ const LoginModal = ({ show, setShow }) => {
                       placeholder="Password"
                       className="login-input-field"
                     ></input>
-                    <a href="#" className="login-btn">
+                    <a href="#" className="element-custom-btn mb-3">
                       Log In
                     </a>
                     <a href="#" className="social-login-links">
@@ -65,7 +65,7 @@ const LoginModal = ({ show, setShow }) => {
                         and data rates may apply.
                       </p>
 
-                      <a href="#" className="login-btn">
+                      <a href="#" className="element-custom-btn mb-3">
                         Continue
                       </a>
                       <a href="#" className="social-login-links">

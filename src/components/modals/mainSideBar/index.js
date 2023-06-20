@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import {
   bell,
@@ -13,7 +13,10 @@ import {
 } from "../../../assets/images";
 import "./mainSidebar.css"; // Import the CSS file
 
+
 const MainSideBar = ({ showModal, handleModalClose }) => {
+  const [loginModal, setLoginModal] = useState(false);
+  const [showSignupModal, setSignupModal] = useState(false);
   return (
     <div className="bg-info">
       <Modal
@@ -33,6 +36,25 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               <p className="m-0">mateen@gmail.com</p>
             </div>
           </div>
+          {/* login button start*/}
+          <div className="content-button d-flex justify-content-center align-items-center mb-3 d-lg-none d-md-none d-sm-flex">
+              <li className="nav-item dropdown pe-3">
+                <a
+                  className="nav-link nav-login-btn "
+                  onClick={() => setLoginModal(true)}>
+                  <span>Log in</span>
+                </a>
+              </li>
+              <li className="nav-item dropdown pe-3">
+                <a
+                  className="nav-link nav-signup-btn "
+                  onClick={() => setSignupModal(true)}
+                >
+                  <span>Sign up</span>
+                </a>
+              </li>
+            </div>
+          {/* login button end*/}
           <div className="side-nav">
             <ul className="p-0">
               <li className="sidebar-list d-flex align-items-center justify-content-between">

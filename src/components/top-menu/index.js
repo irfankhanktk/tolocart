@@ -8,6 +8,8 @@ import MainSideBar from "../modals/mainSideBar";
 import SearchProductsModal from "../modals/search-products-modal";
 import SignupModal from "../modals/signup-modal";
 import "./topmenu.css";
+import PlaceOrderModal from "../modals/placeOrder-modal";
+import TrackOrderModal from "../modals/trackOrder-modal";
 
 export function TopMenu() {
   const { cart } = useSelector((s) => s);
@@ -17,6 +19,8 @@ export function TopMenu() {
   const [showSignupModal, setSignupModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [placeOrderModal, setPlaceOrderModal] = useState(false);
+  const [trackOrderModal, setTrackOrderModal] = useState(false);
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [searchResults, setSearchResults] = React.useState([]);
 
@@ -108,23 +112,39 @@ export function TopMenu() {
                 </li>
               </>
             ) : (
-              <li className="nav-item dropdown pe-3">
+              <li className="nav-item dropdown pe-3 showOntop">
                 <a
                   className="nav-link nav-login-btn "
+                  onClick={() => setLoginModal(true)}
+                >
+                  <span>Log in</span>
+                </a>
+              </li>
+            )}
+              <li className="nav-item dropdown pe-3 showOntop">
+                <a
+                  className="nav-link nav-signup-btn "
                   onClick={() => setSignupModal(true)}
                 >
                   <span>Sign up</span>
                 </a>
               </li>
-            )}
-            <li className="nav-item dropdown pe-3">
-              <a
-                className="nav-link nav-login-btn "
-                onClick={() => setLoginModal(true)}
-              >
-                <span>Log in</span>
-              </a>
-            </li>
+              <li className="nav-item dropdown pe-3 showOntop">
+                <a
+                  className="nav-link nav-signup-btn "
+                  onClick={() => setPlaceOrderModal(true)}
+                >
+                  <span>place order</span>
+                </a>
+              </li>
+              <li className="nav-item dropdown pe-3 showOntop">
+                <a
+                  className="nav-link nav-signup-btn "
+                  onClick={() => setTrackOrderModal(true)}
+                >
+                  <span>Track order</span>
+                </a>
+              </li>
             <li className="nav-item dropdown pe-3">
               <a
                 onClick={() => setCheckoutModal(true)}
@@ -150,6 +170,12 @@ export function TopMenu() {
         setShow={setShowSearchModal}
         loading={searchLoading}
       />
+      <PlaceOrderModal show={placeOrderModal} setShow={setPlaceOrderModal}/>
+      <TrackOrderModal show={trackOrderModal} setShow={setTrackOrderModal}/>
     </>
   );
 }
+
+
+
+            

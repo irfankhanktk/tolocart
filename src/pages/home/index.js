@@ -13,7 +13,7 @@ const Home = () => {
     dispatch(getVehicleDetails());
   }, []);
   return (
-    <div>
+    <div className="container-fluid">
       <img src={home_bg} style={{ width: "100%" }} />
       <p className="home-bg">Tolocart Everyday Needs</p>
       <HomeServices />
