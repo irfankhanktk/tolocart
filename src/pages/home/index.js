@@ -7,7 +7,7 @@ import FrequentlyQuestion from "../../components/frequently-question/index";
 import HomeServices from "../../components/home-services/index";
 const Home = () => {
   return (
-    <div>
+    <div className="container-fluid">
       <img src={home_bg} style={{ width: "100%" }} />
       <p className="home-bg">Tolocart Everyday Needs</p>
       <HomeServices />

@@ -5,36 +5,43 @@ const HomeServices = (props) => {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="row mx-md-5  mx-lg-5 mx-xl-5 justify-content-between">
+      <div className="row m-0">
         <div
           onClick={() => navigate("/market-place")}
-          className="market-place col-md-4 col-sm-12 my-2"
+          className="col-md-5 col-sm-12 mb-4"
         >
-          <p className="market-place-text">Marketplace</p>
-          <img src={vegetable} alt="img here" className="vegetable-img" />
+          <div className="market-place">
+            <p className="market-place-text">Marketplace</p>
+            <img src={vegetable} alt="img here" className="vegetable-img" />
+          </div>
+          
         </div>
-        <div className="services col-md-7 col-sm-12 my-2 d-flex">
-          <p className="service-text">Parcel Delivery</p>
+        <div className="col-md-7 col-sm-12 mb-4 d-flex">
+          <div className="services w-100">
+            <p className="service-text">Parcel Delivery</p>
+          </div>
         </div>
       </div>
-      <div className="row mx-md-5  mx-lg-5 mx-xl-5 justify-content-between">
+      <div className="row m-0">
         <div
-          className="services col-md-4 my-2 d-flex"
-          style={{ height: "394px" }}
-        >
-          <p className="service-text">Pharmacy</p>
+          className="col-md-5 mb-4">
+          <div className="services d-flex" style={{ height: "100%" }}>
+            <p className="service-text">Pharmacy</p>
+          </div>
+          
         </div>
         <div
-          className="col-md-7 d-flex flex-column justify-content-between"
-          style={{ padding: 0 }}
-        >
+          className="col-md-7 mb-4">
           {/* <div style={{ display: 'flex', flexDirection: 'column', height: '300px' }}> */}
-          <div className="services  d-flex my-2" style={{ height: "170px" }}>
-            <p className="service-text">Restaurant</p>
+          <div className="d-flex flex-column justify-content-between" style={{gap: '1.5rem'}}>
+            <div className="services d-flex" style={{ height: "170px" }}>
+              <p className="service-text">Restaurant</p>
+            </div>
+            <div className="services d-flex" style={{ height: "170px" }}>
+              <p className="service-text">Doctor Consultant </p>
+            </div>
           </div>
-          <div className="services  d-flex my-2" style={{ height: "170px" }}>
-            <p className="service-text">Doctor Consultant </p>
-          </div>
+          
         </div>
       </div>
     </div>

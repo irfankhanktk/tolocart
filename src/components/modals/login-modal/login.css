@@ -1,20 +1,13 @@
-.login-btn{
+.element-custom-btn{
     background: #FF5A00;
     border-radius: 10px;
-    padding: 15px;
-    font-family: 'Gilroy';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 18px;
-    text-align: center;
-    text-decoration-line: underline;
-    color: #FFF9FF;
     width: 100%;
     display: block;
-    margin-bottom: 20px;
+    padding: 12px;
+    text-align: center;
+    color: #fff !important;
 }
-.login-btn:hover{
+.element-custom-btn:hover{
     color: #FFF9FF;
 }
 .forgot-password{
@@ -51,6 +44,12 @@
     text-align: center;
     display: block;
     margin-bottom: 15px;
+}
+.social-login-links:hover,
+.continue-with-login-links a:hover,
+.forgot-password:hover
+{
+    color: #000;
 }
 .continue-with-login-links a {
     background: rgba(246, 246, 246, 0.35);

@@ -26,7 +26,7 @@ const Footer = () => {
           >
             Download App
           </p>
-          <div>
+          <div className="d-flex align-items-center">
             <a href="https://example.com">
               <img src={applestore} />
             </a>
@@ -99,10 +99,10 @@ const Footer = () => {
         </div>
         <div class="border border-white" />
         <div className="px-5 py-3 d-md-flex" style={{ background: "#FF5A00" }}>
-          <p className="col-md-6 text-white">
+          {/* <p className="col-md-6 text-white">
             All Rights reserved. Tolocart Company © 2023
-          </p>
-          <div className="col-md-6 d-md-flex justify-content-end">
+          </p> */}
+          <div className="col-md-12 d-flex justify-content-end">
             <p className="text-white mx-md-3">
               All Rights reserved. Tolocart Company © 2023
             </p>

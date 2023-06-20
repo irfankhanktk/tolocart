@@ -14,7 +14,10 @@ import {
   user_profile_img,
 } from "../../../assets/images";
 
+
 const MainSideBar = ({ showModal, handleModalClose }) => {
+  const [loginModal, setLoginModal] = useState(false);
+  const [showSignupModal, setSignupModal] = useState(false);
   return (
     <div className="bg-info">
       <Modal
@@ -31,7 +34,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 <div className="modal-dialog sidebar-modal m-0">
                     <div className="modal-content vh-100"> */}
 
-        <div className="modal-body">
+        <div className="modal-body bg-white">
           <div className="user-profile d-flex align-items-center gap-3 mb-5">
             <div className="user-profile-img">
               <img src={user_profile_img} alt="user-profile" />
@@ -41,6 +44,25 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               <p className="m-0">mateen@gmail.com</p>
             </div>
           </div>
+          {/* login button start*/}
+          <div className="content-button d-flex justify-content-center align-items-center mb-3 d-lg-none d-md-none d-sm-flex">
+              <li className="nav-item dropdown pe-3">
+                <a
+                  className="nav-link nav-login-btn "
+                  onClick={() => setLoginModal(true)}>
+                  <span>Log in</span>
+                </a>
+              </li>
+              <li className="nav-item dropdown pe-3">
+                <a
+                  className="nav-link nav-signup-btn "
+                  onClick={() => setSignupModal(true)}
+                >
+                  <span>Sign up</span>
+                </a>
+              </li>
+            </div>
+          {/* login button end*/}
           <div className="side-nav">
             <ul className="p-0">
               <li className="sidebar-list d-flex align-items-center justify-content-between">

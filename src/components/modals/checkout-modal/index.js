@@ -9,6 +9,7 @@ import BestReviewedCard from "../../best-reviewed-card";
 import CheckoutProduct from "../../checkout-product";
 
 const CheckoutModal = ({ show, setShow }) => {
+  const [checkoutModal, setCheckoutModal] = useState(false);
   return (
       <Modal show={show} onHide={setShow} centered>
         <Modal.Header
@@ -161,7 +162,7 @@ const CheckoutModal = ({ show, setShow }) => {
             {/* table end*/}
 
             <div style={{marginTop:'25px'}}>
-              <a href="#" className="login-btn" style={{textDecoration:'none'}}>Next </a>
+              <a href="#" className="element-custom-btn" style={{textDecoration:'none'}}>Next </a>
             </div>
           </div>
          </Modal.Body>

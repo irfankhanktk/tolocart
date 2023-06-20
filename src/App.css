@@ -45,11 +45,12 @@
   font-family: "Gilroy";
   font-style: normal;
   font-weight: 600;
-  font-size: 2.5rem;
+  font-size: 32px;
   line-height: 29px;
   text-align: center;
   color: #000000;
   margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 .market-place {
   padding: 20px;
