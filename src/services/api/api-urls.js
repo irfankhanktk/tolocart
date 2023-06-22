@@ -1,6 +1,11 @@
 export const URLS = {
   base_url: "http://efuikwaku-001-site19.etempurl.com/api/",
   image_url: "http://efuikwaku-001-site16.etempurl.com/UploadedFiles/",
+  auth: {
+    login: "account/authenticate",
+    login_phone: "account/loginwithphone",
+    register: "account/register",
+  },
   shop: {
     get_all_offers_shop_details: "v1/ShopOffer/GetAllOfferWithShopDetails",
     get_compaign_banners: "v1/ShopOffer/GetBanners/Store",

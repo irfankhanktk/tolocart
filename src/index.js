@@ -4,8 +4,8 @@ import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 //bootstrap config
-import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Provider } from "react-redux";

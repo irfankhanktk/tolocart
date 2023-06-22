@@ -1,3 +1,7 @@
+export const STORAGE_KEYS = {
+  token: "@token",
+  user: "@user",
+};
 export const PLACE_ORDER_DATA = {
   totalAmount: 0,
   shopId: 0,

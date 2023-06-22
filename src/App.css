@@ -1,6 +1,6 @@
-*{
-  margin:0;
-  padding:0;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 .App {
@@ -11,7 +11,6 @@
   height: 40vmin;
   pointer-events: none;
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -105,8 +104,8 @@
   width: "100%";
   background: rgba(84, 104, 255, 0.12);
 }
-.heading-title{
-  font-family: 'Gilroy';
+.heading-title {
+  font-family: "Gilroy";
   font-style: normal;
   font-weight: 700;
   font-size: 38px;
@@ -114,17 +113,17 @@
   color: #181725;
   margin-bottom: 50px;
 }
-.customer-detail{
-  font-family: 'Gilroy';
+.customer-detail {
+  font-family: "Gilroy";
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 20px;
   text-align: justify;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-.category-title{
-  font-family: 'Gilroy';
+.category-title {
+  font-family: "Gilroy";
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -175,4 +174,13 @@
   .font-size-small {
     font-size: 12px;
   }
+}
+.login-btn {
+  background: #ff5a00;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  padding: 12px;
+  text-align: center;
+  color: #fff !important;
 }
