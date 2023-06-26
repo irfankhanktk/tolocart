@@ -64,7 +64,7 @@ const ProductDetails = () => {
     <>
       <div className="container">
         <div className="row" style={{ marginTop: "50px" }}>
-          <div className="col-md-4 d-flex align-items-center justify-content-end">
+          <div className="col-md-4 mb-3 d-flex align-items-center justify-content-end">
             <div
               className="d-flex align-items-center p-3 rounded"
               style={{
@@ -74,12 +74,12 @@ const ProductDetails = () => {
               }}
             >
               <img
-                className="rounded w-100 h-100"
+                className="rounded w-100 h-100" style={{objectFit:'contain'}}
                 src={returnImage(productDetails?.data?.imagePath)}
               />
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 mb-3">
             <div className="singleproduct-wrap">
               <div className="singleproduct-title d-flex align-items-center justify-content-between mb-2">
                 <h2>{productDetails?.data?.name}</h2>
@@ -192,7 +192,7 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 mb-3">
             <div class="dropdown mb-2">
               <a
                 class="btn btn-secondary dropdown-toggle custom-dropdown"
@@ -310,7 +310,7 @@ const ProductDetails = () => {
             </div>
             <a
               href="#"
-              className="login-btn"
+              className="element-custom-btn"
               onClick={() => handleAddToCart(productDetails?.data)}
             >
               Add To Basket
@@ -318,7 +318,7 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        <div className="row" style={{ marginTop: "50px" }}>
+        <div className="row" style={{ marginTop: "50px", marginBottom:'30px' }}>
           <div className="col-md-12">
             <div className="item-title d-flex justify-content-between align-items-center mb-4">
               <h2>Related Items</h2>

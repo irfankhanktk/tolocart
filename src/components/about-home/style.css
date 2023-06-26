@@ -1,0 +1,21 @@
+.about-home{
+    padding: 20px;
+}
+.about-text{
+    color: #000;
+    text-align: justify;
+    font-size: 24px;
+    font-family: Gilroy;
+    font-weight: 300;
+    line-height: 35px;
+}
+.csm-element-title{
+    color: #000;
+    font-size: 38px;
+    font-family: Gilroy;
+    font-weight: 600;
+    line-height: 29px;
+}
+.about-home {
+    padding: 50px 30px;
+}

@@ -184,7 +184,7 @@ const CheckoutModal = ({ show, setShow }) => {
           <div style={{ marginTop: "25px" }}>
             <a
               href="#"
-              className="login-btn"
+              className="element-custom-btn"
               style={{ textDecoration: "none" }}
             >
               Next{" "}

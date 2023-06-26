@@ -8,7 +8,7 @@ const CustomerHomeCard = ({
     descriptionBg = 'red'
 }) => {
     return (
-        <div className='col-md-3 mt-5 d-flex' style={{ ...style }}>
+        <div className='col-md-4 mt-5 d-flex' style={{ ...style }}>
             <img src={image} alt='image here' style={{ height: '175px', width: '100%' }} />
             <div className='p-2' style={{ background: descriptionBg }}>
                 <p style={{ fontSize: '18px', color: '#fff' }}>{title}</p>

@@ -26,7 +26,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
         onHide={handleModalClose}
         className="sidebar-modal m-0"
       >
-        <div className="modal-body">
+        <div className="modal-body bg-white">
           <div className="user-profile d-flex align-items-center gap-3 mb-5">
             <div className="user-profile-img">
               <img src={user_profile_img} alt="user-profile" />

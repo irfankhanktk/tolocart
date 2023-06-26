@@ -31,4 +31,5 @@
 .placeorder-wrap .modal-content{
     max-width: 350px !important;
     padding: 20px;
+    margin: 0 auto;
 }

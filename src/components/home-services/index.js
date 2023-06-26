@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const HomeServices = (props) => {
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="container">
       <div className="row m-0">
         <div
           onClick={() => navigate("/market-place")}

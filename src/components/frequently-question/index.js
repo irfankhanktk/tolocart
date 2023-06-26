@@ -7,17 +7,19 @@ const FrequentlyQuestion = ({}) => {
       <p className="text-center" style={{ fontSize: "20px" }}>
         Frequently Asked Questions
       </p>
-      <div className="d-flex flex-row align-items-center justify-content-between mx-5 border-bottom">
-        <p className="">Frequently Asked Questions</p>
-        <img src={fr_plus} />
-      </div>
-      <div className="d-flex flex-row align-items-center justify-content-between mx-5 border-bottom">
-        <p className="">Frequently Asked Questions</p>
-        <img src={fr_plus} />
-      </div>
-      <div className="d-flex flex-row align-items-center justify-content-between mx-5 border-bottom">
-        <p className="">Frequently Asked Questions</p>
-        <img src={fr_plus} />
+      <div className="container">
+        <div className="d-flex flex-row align-items-center justify-content-between border-bottom">
+          <p className="">Frequently Asked Questions</p>
+          <img src={fr_plus} />
+        </div>
+        <div className="d-flex flex-row align-items-center justify-content-between border-bottom">
+          <p className="">Frequently Asked Questions</p>
+          <img src={fr_plus} />
+        </div>
+        <div className="d-flex flex-row align-items-center justify-content-between border-bottom">
+          <p className="">Frequently Asked Questions</p>
+          <img src={fr_plus} />
+        </div>
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ const Stores = () => {
   }
   return (
     <div>
+      <h2>Popular store in Ygnico by Area</h2>
       <StoreCardHeader />
       <div className="d-md-flex flex-wrap">
         {stores?.map((item, index) => (

@@ -13,25 +13,27 @@ const Home = () => {
     dispatch(getVehicleDetails());
   }, []);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid p-0">
       <img src={home_bg} style={{ width: "100%" }} />
       <p className="home-bg">Tolocart Everyday Needs</p>
       <HomeServices />
       <AboutHome />
-      <Container className="container row justify-content-around d-flex align-items-center mx-auto">
-        <CustomerHomeCard
-          style={{ flexDirection: "column-reverse" }}
-          descriptionBg={"#FF5A00"}
-        />
-        <CustomerHomeCard
-          style={{ flexDirection: "column" }}
-          descriptionBg={"#1BB504DE"}
-        />
-        <CustomerHomeCard
-          style={{ flexDirection: "column-reverse" }}
-          descriptionBg={"#FF5A00"}
-        />
-      </Container>
+      <div className="container">
+        <div className="row">
+          <CustomerHomeCard
+            style={{ flexDirection: "column-reverse" }}
+            descriptionBg={"#FF5A00"}
+          />
+          <CustomerHomeCard
+            style={{ flexDirection: "column" }}
+            descriptionBg={"#1BB504DE"}
+          />
+          <CustomerHomeCard
+            style={{ flexDirection: "column-reverse" }}
+            descriptionBg={"#FF5A00"}
+          />
+        </div>
+      </div>
 
       <FrequentlyQuestion />
     </div>

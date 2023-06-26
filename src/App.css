@@ -131,6 +131,24 @@
   line-height: 29px;
   color: #030303;
 }
+.csm-service-links{
+  color: #FFF;
+  text-align: justify;
+  font-size: 22px;
+  font-family: Gilroy;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+}
+.csm-service-links-wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.laptop-image {
+  width: 100%;
+  height: auto;
+}
 /* Small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .laptop-image {
@@ -139,21 +157,21 @@
   }
 }
 
-@media only screen and (min-width: 768px), (min-width: 992px) {
+/* @media only screen and (min-width: 768px), (min-width: 992px) {
   .laptop-image {
     width: 70%;
     height: auto;
   }
-}
+} */
 
 /* Media query for larger screens */
 @media (min-width: 768px) {
   .font-size-heavy {
     font-size: 48px;
   }
-  .font-size-heading {
+  /* .font-size-heading {
     font-size: 36px;
-  }
+  } */
   .font-size-normal {
     font-size: 28px;
   }
@@ -166,13 +184,31 @@
   .font-size-heavy {
     font-size: 24px;
   }
-  .font-size-heading {
+  /* .font-size-heading {
     font-size: 20px;
-  }
+  } */
   .font-size-normal {
     font-size: 16px;
   }
   .font-size-small {
     font-size: 12px;
+  }
+}
+
+@media(max-width:575px){
+  .csm-service-links-wrap{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+  .all-right-text{
+    text-align: justify;
+    font-size: 14px;
+    font-family: Gilroy;
+    font-weight: 500;
+    line-height: 20px;
+  }
+  .home-bg {
+    font-size: 22px;
   }
 }
