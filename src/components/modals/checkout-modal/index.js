@@ -12,7 +12,7 @@ import { UTILS } from "../../../utils";
 import { getSuggestedItems } from "../../../services/api/api-actions";
 import Loader from "../../loader";
 
-const CheckoutModal = ({ show, setShow }) => {
+const CheckoutModal = ({ show, setShow, onNextClick }) => {
   const { cart } = useSelector((s) => s);
   const [relatedProducts, setRelatedProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -183,6 +183,7 @@ const CheckoutModal = ({ show, setShow }) => {
 
           <div style={{ marginTop: "25px" }}>
             <a
+              onClick={onNextClick}
               href="#"
               className="element-custom-btn"
               style={{ textDecoration: "none" }}

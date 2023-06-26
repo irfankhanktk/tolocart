@@ -12,7 +12,8 @@ import PlaceOrderModal from "../modals/placeOrder-modal";
 import TrackOrderModal from "../modals/trackOrder-modal";
 
 export function TopMenu() {
-  const { cart } = useSelector((s) => s);
+  const { cart, user } = useSelector((s) => s);
+  const { userInfo } = user;
   const [showModal, setShowModal] = useState(false);
   const [checkoutModal, setCheckoutModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
@@ -56,8 +57,8 @@ export function TopMenu() {
             className="fa fa-bars"
             aria-hidden="true"
             onClick={handleModalOpen}
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            // data-bs-toggle="modal"
+            // data-bs-target="#exampleModal"
             style={{ fontSize: "30px", cursor: "pointer" }}
           ></i>
           <a href="/" className="logo d-flex align-items-center">
@@ -92,7 +93,7 @@ export function TopMenu() {
                 <i className="bi bi-search"></i>
               </a>
             </li>
-            {false ? (
+            {userInfo?.id ? (
               <>
                 <li className="nav-item dropdown d-flex flex-column">
                   <a className="takeaway active" href="#">
@@ -112,39 +113,41 @@ export function TopMenu() {
                 </li>
               </>
             ) : (
-              <li className="nav-item dropdown pe-3 showOntop">
-                <a
-                  className="nav-link nav-login-btn "
-                  onClick={() => setLoginModal(true)}
-                >
-                  <span>Log in</span>
-                </a>
-              </li>
+              <>
+                <li className="nav-item dropdown pe-3 showOntop">
+                  <a
+                    className="nav-link nav-login-btn "
+                    onClick={() => setLoginModal(true)}
+                  >
+                    <span>Log in</span>
+                  </a>
+                </li>
+                <li className="nav-item dropdown pe-3 showOntop">
+                  <a
+                    className="nav-link nav-signup-btn "
+                    onClick={() => setSignupModal(true)}
+                  >
+                    <span>Sign up</span>
+                  </a>
+                </li>
+              </>
             )}
-              <li className="nav-item dropdown pe-3 showOntop">
-                <a
-                  className="nav-link nav-signup-btn "
-                  onClick={() => setSignupModal(true)}
-                >
-                  <span>Sign up</span>
-                </a>
-              </li>
-              <li className="nav-item dropdown pe-3 showOntop">
-                <a
-                  className="nav-link nav-signup-btn "
-                  onClick={() => setPlaceOrderModal(true)}
-                >
-                  <span>place order</span>
-                </a>
-              </li>
-              <li className="nav-item dropdown pe-3 showOntop">
-                <a
-                  className="nav-link nav-signup-btn "
-                  onClick={() => setTrackOrderModal(true)}
-                >
-                  <span>Track order</span>
-                </a>
-              </li>
+            <li className="nav-item dropdown pe-3 showOntop">
+              <a
+                className="nav-link nav-signup-btn "
+                onClick={() => setPlaceOrderModal(true)}
+              >
+                <span>place order</span>
+              </a>
+            </li>
+            <li className="nav-item dropdown pe-3 showOntop">
+              <a
+                className="nav-link nav-signup-btn "
+                onClick={() => setTrackOrderModal(true)}
+              >
+                <span>Track order</span>
+              </a>
+            </li>
             <li className="nav-item dropdown pe-3">
               <a
                 onClick={() => setCheckoutModal(true)}
@@ -163,19 +166,29 @@ export function TopMenu() {
       <MainSideBar showModal={showModal} handleModalClose={handleModalClose} />
       <LoginModal show={loginModal} setShow={setLoginModal} />
       <SignupModal show={showSignupModal} setShow={setSignupModal} />
-      <CheckoutModal show={checkoutModal} setShow={setCheckoutModal} />
+      <CheckoutModal
+        show={checkoutModal}
+        setShow={setCheckoutModal}
+        onNextClick={() => {
+          setPlaceOrderModal(true);
+          setCheckoutModal(false);
+        }}
+      />
       <SearchProductsModal
         searchResults={searchResults || []}
         show={showSearchModal}
         setShow={setShowSearchModal}
         loading={searchLoading}
       />
-      <PlaceOrderModal show={placeOrderModal} setShow={setPlaceOrderModal}/>
-      <TrackOrderModal show={trackOrderModal} setShow={setTrackOrderModal}/>
+      <PlaceOrderModal
+        show={placeOrderModal}
+        setShow={setPlaceOrderModal}
+        onPlaceClick={() => {
+          setTrackOrderModal(true);
+          setPlaceOrderModal(false);
+        }}
+      />
+      <TrackOrderModal show={trackOrderModal} setShow={setTrackOrderModal} />
     </>
   );
 }
-
-
-
-            

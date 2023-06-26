@@ -12,9 +12,11 @@ import {
   user_profile_img,
 } from "../../../assets/images";
 import "./mainSidebar.css"; // Import the CSS file
-
+import { useSelector } from "react-redux";
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
+  const { user } = useSelector((s) => s);
+  const { userInfo } = user;
   const [loginModal, setLoginModal] = useState(false);
   const [showSignupModal, setSignupModal] = useState(false);
   return (
@@ -32,28 +34,29 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               <img src={user_profile_img} alt="user-profile" />
             </div>
             <div className="user-detail">
-              <h3 className="mb-1">Mateen</h3>
-              <p className="m-0">mateen@gmail.com</p>
+              <h3 className="mb-1">{userInfo?.userName || "Guest"}</h3>
+              <p className="m-0">{userInfo?.email}</p>
             </div>
           </div>
           {/* login button start*/}
           <div className="content-button d-flex justify-content-center align-items-center mb-3 d-lg-none d-md-none d-sm-flex">
-              <li className="nav-item dropdown pe-3">
-                <a
-                  className="nav-link nav-login-btn "
-                  onClick={() => setLoginModal(true)}>
-                  <span>Log in</span>
-                </a>
-              </li>
-              <li className="nav-item dropdown pe-3">
-                <a
-                  className="nav-link nav-signup-btn "
-                  onClick={() => setSignupModal(true)}
-                >
-                  <span>Sign up</span>
-                </a>
-              </li>
-            </div>
+            <li className="nav-item dropdown pe-3">
+              <a
+                className="nav-link nav-login-btn "
+                onClick={() => setLoginModal(true)}
+              >
+                <span>Log in</span>
+              </a>
+            </li>
+            <li className="nav-item dropdown pe-3">
+              <a
+                className="nav-link nav-signup-btn "
+                onClick={() => setSignupModal(true)}
+              >
+                <span>Sign up</span>
+              </a>
+            </li>
+          </div>
           {/* login button end*/}
           <div className="side-nav">
             <ul className="p-0">

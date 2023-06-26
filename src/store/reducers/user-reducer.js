@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { STORAGE_KEYS } from "../../constants";
 
 const initialState = {
   userInfo: null,
@@ -14,7 +15,15 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo: (state, action) => {
-      state.userInfo = action.payload;
+      localStorage.setItem(
+        STORAGE_KEYS.token,
+        action?.payload?.data?.jwToken || ""
+      );
+      localStorage.setItem(
+        STORAGE_KEYS.user,
+        JSON.stringify(action?.payload?.data)
+      );
+      state.userInfo = action.payload?.data;
     },
     setVehicle: (state, action) => {
       state.vehicle = action.payload;

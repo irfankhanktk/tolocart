@@ -2,7 +2,30 @@ import React, { useState } from "react";
 import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
 import "./login.css"; // Import the CSS file
 import { fb, google } from "../../../assets/images";
+import { onLogin } from "../../../services/api/auth-api-actions";
+import { useDispatch } from "react-redux";
 const LoginModal = ({ show, setShow }) => {
+  const [isPhoneTab, setIsPhoneTab] = React.useState("email");
+  const dispatch = useDispatch();
+  const [loading, setLoading] = React.useState(false);
+  const [payload, setPayload] = React.useState({
+    email: "Mohsin@gmail.com",
+    password: "Zikk@1234",
+    phoneNumber: "+913425693093",
+  });
+  const onHandleChange = (e) =>
+    setPayload((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+  const onSubmit = () => {
+    const data = { ...payload };
+    if (isPhoneTab === "email") {
+      delete data.phoneNumber;
+      dispatch(onLogin(data, setLoading));
+    } else {
+      delete data.email;
+      delete data.password;
+      dispatch(onLogin(data, setLoading, true));
+    }
+  };
   return (
     <div>
       <Modal show={show} onHide={() => setShow(false)} centered>
@@ -11,7 +34,10 @@ const LoginModal = ({ show, setShow }) => {
         </Modal.Header>
         <Modal.Body className="p-0">
           <div className="modal-wrapper">
-            <Tab.Container defaultActiveKey="email">
+            <Tab.Container
+              onSelect={(eventKey) => setIsPhoneTab(eventKey)}
+              defaultActiveKey="email"
+            >
               <span className="signup-title">Log in</span>
               <Nav
                 variant="tabs"
@@ -28,24 +54,49 @@ const LoginModal = ({ show, setShow }) => {
                 <Tab.Pane eventKey="email">
                   <Form>
                     <input
+                      value={payload.email}
+                      name="email"
                       type="email"
                       placeholder="Email"
                       className="login-input-field"
+                      onChange={onHandleChange}
                     ></input>
                     <input
+                      value={payload.password}
+                      name="password"
                       type="password"
                       placeholder="Password"
                       className="login-input-field"
+                      onChange={onHandleChange}
                     ></input>
-                    <a href="#" className="element-custom-btn mb-3">
-                      Log In
+                    <a
+                      disabled={loading}
+                      href="#"
+                      onClick={(e) => {
+                        onSubmit();
+                      }}
+                      className="element-custom-btn mb-3"
+                    >
+                      {loading ? "Loading" : "Log In"}
                     </a>
                     <a href="#" className="social-login-links">
                       Or connect with social media
                     </a>
                     <div className="continue-with-login-links">
-                      <a href="#" className="d-flex gap-3 align-items-center justify-content-center"> <img src={google} />  Continue with Google</a>
-                      <a href="#" className="d-flex gap-3 align-items-center justify-content-center"> <img src={fb} /> Continue with Facebook</a>
+                      <a
+                        href="#"
+                        className="d-flex gap-3 align-items-center justify-content-center"
+                      >
+                        {" "}
+                        <img src={google} /> Continue with Google
+                      </a>
+                      <a
+                        href="#"
+                        className="d-flex gap-3 align-items-center justify-content-center"
+                      >
+                        {" "}
+                        <img src={fb} /> Continue with Facebook
+                      </a>
                     </div>
                     <a href="#" className="forgot-password">
                       Forgot Password? <span>Reset it</span>{" "}
@@ -56,24 +107,44 @@ const LoginModal = ({ show, setShow }) => {
                   <Form>
                     <div className="modal-wrapper p-0">
                       <input
+                        value={payload.phoneNumber}
+                        name="phoneNumber"
                         type="tel"
                         placeholder="Phone Number"
                         className="login-input-field"
+                        onChange={onHandleChange}
                       ></input>
                       <p className="verify-code">
                         We will send a text with a verification code. Message
                         and data rates may apply.
                       </p>
 
-                      <a href="#" className="element-custom-btn mb-3">
-                        Continue
+                      <a
+                        disabled={loading}
+                        onClick={(e) => {
+                          onSubmit();
+                        }}
+                        href="#"
+                        className="element-custom-btn mb-3"
+                      >
+                        {loading ? "Loading" : "Continue"}
                       </a>
                       <a href="#" className="social-login-links">
                         Or connect with social media
                       </a>
                       <div className="continue-with-login-links">
-                        <a href="#" className="d-flex gap-3 align-items-center justify-content-center"><img src={google} /> Continue with Google</a>
-                        <a href="#" className="d-flex gap-3 align-items-center justify-content-center"><img src={fb} /> Continue with Facebook</a>
+                        <a
+                          href="#"
+                          className="d-flex gap-3 align-items-center justify-content-center"
+                        >
+                          <img src={google} /> Continue with Google
+                        </a>
+                        <a
+                          href="#"
+                          className="d-flex gap-3 align-items-center justify-content-center"
+                        >
+                          <img src={fb} /> Continue with Facebook
+                        </a>
                       </div>
                     </div>
                   </Form>
