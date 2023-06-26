@@ -16,7 +16,8 @@ const App = () => {
       <TopMenu />
       <div>
         <Routes>
-          <Route path="/" element={<TrackOrder />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/track-order" element={<TrackOrder />} />
           <Route path="/market-place" element={<MarketPlace />} />
           <Route path="/stores" element={<Stores />} />
           <Route path="/store-dashboard/:id" element={<SideDasboard />} />
