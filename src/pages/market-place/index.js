@@ -200,9 +200,14 @@ const MarketPlace = () => {
           {homeData?.popularShops?.slice(0, 9).map((item, index) => (
             <StoreCard key={index} item={item} />
           ))}
-          <div className="w-100 text-center">
-            <span className="show_all">Show All</span>
-          </div>
+
+          {homeData?.popularShops?.length > 9 && (
+            <div className="w-100 text-center">
+              <a href="/stores" className="show_all">
+                Show All
+              </a>
+            </div>
+          )}
         </div>
 
         <p className="home-bg heading-title">Popular Items Nearby</p>

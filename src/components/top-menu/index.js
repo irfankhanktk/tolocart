@@ -150,13 +150,20 @@ export function TopMenu() {
       </header>
       <MainSideBar showModal={showModal} handleModalClose={handleModalClose} />
       <LoginModal show={loginModal} setShow={setLoginModal} />
-      <SignupModal show={showSignupModal} setShow={setSignupModal} />
+      <SignupModal
+        show={showSignupModal}
+        setShow={setSignupModal}
+        onSuccessRegister={() => {
+          setSignupModal(false);
+          setLoginModal(true);
+        }}
+      />
       <CheckoutModal
         show={checkoutModal}
         setShow={setCheckoutModal}
         onNextClick={() => {
-          setPlaceOrderModal(true);
           setCheckoutModal(false);
+          // setPlaceOrderModal(true);
         }}
       />
       <SearchProductsModal

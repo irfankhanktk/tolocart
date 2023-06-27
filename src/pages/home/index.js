@@ -6,11 +6,25 @@ import CustomerHomeCard from "../../components/customer-home-card/index";
 import FrequentlyQuestion from "../../components/frequently-question/index";
 import HomeServices from "../../components/home-services/index";
 import { useDispatch } from "react-redux";
-import { getVehicleDetails } from "../../services/api/api-actions";
+import {
+  getCurrentLocation,
+  getVehicleDetails,
+} from "../../services/api/api-actions";
+import { STORAGE_KEYS } from "../../constants";
+import { setUserInfo } from "../../store/reducers/user-reducer";
 const Home = () => {
   const dispatch = useDispatch();
+  const getData = () => {
+    const res = localStorage.getItem(STORAGE_KEYS.user);
+    const token = localStorage.getItem(STORAGE_KEYS.token);
+    if (!res) return;
+    const user = JSON.parse(res);
+    dispatch(setUserInfo({ data: user, jwtToken: token }));
+  };
   React.useEffect(() => {
+    getData();
     dispatch(getVehicleDetails());
+    dispatch(getCurrentLocation());
   }, []);
   return (
     <div className="container-fluid p-0">

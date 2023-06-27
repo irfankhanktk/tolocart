@@ -9,13 +9,33 @@ import BestReviewedCard from "../../best-reviewed-card";
 import CheckoutProduct from "../../checkout-product";
 import { useSelector } from "react-redux";
 import { UTILS } from "../../../utils";
-import { getSuggestedItems } from "../../../services/api/api-actions";
+import {
+  getSuggestedItems,
+  placeOrder,
+} from "../../../services/api/api-actions";
 import Loader from "../../loader";
 
 const CheckoutModal = ({ show, setShow, onNextClick }) => {
-  const { cart } = useSelector((s) => s);
+  const { cart, user } = useSelector((s) => s);
   const [relatedProducts, setRelatedProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [orderLoading, setOrderLoading] = React.useState(false);
+  const [deliveryCharges, setDeliveryCharges] = React.useState("0");
+  const [distance, setDistance] = React.useState("1");
+  const onPlaceOrder = async (data) => {
+    try {
+      console.log("data::", data);
+      setOrderLoading(true);
+      await placeOrder(data);
+      alert("Order Placed Successfully");
+      onNextClick();
+    } catch (error) {
+      console.log("error=>>", error);
+      alert(UTILS.returnError(error));
+    } finally {
+      setOrderLoading(false);
+    }
+  };
   const getRelatedItems = async () => {
     try {
       setLoading(true);
@@ -34,9 +54,62 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
       setLoading(false);
     }
   };
+  const getDeliveryCharges = async () => {
+    try {
+      const vendorShop = cart?.cart[0]?.vendorShop;
+      const res = await UTILS.getDistance(
+        user?.location?.latitude,
+        vendorShop?.latitude,
+        user?.location?.longitude,
+        vendorShop?.longitude
+      );
+      console.log("chargesss:::", res);
+      setDistance(res);
+      setDeliveryCharges((res || 1) * user?.vehicle?.perKmRate);
+    } catch (error) {
+      alert(UTILS.returnError(error));
+    }
+  };
   React.useEffect(() => {
+    if (cart?.cart?.length) getDeliveryCharges();
     getRelatedItems();
-  }, [cart?.length]);
+  }, [cart?.cart?.length]);
+  const total = cart?.cart?.reduce(
+    (res, item) => (res += (item?.discountedPrice || item?.price) * item?.qty),
+    0
+  );
+  const totalDiscount = cart?.cart?.reduce(
+    (res, item) => (res += item?.discountedPrice * item?.qty),
+    0
+  );
+  const totalWithoutDiscount = cart?.cart?.reduce(
+    (res, item) => (res += item?.price * item?.qty),
+    0
+  );
+  const data = {
+    totalAmount: total + deliveryCharges,
+    shopId: cart?.cart[0]?.vendorShopId,
+    deliveryAddress: user?.location?.address,
+    latitude: user?.location?.latitude,
+    longitude: user?.location?.longitude,
+    orderItems: cart?.cart?.map((item) => ({
+      id: item?.id,
+      qty: item?.qty,
+      unitPrice: item?.discountedPrice || item?.price,
+      flavor: "",
+      size: "",
+    })),
+    paymentMethod: "Cash",
+    distance: distance || "1",
+    description: "",
+    customerId: user?.userInfo?.id,
+    isPaid: false,
+    deliveryFee: 0,
+    statusId: 0,
+    preferenceName: "",
+    preferenceId: 0,
+    preferencePhone: "",
+  };
   return (
     <Modal show={show} onHide={setShow} centered>
       <Modal.Header
@@ -156,26 +229,27 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 <h2 className="billing-title">Billing Detail</h2>
               </tr>
               <tr>
-                <td>Item Price</td>
-                <td>$ 3.49</td>
+                <td>Total without Discount</td>
+                <td>$ {totalWithoutDiscount}</td>
               </tr>
               <tr>
                 <td>Discount</td>
-                <td>$ 1.0</td>
+                <td>$ {totalDiscount}</td>
               </tr>
               <tr>
                 <td>Tax</td>
-                <td>$ 0.51</td>
+                <td>$ 0</td>
               </tr>
               <tr className="no-border">
                 <td>Delivery Charges</td>
                 <td>
-                  <span className="EstimateCost">Estimated Cost </span> $ 2.0
+                  <span className="EstimateCost">Estimated Cost </span> ${" "}
+                  {deliveryCharges}
                 </td>
               </tr>
               <tr className="no-border">
                 <td>Total Cost</td>
-                <td className="highlighted">$ 5.0</td>
+                <td className="highlighted">$ {total + deliveryCharges}</td>
               </tr>
             </table>
           </div>
@@ -183,12 +257,38 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
 
           <div style={{ marginTop: "25px" }}>
             <a
-              onClick={onNextClick}
+              disabled={orderLoading}
+              onClick={() => {
+                onPlaceOrder({
+                  totalAmount: total + deliveryCharges,
+                  shopId: cart?.cart[0]?.vendorShopId,
+                  deliveryAddress: user?.location?.address,
+                  latitude: user?.location?.latitude,
+                  longitude: user?.location?.longitude,
+                  orderItems: cart?.cart?.map((item) => ({
+                    id: item?.id,
+                    qty: item?.qty,
+                    unitPrice: item?.discountedPrice || item?.price,
+                    flavor: "",
+                    size: "",
+                  })),
+                  paymentMethod: "Cash",
+                  distance: distance || "1",
+                  description: "",
+                  customerId: user?.userInfo?.id,
+                  isPaid: false,
+                  deliveryFee: 0,
+                  statusId: 0,
+                  preferenceName: "",
+                  preferenceId: 0,
+                  preferencePhone: "",
+                });
+              }}
               href="#"
               className="element-custom-btn"
               style={{ textDecoration: "none" }}
             >
-              Next{" "}
+              {orderLoading ? "Loading" : "Place Order"}
             </a>
           </div>
         </div>

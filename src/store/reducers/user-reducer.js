@@ -17,7 +17,7 @@ export const userSlice = createSlice({
     setUserInfo: (state, action) => {
       localStorage.setItem(
         STORAGE_KEYS.token,
-        action?.payload?.data?.jwToken || ""
+        action?.payload?.data?.jwToken || null
       );
       localStorage.setItem(
         STORAGE_KEYS.user,

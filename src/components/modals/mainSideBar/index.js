@@ -13,6 +13,8 @@ import {
 } from "../../../assets/images";
 import "./mainSidebar.css"; // Import the CSS file
 import { useSelector } from "react-redux";
+import LoginModal from "../login-modal";
+import SignupModal from "../signup-modal";
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
   const { user } = useSelector((s) => s);
@@ -34,7 +36,9 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               <img src={user_profile_img} alt="user-profile" />
             </div>
             <div className="user-detail">
-              <h3 className="mb-1">{userInfo?.userName || "Guest"}</h3>
+              <h3 className="mb-1">
+                {userInfo?.userName?.slice(0, 15) || "Guest"}
+              </h3>
               <p className="m-0">{userInfo?.email}</p>
             </div>
           </div>
@@ -61,7 +65,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
           <div className="side-nav">
             <ul className="p-0">
               <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="/stores" className="sidebar-icon">
+                <a href="/order-history" className="sidebar-icon">
                   <img src={shopping_beg} alt="shopping-bag" /> Orders
                 </a>
                 <i
@@ -158,6 +162,15 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
 
         {/* </Modal.Body> */}
       </Modal>
+      <LoginModal show={loginModal} setShow={setLoginModal} />
+      <SignupModal
+        show={showSignupModal}
+        setShow={setSignupModal}
+        onSuccessRegister={() => {
+          setSignupModal(false);
+          setLoginModal(true);
+        }}
+      />
     </div>
   );
 };

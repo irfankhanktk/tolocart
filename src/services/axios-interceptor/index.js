@@ -8,7 +8,7 @@ export const client = axios.create({
 //Axios Interceptors
 client.interceptors.request.use(
   async (config) => {
-    let token = ""; //localStorage.getItem("@token");
+    let token = localStorage.getItem("@token");
     console.log("token->>>", token);
     config.headers = {
       Accept: "*/*",

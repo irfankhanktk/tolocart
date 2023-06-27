@@ -4,7 +4,7 @@ import "./signup.css"; // Import the CSS file
 import { fb, google } from "../../../assets/images";
 import RegistrationForm from "../../registeration-form";
 
-const SignupModal = ({ show, setShow }) => {
+const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
   return (
     <div>
       <Modal show={show} onHide={setShow} centered>
@@ -19,7 +19,7 @@ const SignupModal = ({ show, setShow }) => {
               By continuing you agree to our{" "}
               <a href="#">Terms of Service and Privacy Policy.</a>
             </p>
-            <RegistrationForm />
+            <RegistrationForm setShow={onSuccessRegister} />
             <a href="#" className="social-links">
               Or connect with social media
             </a>

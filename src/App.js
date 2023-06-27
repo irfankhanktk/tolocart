@@ -10,6 +10,7 @@ import ProductDetails from "./pages/product-details";
 import SideDasboard from "./pages/store-dashboard";
 import Stores from "./pages/stores";
 import TrackOrder from "./pages/track-order";
+import OrderHistory from "./pages/order-history";
 const App = () => {
   return (
     <Router>
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/store-dashboard/:id" element={<SideDasboard />} />
           <Route path="/product-detail/:id" element={<ProductDetails />} />
           <Route path="/checkoutDetail" element={<CheckoutModal />} />
+          <Route path="/order-history" element={<OrderHistory />} />
         </Routes>
         <Footer />
       </div>

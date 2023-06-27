@@ -2,10 +2,22 @@ import React from "react";
 import { laptop_home, review_img, review_plus } from "../../assets/images";
 import { review_start } from "../../assets/svgs";
 import "./style.css"; // Import the CSS file
-import { returnImage } from "../../utils";
+import { UTILS, returnImage } from "../../utils";
 import { useDispatch } from "react-redux";
-import { setIncrementQtyCart } from "../../store/reducers/cart-slice";
+import {
+  setAddToCart,
+  setIncrementQtyCart,
+} from "../../store/reducers/cart-slice";
 const BestReviewedCard = ({ item, onClick = () => {} }) => {
+  const dispatch = useDispatch();
+  const onPlusClick = () => {
+    try {
+      dispatch(setAddToCart(item));
+      alert("Item is added successfully in your cart");
+    } catch (error) {
+      alert(UTILS.returnError(error));
+    }
+  };
   return (
     // <div className='col-md-2 col-sm-10 mt-5 px-1'>
     <div onClick={onClick} className="col-md-12 position-relative">
@@ -46,7 +58,7 @@ const BestReviewedCard = ({ item, onClick = () => {} }) => {
               {item?.discountedPrice ? <del>{item?.price}$</del> : null}
             </h3>
           </div>
-          <a href="#" className="add-to-cart-img">
+          <a href="#" onClick={onPlusClick} className="add-to-cart-img">
             <img className="img-fluid" src={review_plus} alt="image here" />
           </a>
         </div>

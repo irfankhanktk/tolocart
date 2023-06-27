@@ -1,5 +1,9 @@
 import { PLACE_ORDER_DATA } from "../../constants";
-import { setVehicle } from "../../store/reducers/user-reducer";
+import {
+  setActiveOrders,
+  setPastOrders,
+} from "../../store/reducers/order-slice";
+import { setLocation, setVehicle } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
 import { getData, postData } from "./";
 import { URLS } from "./api-urls";
@@ -12,6 +16,52 @@ export const getVehicleDetails = (type = "Bike") => {
     } catch (error) {
       console.log("error in vehicle details", UTILS?.returnError(error));
       alert("", UTILS?.returnError(error));
+    }
+  };
+};
+export const getCurrentLocation = () => {
+  return async (dispatch, getState) => {
+    try {
+      UTILS.get_current_location(
+        async (position) => {
+          const res = await UTILS?._returnAddress(
+            position?.coords?.latitude,
+            position?.coords?.longitude
+          );
+
+          dispatch(
+            setLocation({
+              latitude: position?.coords?.latitude,
+              longitude: position?.coords?.longitude,
+              address: res?.fulladdress,
+            })
+          );
+        },
+        (error) => {
+          alert("Location Error", UTILS?.returnError(error));
+        }
+      );
+      // const res = await ;
+      // dispatch(setVehicle(res?.data));
+    } catch (error) {
+      console.log("error in vehicle details", UTILS?.returnError(error));
+      alert("", UTILS?.returnError(error));
+    }
+  };
+};
+export const getUserOrders = (setLoading) => {
+  return async (dispatch, getState) => {
+    try {
+      setLoading(true);
+      const res = await getData(`${URLS.order.active_orders}Store`);
+      const res1 = await getData(`${URLS.order.past_orders}Store`);
+      dispatch(setActiveOrders(res?.data));
+      dispatch(setPastOrders(res1?.data));
+    } catch (error) {
+      console.log("error in vehicle details", UTILS?.returnError(error));
+      alert("", UTILS?.returnError(error));
+    } finally {
+      setLoading(false);
     }
   };
 };
@@ -43,3 +93,5 @@ export const getProductDetails = (product_id) =>
   getData(`${URLS.product.get_product_details}${product_id}`);
 export const getSuggestedItems = (product_ids) =>
   getData(`${URLS.product.get_suggested_items}${product_ids}`);
+export const getOrderDetails = (order_id) =>
+  getData(`${URLS.order.order_details}${order_id}`);

@@ -28,5 +28,8 @@ export const URLS = {
   },
   order: {
     place_order: "v1/order",
+    order_details: "v1/order/", //12
+    past_orders: "v1/Order/GetCustomerPastOrders?ShopType=", //Store
+    active_orders: "v1/Order/GetCustomerActiveOrders/", //Store
   },
 };

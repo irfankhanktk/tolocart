@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import categorySlice from "./reducers/category-slice";
 import userSlice from "./reducers/user-reducer";
 import cartSlice from "./reducers/cart-slice";
+import orderSlice from "./reducers/order-slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     category: categorySlice,
     user: userSlice,
     cart: cartSlice,
+    order: orderSlice,
     // [api.reducerPath]: api.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,

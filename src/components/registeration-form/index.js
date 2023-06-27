@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { onSignup } from "../../services/api/auth-api-actions";
 import { UTILS } from "../../utils";
 import "./style.css";
-const RegistrationForm = () => {
+import { user_img } from "../../assets/images";
+const RegistrationForm = ({ setShow = (bool) => {} }) => {
   const fileInputRef = React.useRef(null);
   const [loading, setLoading] = React.useState(false);
   const [formData, setFormData] = useState({
@@ -41,6 +42,7 @@ const RegistrationForm = () => {
       setLoading(true);
       const res = await onSignup(formData);
       console.log("ress of register::", res);
+      setShow(false);
       // Perform form submission or validation logic here
     } catch (error) {
       alert(UTILS.returnError(error));
@@ -65,11 +67,7 @@ const RegistrationForm = () => {
                 className="profile-picture shadow-3"
               />
             ) : (
-              <i
-                class="fa fa-user-circle"
-                // style={{ height: "100px", width: "100px" }}
-                aria-hidden="true"
-              />
+              <img src={user_img} style={{ height: "100px", width: "100px" }} />
             )}
             <input
               type="file"
