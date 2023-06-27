@@ -2,6 +2,7 @@ import axios from "axios";
 import { URLS } from "./api-urls";
 import { client } from "../axios-interceptor";
 import { UTILS } from "../../utils";
+import { STORAGE_KEYS } from "../../constants";
 export const postData = async (url, data) => {
   console.log("url: ", url);
   console.log("data: ", data);
@@ -22,7 +23,7 @@ export const postFormData = async (url, data) => {
   console.log("url==>", url);
 
   data = UTILS.getFormData(data);
-  const token = "";
+  const token = localStorage.getItem(STORAGE_KEYS.token);
   return axios
     .post(URLS.base_url + url, data, {
       headers: {

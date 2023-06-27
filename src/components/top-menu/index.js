@@ -132,22 +132,7 @@ export function TopMenu() {
                 </li>
               </>
             )}
-            <li className="nav-item dropdown pe-3 showOntop">
-              <a
-                className="nav-link nav-signup-btn "
-                onClick={() => setPlaceOrderModal(true)}
-              >
-                <span>place order</span>
-              </a>
-            </li>
-            <li className="nav-item dropdown pe-3 showOntop">
-              <a
-                className="nav-link nav-signup-btn "
-                onClick={() => setTrackOrderModal(true)}
-              >
-                <span>Track order</span>
-              </a>
-            </li>
+
             <li className="nav-item dropdown pe-3">
               <a
                 onClick={() => setCheckoutModal(true)}

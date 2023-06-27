@@ -2,6 +2,7 @@ import { URLS } from "../services/api/api-urls";
 
 // Initialize the module (needs to be done only once)
 const getErrorList = (data) => {
+  console.log("errors:::", data);
   const { message, errors } = data;
   let concatenatedMessages = null;
   console.log("errors=>>::", errors);
@@ -44,40 +45,32 @@ export const UTILS = {
     return formData;
   },
   returnError: (error) => {
-    if (error?.response?.request) {
-      let { _response } = error?.response?.request;
-      console.log("FACTORY ERRORS :: ", JSON.parse(_response));
-      const temp = JSON.parse(_response);
-      const resp = getErrorList(temp);
-      console.log("ASDFGFDSDF:::", resp);
-      return resp;
-    } else if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log("=>>>>>>::::", error.response.data?.errors);
-      console.log(error.response.status);
-      // console.log(error.response.headers);
-      console.log("error data ==>", error?.response.data);
-      if (error.response.data?.errors) {
-        return `${error?.response?.data?.errors}`;
+    console.log("error.response:::", error.response);
+    if (error.response) {
+      if (error.response?.data?.Message) {
+        return `${error.response?.data?.Message}`;
       }
-      return `${error?.response?.data?.message || error?.response?.status}`;
-    } else if (error?.request) {
+      if (error.response.data && error.response.data.errors) {
+        const errorMessages = Object.values(error.response.data.errors).flatMap(
+          (errors) => errors
+        );
+        const concatenatedErrors = errorMessages.join(", ");
+        console.log(concatenatedErrors);
+        return concatenatedErrors;
+      }
+      console.log(error.response.status);
+      console.log(error.response.headers);
+      return `${error.response.status}`;
+    } else if (error.request) {
       // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      console.log(error?.request);
+      console.log(error.request);
+      return "Something went wrong!";
     } else {
-      // Something happened in setting up the request that triggered an Error
+      // Something else happened while setting up the request
       console.log("Error", error.message);
+      console.log(error.config);
+      return "Something went wrong!";
     }
-    console.log(error.config);
-    console.log("type of code: ", error?.code);
-    console.log("type of message: ", error?.message);
-    if (typeof error === "string") {
-      return error;
-    }
-    return error?.message || error?.code;
   },
   capitalizeFirst: (str) => str?.charAt(0)?.toUpperCase() + str?.slice(1),
   returnStringify: (data) => JSON.stringify(data),

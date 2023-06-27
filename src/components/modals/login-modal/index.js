@@ -19,11 +19,11 @@ const LoginModal = ({ show, setShow }) => {
     const data = { ...payload };
     if (isPhoneTab === "email") {
       delete data.phoneNumber;
-      dispatch(onLogin(data, setLoading));
+      dispatch(onLogin(data, setLoading, false, setShow));
     } else {
       delete data.email;
       delete data.password;
-      dispatch(onLogin(data, setLoading, true));
+      dispatch(onLogin(data, setLoading, true, setShow));
     }
   };
   return (
