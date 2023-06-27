@@ -130,8 +130,8 @@
   line-height: 29px;
   color: #030303;
 }
-.csm-service-links{
-  color: #FFF;
+.csm-service-links {
+  color: #fff;
   text-align: justify;
   font-size: 22px;
   font-family: Gilroy;
@@ -139,7 +139,7 @@
   line-height: 20px;
   text-decoration: none;
 }
-.csm-service-links-wrap{
+.csm-service-links-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -193,15 +193,14 @@
     font-size: 12px;
   }
 }
-<<<<<<< HEAD
 
-@media(max-width:575px){
-  .csm-service-links-wrap{
+@media (max-width: 575px) {
+  .csm-service-links-wrap {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 10px;
   }
-  .all-right-text{
+  .all-right-text {
     text-align: justify;
     font-size: 14px;
     font-family: Gilroy;
@@ -211,7 +210,7 @@
   .home-bg {
     font-size: 22px;
   }
-=======
+}
 .login-btn {
   background: #ff5a00;
   border-radius: 10px;
@@ -220,5 +219,4 @@
   padding: 12px;
   text-align: center;
   color: #fff !important;
->>>>>>> c15e5d434456c91b326dff159b2dba86d9bd5e76
 }
