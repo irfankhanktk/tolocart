@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logo_main } from "../../assets/images";
 import { getSearchProducts } from "../../services/api/api-actions";
 import CheckoutModal from "../modals/checkout-modal";
@@ -10,13 +10,15 @@ import SignupModal from "../modals/signup-modal";
 import "./topmenu.css";
 import PlaceOrderModal from "../modals/placeOrder-modal";
 import TrackOrderModal from "../modals/trackOrder-modal";
+import { setIsReqLogin } from "../../store/reducers/user-reducer";
 
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
+  const dispatch = useDispatch();
   const { userInfo } = user;
   const [showModal, setShowModal] = useState(false);
   const [checkoutModal, setCheckoutModal] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
+  const [currentOrderId, setCurrentOrderId] = useState(null);
   const [showSignupModal, setSignupModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -24,7 +26,10 @@ export function TopMenu() {
   const [trackOrderModal, setTrackOrderModal] = useState(false);
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [searchResults, setSearchResults] = React.useState([]);
-
+  // React.useEffect(() => {
+  //   // dispatch(setIsReqLogin(user?.isRequiredLogin));
+  //   setLoginModal(user?.isRequiredLogin);
+  // }, [user?.isRequiredLogin]);
   const handleSubmit = async (event) => {
     try {
       event.preventDefault(); // Prevents the default form submission behavior
@@ -49,6 +54,9 @@ export function TopMenu() {
   const handleModalClose = () => {
     setShowModal(false);
   };
+  React.useEffect(() => {
+    window.scrollTo(0, 0); //
+  }, []);
   return (
     <>
       <header id="header" className="header d-flex align-items-center">
@@ -108,7 +116,7 @@ export function TopMenu() {
                     <span>
                       <i className="fa fa-map-marker" aria-hidden="true"></i>
                     </span>
-                    <span>Ygnacio, CA</span>
+                    <span> {user?.location?.address?.slice(0, 20)}</span>
                   </a>
                 </li>
               </>
@@ -117,7 +125,7 @@ export function TopMenu() {
                 <li className="nav-item dropdown pe-3 showOntop">
                   <a
                     className="nav-link nav-login-btn "
-                    onClick={() => setLoginModal(true)}
+                    onClick={() => dispatch(setIsReqLogin(true))}
                   >
                     <span>Log in</span>
                   </a>
@@ -149,20 +157,26 @@ export function TopMenu() {
         </nav>
       </header>
       <MainSideBar showModal={showModal} handleModalClose={handleModalClose} />
-      <LoginModal show={loginModal} setShow={setLoginModal} />
+      <LoginModal
+        show={user?.isRequiredLogin}
+        setShow={(bool) => dispatch(setIsReqLogin(bool))}
+      />
       <SignupModal
         show={showSignupModal}
         setShow={setSignupModal}
         onSuccessRegister={() => {
           setSignupModal(false);
-          setLoginModal(true);
+          // setLoginModal(true);
+          dispatch(setIsReqLogin(true));
         }}
       />
       <CheckoutModal
         show={checkoutModal}
         setShow={setCheckoutModal}
-        onNextClick={() => {
+        onNextClick={(res) => {
           setCheckoutModal(false);
+          setTrackOrderModal(true);
+          setCurrentOrderId(res?.data);
           // setPlaceOrderModal(true);
         }}
       />
@@ -180,7 +194,11 @@ export function TopMenu() {
           setPlaceOrderModal(false);
         }}
       />
-      <TrackOrderModal show={trackOrderModal} setShow={setTrackOrderModal} />
+      <TrackOrderModal
+        orderId={currentOrderId}
+        show={trackOrderModal}
+        setShow={setTrackOrderModal}
+      />
     </>
   );
 }

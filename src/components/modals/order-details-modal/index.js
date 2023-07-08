@@ -29,7 +29,9 @@ const OrderDetailsModal = ({ show, setShow, order_id }) => {
   };
 
   React.useEffect(() => {
-    getDetails();
+    if (order_id) {
+      getDetails();
+    }
   }, [order_id]);
 
   return (

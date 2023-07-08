@@ -12,12 +12,14 @@ import {
   user_profile_img,
 } from "../../../assets/images";
 import "./mainSidebar.css"; // Import the CSS file
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../login-modal";
 import SignupModal from "../signup-modal";
+import { resetUser, setUserInfo } from "../../../store/reducers/user-reducer";
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
   const { user } = useSelector((s) => s);
+  const dispatch = useDispatch();
   const { userInfo } = user;
   const [loginModal, setLoginModal] = useState(false);
   const [showSignupModal, setSignupModal] = useState(false);
@@ -64,27 +66,31 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
           {/* login button end*/}
           <div className="side-nav">
             <ul className="p-0">
-              <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="/order-history" className="sidebar-icon">
-                  <img src={shopping_beg} alt="shopping-bag" /> Orders
-                </a>
-                <i
-                  className="fa fa-chevron-right"
-                  style={{ cursor: "pointer" }}
-                  aria-hidden="true"
-                ></i>
-              </li>
-              <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="#" className="sidebar-icon">
-                  {" "}
-                  <img src={profile} alt="profile" /> My Details
-                </a>
-                <i
-                  className="fa fa-chevron-right"
-                  style={{ cursor: "pointer" }}
-                  aria-hidden="true"
-                ></i>
-              </li>
+              {userInfo && (
+                <>
+                  <li className="sidebar-list d-flex align-items-center justify-content-between">
+                    <a href="/order-history" className="sidebar-icon">
+                      <img src={shopping_beg} alt="shopping-bag" /> Orders
+                    </a>
+                    <i
+                      className="fa fa-chevron-right"
+                      style={{ cursor: "pointer" }}
+                      aria-hidden="true"
+                    ></i>
+                  </li>
+                  <li className="sidebar-list d-flex align-items-center justify-content-between">
+                    <a href="#" className="sidebar-icon">
+                      {" "}
+                      <img src={profile} alt="profile" /> My Details
+                    </a>
+                    <i
+                      className="fa fa-chevron-right"
+                      style={{ cursor: "pointer" }}
+                      aria-hidden="true"
+                    ></i>
+                  </li>
+                </>
+              )}
               <li className="sidebar-list d-flex align-items-center justify-content-between">
                 <a href="#" className="sidebar-icon">
                   {" "}
@@ -151,9 +157,18 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               </li>
             </ul>
 
-            <a href="#" className="logout-btn">
-              <i className="fa fa-sign-out" aria-hidden="true"></i> Log Out
-            </a>
+            {userInfo && (
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(setUserInfo());
+                }}
+                href="#"
+                className="logout-btn"
+              >
+                <i className="fa fa-sign-out" aria-hidden="true"></i> Log Out
+              </a>
+            )}
           </div>
         </div>
         {/* </div>

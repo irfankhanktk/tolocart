@@ -1,9 +1,14 @@
 import React from "react";
-import { Checkout_img } from "../../assets/images";
+import { returnImage } from "../../utils";
 import ProductCounter from "../counter";
 import "./style.css";
-import { returnImage } from "../../utils";
+import { useDispatch } from "react-redux";
+import { setRemoveFromCart } from "../../store/reducers/cart-slice";
 const CheckoutProduct = ({ item }) => {
+  const dispatch = useDispatch();
+  const onRemove = () => {
+    dispatch(setRemoveFromCart(item));
+  };
   return (
     <>
       <div className="card-product">
@@ -25,7 +30,7 @@ const CheckoutProduct = ({ item }) => {
             </div>
           </div>
           <div className="col-md-2 d-flex align-items-end justify-content-between flex-column">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i onClick={onRemove} class="fa fa-times" aria-hidden="true"></i>
             <div className="checkout-price h-auto ">
               <span>${item?.price}</span>
               <p className="mb-2">49</p>

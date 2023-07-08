@@ -8,6 +8,7 @@ const initialState = {
   vehicle: {},
   notifications: [],
   unreadNotification: 0,
+  isRequiredLogin: false,
 };
 
 export const userSlice = createSlice({
@@ -28,14 +29,22 @@ export const userSlice = createSlice({
     setVehicle: (state, action) => {
       state.vehicle = action.payload;
     },
+    setIsReqLogin: (state, action) => {
+      if (action.payload) {
+        state.userInfo = null;
+        localStorage.removeItem(STORAGE_KEYS.token);
+        localStorage.removeItem(STORAGE_KEYS.user);
+      }
+      state.isRequiredLogin = action.payload;
+    },
     setLanguage: (state, action) => {
       state.language = action.payload;
     },
     setLocation: (state, action) => {
       state.location = action.payload;
     },
-    reset: (state, action) => {
-      state = initialState;
+    resetUser: (state, action) => {
+      return initialState;
     },
     setNotifications: (state, action) => {
       state.notifications = action.payload;
@@ -51,11 +60,12 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setUserInfo,
-  reset,
+  resetUser,
   setLanguage,
   setLocation,
   setNotifications,
   setVehicle,
+  setIsReqLogin,
   // demoAsync
 } = userSlice.actions;
 

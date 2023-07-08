@@ -3,7 +3,11 @@ import {
   setActiveOrders,
   setPastOrders,
 } from "../../store/reducers/order-slice";
-import { setLocation, setVehicle } from "../../store/reducers/user-reducer";
+import {
+  setIsReqLogin,
+  setLocation,
+  setVehicle,
+} from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
 import { getData, postData } from "./";
 import { URLS } from "./api-urls";
@@ -15,7 +19,11 @@ export const getVehicleDetails = (type = "Bike") => {
       dispatch(setVehicle(res?.data));
     } catch (error) {
       console.log("error in vehicle details", UTILS?.returnError(error));
-      alert("", UTILS?.returnError(error));
+      if (UTILS?.returnError(error) === "Request failed with status code 401") {
+        dispatch(setIsReqLogin(true));
+      } else {
+        alert(UTILS?.returnError(error));
+      }
     }
   };
 };
@@ -59,7 +67,11 @@ export const getUserOrders = (setLoading) => {
       dispatch(setPastOrders(res1?.data));
     } catch (error) {
       console.log("error in vehicle details", UTILS?.returnError(error));
-      alert("", UTILS?.returnError(error));
+      if (UTILS?.returnError(error) === "Request failed with status code 401") {
+        dispatch(setIsReqLogin(true));
+      } else {
+        alert(UTILS?.returnError(error));
+      }
     } finally {
       setLoading(false);
     }

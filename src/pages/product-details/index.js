@@ -55,6 +55,7 @@ const ProductDetails = () => {
     }
   };
   React.useEffect(() => {
+    window.scrollTo(0, 0); //
     getDetails();
   }, [id]);
   if (loading) {
@@ -74,7 +75,8 @@ const ProductDetails = () => {
               }}
             >
               <img
-                className="rounded w-100 h-100" style={{objectFit:'contain'}}
+                className="rounded w-100 h-100"
+                style={{ objectFit: "contain" }}
                 src={returnImage(productDetails?.data?.imagePath)}
               />
             </div>
@@ -318,7 +320,10 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        <div className="row" style={{ marginTop: "50px", marginBottom:'30px' }}>
+        <div
+          className="row"
+          style={{ marginTop: "50px", marginBottom: "30px" }}
+        >
           <div className="col-md-12">
             <div className="item-title d-flex justify-content-between align-items-center mb-4">
               <h2>Related Items</h2>

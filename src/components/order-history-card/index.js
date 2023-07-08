@@ -22,7 +22,7 @@ const OrderHistoryCard = ({ order, onClick = () => {} }) => {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                href="/track-order"
+                href={`/track-order/${order?.id}`}
                 className="login-btn w-50 p-0"
                 style={{ height: "30px" }}
               >

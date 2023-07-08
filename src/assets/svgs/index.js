@@ -13,3 +13,4 @@ export { default as tick } from "./tick.svg";
 export { default as cross_icon } from "./cross-icon.svg";
 export { default as share } from "./share.svg";
 export { default as gray_heart } from "./gray-heart.svg";
+export { default as waiting } from "./waiting.svg";

@@ -50,7 +50,7 @@ export const UTILS = {
     try {
       var km = 1;
       const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98`
+        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=AIzaSyDH7Afsb0W4BTLHKELRLf_hg1UPiTvwc7k`
       );
       if (response?.data?.status === "OK") {
         console.log("Distance is ");
@@ -109,7 +109,7 @@ export const UTILS = {
 
   _returnAddress: async (latitude, longitude) => {
     const res = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDH7Afsb0W4BTLHKELRLf_hg1UPiTvwc7k`
     );
     const addressObject = res?.data;
     let returnAddress = {

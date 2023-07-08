@@ -22,6 +22,7 @@ const StoreDashboard = () => {
     }
   };
   React.useEffect(() => {
+    window.scrollTo(0, 0); //
     getStores();
   }, []);
   if (loading) {

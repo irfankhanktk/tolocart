@@ -1,17 +1,54 @@
 import React from "react";
 import { Map, GoogleApiWrapper, Marker, Polyline } from "google-maps-react";
+import { useLocation, useParams } from "react-router-dom";
+import { getOrderDetails } from "../../services/api/api-actions";
+import Loader from "../../components/loader";
 
 const TrackOrder = (props) => {
   const [directions, setDirections] = React.useState(null);
-  const source = {
-    lat: 31.505612225989942,
-    lng: 74.34488664801904,
-  };
-  const dest = {
-    lat: 31.502035568265256,
-    lng: 74.349006520655,
+  const [orderDetails, setOrderDetails] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+
+  const { id } = useParams();
+
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+
+  // const receivedObject = {
+  //   key1: queryParams.get("key1"),
+  //   key2: queryParams.get("key2"),
+  // };
+  const getDetails = async () => {
+    try {
+      if (!id) return;
+      setLoading(true);
+      const res = await getOrderDetails(id);
+      setOrderDetails(res?.data);
+    } catch (error) {
+      console.log("error::", error);
+    } finally {
+      setLoading(false);
+    }
   };
   React.useEffect(() => {
+    getDetails();
+    // const intervalId = setInterval(getDetails, 30000);
+
+    // // Clean up the interval on component unmount
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
+  }, [id]);
+  const source = {
+    lat: orderDetails?.shopLatitude || 31.505612225989942,
+    lng: orderDetails?.shopLongitude || 74.34488664801904,
+  };
+  const dest = {
+    lat: orderDetails?.latitude || 31.502035568265256,
+    lng: orderDetails?.longitude || 74.349006520655,
+  };
+  React.useEffect(() => {
+    window.scrollTo(0, 0); //
     const { google } = props;
 
     const directionsService = new google.maps.DirectionsService();
@@ -32,7 +69,8 @@ const TrackOrder = (props) => {
         setDirections(result);
       }
     });
-  }, [props]);
+  }, [props, orderDetails]);
+  if (loading) return <Loader />;
   return (
     <div>
       <div className="container-fluid">
@@ -64,5 +102,5 @@ const TrackOrder = (props) => {
   );
 };
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98",
+  apiKey: "AIzaSyDH7Afsb0W4BTLHKELRLf_hg1UPiTvwc7k",
 })(TrackOrder);
