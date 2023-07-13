@@ -18,7 +18,7 @@ client.interceptors.request.use(
     // config.signal = newAbortSignal(15000),
     config.params = config.params || {};
     config.cancelToken = source.token || {};
-    config.headers["Authorization"] = `Bearer ${"token"}`;
+    config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
   (error) => {
