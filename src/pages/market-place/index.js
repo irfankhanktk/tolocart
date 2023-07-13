@@ -93,7 +93,7 @@ const MarketPlace = () => {
                 {homeData?.categories?.map((item, index) => (
                   <CateryCard
                     key={index}
-                    onClick={() => navigate(`/product-detail/${item?.id}`)}
+                    onClick={() => navigate(`/stores`)}
                     // title={item?.title}
                     item={item}
                     // border={item?.border}
