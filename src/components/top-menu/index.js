@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logo_main } from "../../assets/images";
-import { getSearchProducts } from "../../services/api/api-actions";
+import {
+  getCurrentLocation,
+  getSearchProducts,
+} from "../../services/api/api-actions";
 import CheckoutModal from "../modals/checkout-modal";
 import LoginModal from "../modals/login-modal";
 import MainSideBar from "../modals/mainSideBar";
@@ -113,7 +116,12 @@ export function TopMenu() {
                 </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link nav-icon nav-address" href="#">
-                    <span>
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        dispatch(getCurrentLocation());
+                      }}
+                    >
                       <i className="fa fa-map-marker" aria-hidden="true"></i>
                     </span>
                     <span> {user?.location?.address?.slice(0, 20)}</span>

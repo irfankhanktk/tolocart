@@ -18,7 +18,7 @@ client.interceptors.request.use(
     // config.signal = newAbortSignal(15000),
     config.params = config.params || {};
     config.cancelToken = source.token || {};
-    config.headers["Authorization"] = `Bearer ${token}`;
+    config.headers["Authorization"] = `Bearer ${"token"}`;
     return config;
   },
   (error) => {
@@ -27,7 +27,7 @@ client.interceptors.request.use(
   }
 );
 
-client.interceptors.response.use(
+const interceptor = client.interceptors.response.use(
   (response) => {
     console.log("RESPONSE INTERCPTOR : ", response?.status);
     return response;
@@ -41,6 +41,11 @@ client.interceptors.response.use(
       return Promise.reject("Hi Dude");
     } else if (error?.response?.status === 401) {
       originalRequest._retry = true;
+      // Remove the interceptor to prevent recursive calls
+      client.interceptors.response.eject(interceptor);
+      localStorage.clear();
+      // Perform the retry logic
+      return client.get(error.config.url);
       //   navigate('Login');
       //await DIVIY_API.refreshToken(JSON.parse(token)?.refresh_token);
     }

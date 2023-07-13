@@ -36,7 +36,6 @@ export const getCurrentLocation = () => {
             position?.coords?.latitude,
             position?.coords?.longitude
           );
-
           dispatch(
             setLocation({
               latitude: position?.coords?.latitude,
