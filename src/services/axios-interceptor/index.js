@@ -9,7 +9,6 @@ export const client = axios.create({
 client.interceptors.request.use(
   async (config) => {
     let token = localStorage.getItem("@token");
-    console.log("token->>>", token);
     config.headers = {
       Accept: "*/*",
       // "Cache-Control": "no-cache",

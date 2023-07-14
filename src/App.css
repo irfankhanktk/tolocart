@@ -166,7 +166,7 @@
 /* Media query for larger screens */
 @media (min-width: 768px) {
   .font-size-heavy {
-    font-size: 48px;
+    font-size: 40px;
   }
   /* .font-size-heading {
     font-size: 36px;

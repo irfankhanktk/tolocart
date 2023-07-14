@@ -6,7 +6,7 @@ import "./style.css";
 const StoreCard = ({ item }) => {
   const navigate = useNavigate();
   return (
-    <div className="col-md-4 mt-3  px-3">
+    <div className="col-md-4 mb-3  px-3">
       <div
         onClick={() => navigate(`/store-dashboard/${item?.id}`)}
         className="main-container"

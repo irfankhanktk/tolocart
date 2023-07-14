@@ -23,14 +23,14 @@ const StoreRating = ({
       className="d-flex p-2 align-items-center"
       style={{ ...style, background: `${bg}` }}
     >
-      <div className="col-6">
+      <div className="col-8">
         <p className="title">{title}</p>
-        <p className="description">{description}</p>
+        <p className="description1">{description}</p>
         <div className="d-flex gap-1">
           <RatingStars />
         </div>
       </div>
-      <div className="col-6">
+      <div className="col-4">
         <div className="d-flex gap-2 justify-content-end">
           <img className="image-fluid" src={tick} />
           <span className="status">Delivery available</span>

@@ -62,7 +62,10 @@ export function TopMenu() {
   }, []);
   return (
     <>
-      <header id="header" className="header d-flex align-items-center">
+      <header
+        id="header"
+        className="header d-flex align-items-center sticky-header"
+      >
         <div className="d-flex align-items-center justify-content-between">
           <i
             className="fa fa-bars"

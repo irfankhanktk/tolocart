@@ -4,8 +4,6 @@ import { returnImage } from "../../utils";
 
 const CateryCard = ({
   item,
-  image = laptop_home,
-  title = "Groceries",
   style,
   bg = "#53B175B2",
   border = "#F8A44C1A",
@@ -23,9 +21,9 @@ const CateryCard = ({
         }}
       >
         <img
-          className="w-100"
+          // className="w-100"
           src={returnImage(item?.image)}
-          style={{ height: "137px" }}
+          style={{ height: "137px", width: "100%" }}
           alt="image here"
         />
       </div>
