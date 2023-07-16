@@ -14,9 +14,12 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "./store/reducers/user-reducer";
 import {
   getCurrentLocation,
+  getSlides,
   getVehicleDetails,
 } from "./services/api/api-actions";
 import { STORAGE_KEYS } from "./constants";
+import Help from "./pages/help";
+import About from "./pages/about";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,12 +33,13 @@ const App = () => {
   React.useEffect(() => {
     getData();
     dispatch(getVehicleDetails());
+    dispatch(getSlides());
     dispatch(getCurrentLocation());
   }, []);
   return (
     <Router>
-      <TopMenu />
-      <div>
+      <main>
+        <TopMenu />
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/" element={<MarketPlace />} />
@@ -44,9 +48,13 @@ const App = () => {
           <Route path="/product-detail/:id" element={<ProductDetails />} />
           <Route path="/track-order/:id" element={<TrackOrder />} />
           <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/help" element={<Help />} />
         </Routes>
+        {/* <div className="layout"> */}
         <Footer />
-      </div>
+        {/* </div> */}
+      </main>
     </Router>
   );
 };

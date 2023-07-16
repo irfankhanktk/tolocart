@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./style.css";
 export default function Loader({ style }) {
   return (
     <div
@@ -9,7 +9,15 @@ export default function Loader({ style }) {
       }}
       className="d-flex flex-column justify-content-center text-center"
     >
-      Loading...
+      <Shimmer />
     </div>
   );
 }
+
+const Shimmer = () => {
+  return (
+    <div className="shimmer-container">
+      <div className="shimmer-content"></div>
+    </div>
+  );
+};

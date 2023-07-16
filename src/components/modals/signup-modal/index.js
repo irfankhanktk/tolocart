@@ -14,7 +14,7 @@ const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
         ></Modal.Header>
         <Modal.Body className="p-0">
           <div className="modal-wrapper">
-            <span className="signup-title">Sign up</span>
+            <span className="signup-title decoration-none">Sign up</span>
             <p className="privacy-policy">
               By continuing you agree to our{" "}
               <a href="#">Terms of Service and Privacy Policy.</a>

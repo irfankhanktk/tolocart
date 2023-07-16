@@ -1,13 +1,16 @@
+import { GoogleApiWrapper, Map, Marker, Polyline } from "google-maps-react";
 import React from "react";
-import { Map, GoogleApiWrapper, Marker, Polyline } from "google-maps-react";
-import { useLocation, useParams } from "react-router-dom";
-import { getOrderDetails } from "../../services/api/api-actions";
+import { useParams } from "react-router-dom";
 import Loader from "../../components/loader";
-
+import { getOrderDetails } from "../../services/api/api-actions";
+import { UTILS } from "../../utils";
+import ErrorPage from "../error-page";
+import "./style.css";
 const TrackOrder = (props) => {
   const [directions, setDirections] = React.useState(null);
   const [orderDetails, setOrderDetails] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState("");
 
   const { id } = useParams();
 
@@ -26,6 +29,7 @@ const TrackOrder = (props) => {
       setOrderDetails(res?.data);
     } catch (error) {
       console.log("error::", error);
+      setError(UTILS.returnError(error));
     } finally {
       setLoading(false);
     }
@@ -70,34 +74,43 @@ const TrackOrder = (props) => {
       }
     });
   }, [props, orderDetails]);
-  if (loading) return <Loader />;
+  if (error) return <ErrorPage error={error} />;
+
   return (
-    <div>
-      <div className="container-fluid">
-        <h1>Track Your Bike Order</h1>
-        {directions && (
-          <div className="info">
-            <p>
-              Estimated Distance: {directions.routes[0].legs[0].distance.text}
-            </p>
-            <p>
-              Estimated Duration: {directions.routes[0].legs[0].duration.text}
-            </p>
+    <div className="m-container">
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="container-fluid">
+            <h1>Track Your Bike Order</h1>
+            {directions && (
+              <div className="info">
+                <p>
+                  Estimated Distance:{" "}
+                  {directions.routes[0].legs[0].distance.text}
+                </p>
+                <p>
+                  Estimated Duration:{" "}
+                  {directions.routes[0].legs[0].duration.text}
+                </p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <Map google={props.google} zoom={14} initialCenter={source}>
-        <Marker position={source} />
-        <Marker position={dest} />
-        {directions && (
-          <Polyline
-            path={directions.routes[0].overview_path}
-            strokeColor="#0000FF"
-            strokeOpacity={0.8}
-            strokeWeight={5}
-          />
-        )}
-      </Map>
+          <Map google={props.google} zoom={14} initialCenter={source}>
+            <Marker position={source} />
+            <Marker position={dest} />
+            {directions && (
+              <Polyline
+                path={directions.routes[0].overview_path}
+                strokeColor="#0000FF"
+                strokeOpacity={0.8}
+                strokeWeight={5}
+              />
+            )}
+          </Map>
+        </>
+      )}
     </div>
   );
 };

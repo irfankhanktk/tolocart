@@ -6,6 +6,7 @@ export const URLS = {
     login_phone: "account/loginwithphone",
     register: "account/register",
   },
+  get_slides: "v1/SliderImages/GetAll",
   shop: {
     get_all_offers_shop_details: "v1/ShopOffer/GetAllOfferWithShopDetails",
     get_compaign_banners: "v1/ShopOffer/GetBanners/Store",

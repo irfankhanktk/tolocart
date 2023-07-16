@@ -71,7 +71,11 @@ const Footer = () => {
               <div className=" csm-service-links-wrap col-lg-8 col-md-9 col-sm-9">
                 {["Services", "Safety", "About", "Careers"]?.map(
                   (item, index) => (
-                    <a href="#" className="csm-service-links" style={{ color: "#fff" }}>
+                    <a
+                      href="#"
+                      className="csm-service-links"
+                      style={{ color: "#fff" }}
+                    >
                       {item}
                     </a>
                   )
@@ -113,8 +117,20 @@ const Footer = () => {
             </div>
             <div className="col-md-6 ">
               <div className="justify-content-end d-flex align-items-center gap-4 mt-2 mb-2">
-                <a href="#" className="text-white all-right-text" style={{textDecoration: 'none'}}>Terms of Service</a>
-                <a href="#" className="text-white all-right-text" style={{textDecoration: 'none'}}>Privacy policy</a>
+                <a
+                  href="#"
+                  className="text-white all-right-text"
+                  style={{ textDecoration: "none" }}
+                >
+                  Terms of Service
+                </a>
+                <a
+                  href="#"
+                  className="text-white all-right-text"
+                  style={{ textDecoration: "none" }}
+                >
+                  Privacy policy
+                </a>
               </div>
             </div>
           </div>

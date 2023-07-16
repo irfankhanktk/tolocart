@@ -135,7 +135,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 ></i>
               </li>
               <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="#" className="sidebar-icon">
+                <a href="/help" className="sidebar-icon">
                   <img src={question} alt="question" /> Help
                 </a>
                 <i

@@ -5,6 +5,7 @@ export const source = CancelToken.source();
 export const client = axios.create({
   baseURL: URLS.base_url,
 });
+const controller = new AbortController();
 //Axios Interceptors
 client.interceptors.request.use(
   async (config) => {
@@ -47,6 +48,8 @@ const interceptor = client.interceptors.response.use(
       return client.get(error.config.url);
       //   navigate('Login');
       //await DIVIY_API.refreshToken(JSON.parse(token)?.refresh_token);
+    } else {
+      // controller.abort();
     }
     return Promise.reject(error);
   }

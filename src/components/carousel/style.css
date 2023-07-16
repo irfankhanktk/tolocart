@@ -1,0 +1,32 @@
+/* MyCarousel.css */
+.slick-dots.custom-dots {
+  position: absolute;
+  bottom: 120px; /* Adjust the desired bottom padding */
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.slick-dots.custom-dots li {
+  margin: 0 5px;
+}
+
+.slick-dots.custom-dots li button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #bbb;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.slick-dots.custom-dots li.slick-active button {
+  background-color: #333;
+}

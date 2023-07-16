@@ -6,12 +6,28 @@ import {
 import {
   setIsReqLogin,
   setLocation,
+  setSlides,
   setVehicle,
 } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
 import { getData, postData } from "./";
 import { URLS } from "./api-urls";
 
+export const getSlides = () => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await getData(`${URLS.get_slides}`);
+      dispatch(setSlides(res?.data));
+    } catch (error) {
+      console.log("error in getSlides", UTILS?.returnError(error));
+      if (UTILS?.returnError(error) === "Request failed with status code 401") {
+        dispatch(setIsReqLogin(true));
+      } else {
+        // alert(UTILS?.returnError(error));
+      }
+    }
+  };
+};
 export const getVehicleDetails = (type = "Bike") => {
   return async (dispatch, getState) => {
     try {
@@ -22,7 +38,7 @@ export const getVehicleDetails = (type = "Bike") => {
       if (UTILS?.returnError(error) === "Request failed with status code 401") {
         dispatch(setIsReqLogin(true));
       } else {
-        alert(UTILS?.returnError(error));
+        // alert(UTILS?.returnError(error));
       }
     }
   };
@@ -45,7 +61,7 @@ export const getCurrentLocation = () => {
           );
         },
         (error) => {
-          alert("Location Error", UTILS?.returnError(error));
+          // alert("Location Error", UTILS?.returnError(error));
         }
       );
       // const res = await ;
@@ -56,7 +72,7 @@ export const getCurrentLocation = () => {
     }
   };
 };
-export const getUserOrders = (setLoading) => {
+export const getUserOrders = (setLoading, setError) => {
   return async (dispatch, getState) => {
     try {
       setLoading(true);
@@ -69,7 +85,7 @@ export const getUserOrders = (setLoading) => {
       if (UTILS?.returnError(error) === "Request failed with status code 401") {
         dispatch(setIsReqLogin(true));
       } else {
-        alert(UTILS?.returnError(error));
+        setError(UTILS?.returnError(error));
       }
     } finally {
       setLoading(false);

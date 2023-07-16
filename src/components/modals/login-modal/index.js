@@ -71,7 +71,7 @@ const LoginModal = ({ show, setShow }) => {
                     ></input>
                     <a
                       disabled={loading}
-                      href="#"
+                      href="/"
                       onClick={(e) => {
                         onSubmit();
                       }}

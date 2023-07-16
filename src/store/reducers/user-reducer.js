@@ -7,6 +7,7 @@ const initialState = {
   location: undefined,
   vehicle: {},
   notifications: [],
+  slides: [],
   unreadNotification: 0,
   isRequiredLogin: false,
 };
@@ -28,6 +29,9 @@ export const userSlice = createSlice({
     },
     setVehicle: (state, action) => {
       state.vehicle = action.payload;
+    },
+    setSlides: (state, action) => {
+      state.slides = action.payload;
     },
     setIsReqLogin: (state, action) => {
       if (action.payload) {
@@ -66,6 +70,7 @@ export const {
   setNotifications,
   setVehicle,
   setIsReqLogin,
+  setSlides,
   // demoAsync
 } = userSlice.actions;
 

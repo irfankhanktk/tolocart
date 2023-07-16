@@ -12,6 +12,7 @@ import { UTILS, returnImage } from "../../utils";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { setAddToCart } from "../../store/reducers/cart-slice";
+import ErrorPage from "../error-page";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [checkoutModal, setCheckoutModal] = useState(false);
   const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState("");
 
   const [productDetails, setProductDetails] = React.useState({
     data: {},
@@ -49,7 +51,7 @@ const ProductDetails = () => {
       });
     } catch (error) {
       console.log("error=>>", error);
-      alert(UTILS.returnError(error));
+      setError(UTILS.returnError(error));
     } finally {
       setLoading(false);
     }
@@ -61,6 +63,8 @@ const ProductDetails = () => {
   if (loading) {
     return <Loader />;
   }
+  if (error) return <ErrorPage error={error} />;
+
   return (
     <>
       <div className="container">
@@ -312,8 +316,11 @@ const ProductDetails = () => {
             </div>
             <a
               href="#"
-              className="element-custom-btn"
-              onClick={() => handleAddToCart(productDetails?.data)}
+              className="element-custom-btn decoration-none"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddToCart(productDetails?.data);
+              }}
             >
               Add To Basket
             </a>

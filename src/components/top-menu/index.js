@@ -118,17 +118,16 @@ export function TopMenu() {
                   </a>
                 </li>
                 <li className="nav-item dropdown">
-                  <a className="nav-link nav-icon nav-address" href="#">
+                  <button className="btn btn-link nav-link nav-icon nav-address">
                     <span
                       onClick={(e) => {
-                        e.preventDefault();
                         dispatch(getCurrentLocation());
                       }}
                     >
                       <i className="fa fa-map-marker" aria-hidden="true"></i>
                     </span>
                     <span> {user?.location?.address?.slice(0, 20)}</span>
-                  </a>
+                  </button>
                 </li>
               </>
             ) : (

@@ -4,16 +4,19 @@ import StoreCard from "../../components/store-card/index";
 import { getPopularShops } from "../../services/api/api-actions";
 import Loader from "../../components/loader";
 import { UTILS } from "../../utils";
+import ErrorPage from "../error-page";
 const Stores = () => {
   const [loading, setLoading] = React.useState(true);
   const [stores, setStores] = React.useState([]);
+  const [error, setError] = React.useState("");
+
   const getStores = async () => {
     try {
       const res = await getPopularShops();
       setStores(res?.data);
     } catch (error) {
       console.log("error=>>", error);
-      alert(UTILS.returnError(error));
+      setError(UTILS.returnError(error));
     } finally {
       setLoading(false);
     }
@@ -25,6 +28,7 @@ const Stores = () => {
   if (loading) {
     return <Loader />;
   }
+  if (error) return <ErrorPage error={error} />;
   return (
     <div>
       <h2 className="p-3">Popular store in Ygnico by Area</h2>
