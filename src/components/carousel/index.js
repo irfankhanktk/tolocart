@@ -31,7 +31,7 @@ const MyCarousel = () => {
             alt="First slide"
           />
           <div className="text-center">
-            <h3>{item?.title}</h3>
+            {/* <h3>{item?.title}</h3> */}
             {/* <p>Explore a diverse range of cuisines from around the world.</p> */}
           </div>
         </div>
