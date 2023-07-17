@@ -23,6 +23,7 @@ import { UTILS } from "../../utils";
 import "./style.css";
 import Carousel from "../../components/carousel";
 import ErrorPage from "../error-page";
+import CollapsibleView from "../../components/collapsible-view";
 const MarketPlace = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -306,7 +307,7 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          {/* <PopularItemCard/> */}
+
           <FrequentlyQuestion />
         </div>
       </>

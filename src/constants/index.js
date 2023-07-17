@@ -44,3 +44,20 @@ export const SLIDES_LIST = [
       "http://hamiddawod-001-site2.htempurl.com/UploadedFiles/966549f6-59d5-470c-af95-49d4498ff2c9slider3.jpg",
   },
 ];
+export const FAQS = [
+  {
+    question: "How does the food delivery app work?",
+    answer:
+      "This question aims to understand the general process and steps involved in using the app, from selecting food items to placing an order and receiving the delivery.",
+  },
+  {
+    question: "What are the available payment options?",
+    answer:
+      "Users often want to know the various payment methods supported by the app, such as credit/debit cards, digital wallets, or cash on delivery.",
+  },
+  {
+    question: "Is there a minimum order requirement?",
+    answer:
+      "Users may inquire about any minimum order amount or quantity they need to meet to place an order through the app.",
+  },
+];

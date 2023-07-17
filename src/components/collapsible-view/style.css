@@ -1,0 +1,13 @@
+.accordion-button.collapsed .accordion-icon::before {
+  content: "+";
+}
+
+.accordion-button:not(.collapsed) .accordion-icon::before {
+  content: "-";
+}
+
+.accordion-icon::before {
+  content: "";
+  display: inline-block;
+  margin-right: 0.5em;
+}
