@@ -1,25 +1,4 @@
 import axios from "axios";
-import { URLS } from "../services/api/api-urls";
-
-// Initialize the module (needs to be done only once)
-const getErrorList = (data) => {
-  console.log("errors:::", data);
-  const { message, errors } = data;
-  let concatenatedMessages = null;
-  console.log("errors=>>::", errors);
-
-  if (typeof errors === "object" && Object.keys(errors)?.length) {
-    concatenatedMessages = errors
-      ? Object.values(message)?.flat()?.join(", ")
-      : null;
-  } else if (typeof message === "string") return message;
-  concatenatedMessages = message
-    ? Object.values(message)?.flat()?.join(", ")
-    : null;
-
-  console.log(concatenatedMessages);
-  return concatenatedMessages;
-};
 export const horizontalAnimation = {
   headerShown: false,
   gestureDirection: "horizontal",
@@ -65,8 +44,10 @@ export const UTILS = {
     console.log("error.response:::", error.response);
     if (error?.message) return error?.message;
     if (error.response) {
-      if (error.response?.data?.Message) {
-        return `${error.response?.data?.Message}`;
+      if (error.response?.data?.Message || error.response?.data?.message) {
+        return `${
+          error.response?.data?.Message || error.response?.data?.message
+        }`;
       }
       if (error.response.data && error.response.data.errors) {
         const errorMessages = Object.values(error.response.data.errors).flatMap(

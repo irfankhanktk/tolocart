@@ -64,6 +64,13 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
   const getDeliveryCharges = async () => {
     try {
       const vendorShop = cart?.cart[0]?.vendorShop;
+      console.log(
+        "jhkl",
+        user?.location?.latitude,
+        vendorShop?.latitude,
+        user?.location?.longitude,
+        vendorShop?.longitude
+      );
       const res = await UTILS.getDistance(
         user?.location?.latitude,
         vendorShop?.latitude,
@@ -74,7 +81,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
       setDistance(res);
       setDeliveryCharges((res || 1) * user?.vehicle?.perKmRate);
     } catch (error) {
-      alert(UTILS.returnError(error));
+      // alert(UTILS.returnError(error));
     }
   };
   React.useEffect(() => {

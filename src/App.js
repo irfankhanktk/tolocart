@@ -40,18 +40,21 @@ const App = () => {
     <Router>
       <main>
         <TopMenu />
-        <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<MarketPlace />} />
-          <Route path="/stores" element={<Stores />} />
-          <Route path="/store-dashboard/:id" element={<SideDasboard />} />
-          <Route path="/product-detail/:id" element={<ProductDetails />} />
-          <Route path="/track-order/:id" element={<TrackOrder />} />
-          <Route path="/order-history" element={<OrderHistory />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/help" element={<Help />} />
-        </Routes>
-        {/* <div className="layout"> */}
+        <div style={{ minHeight: window.innerHeight }}>
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<MarketPlace />} />
+            <Route path="/stores" element={<Stores />} />
+            <Route path="/store-dashboard/:id" element={<SideDasboard />} />
+            <Route path="/product-detail/:id" element={<ProductDetails />} />
+            <Route path="/track-order/:id" element={<TrackOrder />} />
+            <Route path="/order-history" element={<OrderHistory />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/help" element={<Help />} />
+          </Routes>
+          {/* <div className="layout"> */}
+        </div>
+
         <Footer />
         {/* </div> */}
       </main>

@@ -8,8 +8,9 @@ import { UTILS, returnImage } from "../../utils";
 import "./style.css"; // Import the CSS file
 const BestReviewedCard = ({ item, onClick = () => {}, loading }) => {
   const dispatch = useDispatch();
-  const onPlusClick = () => {
+  const onPlusClick = (e) => {
     try {
+      e.stopPropagation();
       dispatch(setAddToCart(item));
       alert("Item is added successfully in your cart");
     } catch (error) {
