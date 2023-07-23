@@ -9,7 +9,7 @@ const FrequentlyQuestion = ({}) => {
       <p className="text-center" style={{ fontSize: "20px" }}>
         Frequently Asked Questions
       </p>
-      <div class="accordion" id="accordionExp">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
         {FAQS?.map((item, index) => (
           <CollapsibleView
             index={index}

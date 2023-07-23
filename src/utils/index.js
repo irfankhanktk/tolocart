@@ -42,7 +42,7 @@ export const UTILS = {
   },
   returnError: (error) => {
     console.log("error.response:::", error.response);
-    if (error?.message) return error?.message;
+
     if (error.response) {
       if (error.response?.data?.Message || error.response?.data?.message) {
         return `${
@@ -59,6 +59,7 @@ export const UTILS = {
       }
       console.log(error.response.status);
       console.log(error.response.headers);
+      if (error?.message) return error?.message;
       return `${error.response.status}`;
     } else if (error.request) {
       // The request was made but no response was received

@@ -4,7 +4,8 @@ export const URLS = {
   auth: {
     login: "account/authenticate",
     login_phone: "account/loginwithphone",
-    register: "account/register",
+    // register: "account/register",
+    register: "account/register-with-email",
   },
   get_slides: "v1/SliderImages/GetAll",
   shop: {
@@ -32,5 +33,6 @@ export const URLS = {
     order_details: "v1/order/", //12
     past_orders: "v1/Order/GetCustomerPastOrders?ShopType=", //Store
     active_orders: "v1/Order/GetCustomerActiveOrders/", //Store
+    update_payment: "v1/Order/UpdatePayment",
   },
 };

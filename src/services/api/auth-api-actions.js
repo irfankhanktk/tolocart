@@ -15,6 +15,7 @@ export const onLogin = (
         isPhoneAuth ? URLS.auth.login_phone : URLS.auth.login,
         values
       );
+
       console.log("res of onLogin::=>", res);
       dispatch(setUserInfo(res));
       setShow(false);
@@ -26,4 +27,4 @@ export const onLogin = (
     }
   };
 };
-export const onSignup = (values) => postFormData(URLS.auth.register, values);
+export const onSignup = (values) => postData(URLS.auth.register, values);

@@ -73,6 +73,7 @@ const LoginModal = ({ show, setShow }) => {
                       disabled={loading}
                       href="/"
                       onClick={(e) => {
+                        e.preventDefault();
                         onSubmit();
                       }}
                       className="element-custom-btn mb-3"

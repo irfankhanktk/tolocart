@@ -312,7 +312,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 className="element-custom-btn"
                 style={{ textDecoration: "none" }}
               >
-                {orderLoading ? "Loading" : "Place Order"}
+                {orderLoading ? "Loading" : "Next"}
               </a>
             </div>
           </div>

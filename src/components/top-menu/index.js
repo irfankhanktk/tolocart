@@ -19,6 +19,7 @@ export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
   const dispatch = useDispatch();
   const { userInfo } = user;
+  const [orderDetails, setOrderDetails] = React.useState({});
   const [showModal, setShowModal] = useState(false);
   const [checkoutModal, setCheckoutModal] = useState(false);
   const [currentOrderId, setCurrentOrderId] = useState(null);
@@ -180,31 +181,35 @@ export function TopMenu() {
           dispatch(setIsReqLogin(true));
         }}
       />
-      <CheckoutModal
-        show={checkoutModal}
-        setShow={setCheckoutModal}
-        onNextClick={(res) => {
-          setCheckoutModal(false);
-          setTrackOrderModal(true);
-          setCurrentOrderId(res?.data);
-          // setPlaceOrderModal(true);
-        }}
-      />
       <SearchProductsModal
         searchResults={searchResults || []}
         show={showSearchModal}
         setShow={setShowSearchModal}
         loading={searchLoading}
       />
+      <CheckoutModal
+        show={checkoutModal}
+        setShow={setCheckoutModal}
+        onNextClick={(res) => {
+          setCheckoutModal(false);
+          // setTrackOrderModal(true);
+          setCurrentOrderId(res?.data);
+          setPlaceOrderModal(true);
+        }}
+      />
       <PlaceOrderModal
+        orderId={currentOrderId}
         show={placeOrderModal}
         setShow={setPlaceOrderModal}
         onPlaceClick={() => {
           setTrackOrderModal(true);
           setPlaceOrderModal(false);
         }}
+        orderDetails={orderDetails}
+        setOrderDetails={setOrderDetails}
       />
       <TrackOrderModal
+        orderDetails={orderDetails}
         orderId={currentOrderId}
         show={trackOrderModal}
         setShow={setTrackOrderModal}

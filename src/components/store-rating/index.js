@@ -37,7 +37,7 @@ const StoreRating = ({
         </div>
         <div className="d-flex gap-2 justify-content-end">
           <img className="image-fluid" src={tick} />
-          <span className="status">Delivery available</span>
+          <span className="status">Pickup available</span>
         </div>
       </div>
     </div>

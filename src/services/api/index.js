@@ -5,7 +5,7 @@ import { UTILS } from "../../utils";
 import { STORAGE_KEYS } from "../../constants";
 export const postData = async (url, data) => {
   console.log("url: ", url);
-  console.log("data: ", data);
+  console.log("data::: ", data);
   const response = await client.post(url, data);
   return response?.data;
 };

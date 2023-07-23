@@ -7,24 +7,19 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
   const fileInputRef = React.useRef(null);
   const [loading, setLoading] = React.useState(false);
   const [formData, setFormData] = useState({
-    profilePicture: null,
-    fullName: "",
     email: "",
     password: "",
-    address: "",
-    phone: "",
-    momoNumber: "123",
     confirmPassword: "",
-    role: "Customer",
+    // role: "Customer",
   });
-  const handleProfilePictureChange = (event) => {
-    const file = event.target.files[0];
-    setFormData({ ...formData, profilePicture: file });
-  };
+  // const handleProfilePictureChange = (event) => {
+  //   const file = event.target.files[0];
+  //   setFormData({ ...formData, profilePicture: file });
+  // };
 
-  const handleProfilePictureClick = () => {
-    fileInputRef.current.click();
-  };
+  // const handleProfilePictureClick = () => {
+  //   fileInputRef.current.click();
+  // };
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -54,46 +49,6 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="profilePicture">Profile Picture:</label>
-          <div
-            className="profile-picture-container"
-            onClick={handleProfilePictureClick}
-          >
-            {formData.profilePicture ? (
-              <img
-                src={URL.createObjectURL(formData.profilePicture)}
-                alt="Profile Picture"
-                className="profile-picture shadow-3"
-              />
-            ) : (
-              <img src={user_img} style={{ height: "100px", width: "100px" }} />
-            )}
-            <input
-              type="file"
-              hidden
-              id="profilePicture"
-              accept="image/*"
-              ref={fileInputRef}
-              className="profile-picture-input"
-              onChange={handleProfilePictureChange}
-            />
-          </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="fullName" className="form-label">
-            Full Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
             Email
@@ -120,33 +75,6 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
             value={formData.password}
             onChange={handleInputChange}
             required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="address" className="form-label">
-            Address
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="phone" className="form-label">
-            Phone
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
           />
         </div>
         <div className="mb-3">

@@ -122,3 +122,5 @@ export const getSuggestedItems = (product_ids) =>
   getData(`${URLS.product.get_suggested_items}${product_ids}`);
 export const getOrderDetails = (order_id) =>
   getData(`${URLS.order.order_details}${order_id}`);
+export const updateOrderPayment = (data) =>
+  postData(`${URLS.order.update_payment}`, data);
