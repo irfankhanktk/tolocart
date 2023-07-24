@@ -21,24 +21,36 @@ const OrderHistory = () => {
   React.useEffect(() => {
     getOrders();
   }, []);
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
   if (error) return <ErrorPage error={error} />;
 
   return (
     <div className="container-fluid">
       <div className="d-md-flex flex-md-wrap pt-3">
-        {active_orders?.map((item, index) => (
-          <OrderHistoryCard
-            order={item}
-            key={index}
-            onClick={() => {
-              setOrderDetails(item);
-              setOrderModal(true);
-            }}
-          />
-        ))}
+        {loading
+          ? new Array(15)
+              .fill({})
+              ?.map((item, index) => (
+                <OrderHistoryCard
+                  loading={loading}
+                  order={item}
+                  key={index}
+                  onClick={() => {}}
+                />
+              ))
+          : active_orders?.map((item, index) => (
+              <OrderHistoryCard
+                loading={loading}
+                order={item}
+                key={index}
+                onClick={() => {
+                  setOrderDetails(item);
+                  setOrderModal(true);
+                }}
+              />
+            ))}
       </div>
       <OrderDetailsModal
         order_id={orderDetails?.id}

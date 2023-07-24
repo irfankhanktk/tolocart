@@ -254,7 +254,7 @@ const PlaceOrderModal = ({
                   className="element-custom-btn"
                   style={{ textDecoration: "none" }}
                 >
-                  Place Order{" "}
+                  {loading ? "Loading" : "Place Order"}
                 </a>
               </div>
             </div>
