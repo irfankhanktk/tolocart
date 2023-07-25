@@ -13,6 +13,7 @@ import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
 import {
   getCategories,
+  getFAQs,
   getPopularItems,
   getPopularShops,
   getRecommendedProducts,
@@ -37,6 +38,7 @@ const MarketPlace = () => {
     compaignBanners: [],
     popularProducts: [],
     recommended: [],
+    faqs: [],
   });
   React.useEffect(() => {
     getHomeData();
@@ -49,6 +51,7 @@ const MarketPlace = () => {
         getShopCompaignBanners(),
         getPopularItems(),
         getRecommendedProducts(),
+        getFAQs(),
       ]);
 
       setHomeData({
@@ -57,6 +60,7 @@ const MarketPlace = () => {
         compaignBanners: res[2].data,
         popularProducts: res[3].data,
         recommended: res[4].data,
+        faqs: res[5].data,
       });
     } catch (error) {
       console.log("error=>>", error);
@@ -308,7 +312,7 @@ const MarketPlace = () => {
             </div>
           </div>
 
-          <FrequentlyQuestion />
+          <FrequentlyQuestion faqs={homeData?.faqs || []} />
         </div>
       </>
     </div>

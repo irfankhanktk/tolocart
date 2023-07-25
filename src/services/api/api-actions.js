@@ -124,3 +124,4 @@ export const getOrderDetails = (order_id) =>
   getData(`${URLS.order.order_details}${order_id}`);
 export const updateOrderPayment = (data) =>
   postData(`${URLS.order.update_payment}`, data);
+export const getFAQs = () => getData(`${URLS.faqs}`);

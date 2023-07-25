@@ -1,6 +1,7 @@
 export const URLS = {
   base_url: "http://hamiddawod-001-site2.htempurl.com/api/",
   image_url: "http://efuikwaku-001-site16.etempurl.com/UploadedFiles/",
+  faqs: "v1/Faqs/GetAll",
   auth: {
     login: "account/authenticate",
     login_phone: "account/loginwithphone",
