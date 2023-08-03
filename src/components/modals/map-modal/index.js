@@ -1,5 +1,6 @@
 import "leaflet/dist/leaflet.css";
 import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
 import {
   MapContainer,
   Marker,
@@ -24,7 +25,7 @@ function LocationMarker({ position, setPosition }) {
     </Marker>
   );
 }
-const MapComponent = () => {
+const MapComponent = ({ show, onHide, onLocationSelected }) => {
   const [position, setPosition] = useState(null);
   const [currentLocation, setCurrentLocation] = useState({
     latitude: 0,
@@ -50,19 +51,27 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <MapContainer
-      scrollWheelZoom={false}
-      center={[mapCenter.latitude, mapCenter.longitude]}
-      zoom={13}
-      style={{ height: "400px" }}
-    >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {/* <Marker position={[currentLocation.latitude, currentLocation.longitude]}>
-        <Popup>Your Current Location</Popup>
-      </Marker> */}
-
-      <LocationMarker position={position} setPosition={setPosition} />
-    </MapContainer>
+    <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton className="custom-close-header">
+        {/* <Modal.Title>Login</Modal.Title> */}
+      </Modal.Header>
+      <Modal.Body className="p-0">
+        <MapContainer
+          center={[mapCenter.latitude, mapCenter.longitude]}
+          zoom={13}
+          style={{ height: "400px" }}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <Marker
+            position={[currentLocation.latitude, currentLocation.longitude]}
+          >
+            <Popup>Your Current Location</Popup>
+          </Marker>
+          {console.log("position::>>>>", position)}
+          <LocationMarker position={position} setPosition={setPosition} />
+        </MapContainer>
+      </Modal.Body>
+    </Modal>
   );
 };
 

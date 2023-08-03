@@ -44,7 +44,6 @@ const App = () => {
         <div style={{ minHeight: window.innerHeight }}>
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
-            <Route index path="/" element={<MarketPlace />} />
             <Route path="/stores" element={<Stores />} />
             <Route path="/store-dashboard/:id" element={<SideDasboard />} />
             <Route path="/product-detail/:id" element={<ProductDetails />} />
@@ -52,6 +51,7 @@ const App = () => {
             <Route path="/order-history" element={<OrderHistory />} />
             <Route path="/about" element={<About />} />
             <Route path="/help" element={<Help />} />
+            <Route path="/" element={<MarketPlace />} />
           </Routes>
           {/* <div className="layout"> */}
         </div>
