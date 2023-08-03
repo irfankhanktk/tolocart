@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import { home_bg } from "../../assets/images";
 import BestReviewedCard from "../../components/best-reviewed-card";
+import Carousel from "../../components/carousel";
 import CateryCard from "../../components/category-card";
 import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
@@ -21,10 +21,8 @@ import {
 } from "../../services/api/api-actions";
 import { setIsReqLogin } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
-import "./style.css";
-import Carousel from "../../components/carousel";
 import ErrorPage from "../error-page";
-import CollapsibleView from "../../components/collapsible-view";
+import "./style.css";
 const MarketPlace = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -115,9 +113,11 @@ const MarketPlace = () => {
                   ))}
             </div>
           </div>
-          <p className="home-bg heading-title mx-3">
-            Daily campaigns comfort your life
-          </p>
+          {homeData?.compaignBanners?.length && (
+            <p className="home-bg heading-title mx-3">
+              Daily campaigns comfort your life
+            </p>
+          )}
           <div className="mx-5">
             <div className="card-container">
               <Slider
@@ -175,9 +175,11 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          <p className="home-bg heading-title">
-            Best Reviewed items which sale faster
-          </p>
+          {homeData?.popularProducts?.length && (
+            <p className="home-bg heading-title">
+              Best Reviewed items which sale faster
+            </p>
+          )}
           <div className="mx-3">
             <div className="card-container">
               <Slider
@@ -236,9 +238,11 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          <p className="home-bg heading-title">
-            Popular store in Ygnico by Area
-          </p>
+          {homeData?.popularShops?.length && (
+            <p className="home-bg heading-title">
+              Popular store in Ygnico by Area
+            </p>
+          )}
           <div className="d-md-flex flex-wrap">
             {loading
               ? new Array(10)
@@ -264,7 +268,9 @@ const MarketPlace = () => {
             )}
           </div>
 
-          <p className="home-bg heading-title">Popular Items Nearby</p>
+          {homeData?.popularProducts?.length && (
+            <p className="home-bg heading-title">Popular Items Nearby</p>
+          )}
           <div className="mx-3">
             <div className="card-container">
               <Slider

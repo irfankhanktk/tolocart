@@ -16,13 +16,28 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../login-modal";
 import SignupModal from "../signup-modal";
 import { resetUser, setUserInfo } from "../../../store/reducers/user-reducer";
+import NotificationModal from "../notifications-modal";
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
   const { user } = useSelector((s) => s);
   const dispatch = useDispatch();
   const { userInfo } = user;
   const [loginModal, setLoginModal] = useState(false);
+  const [notificationModal, setNotificationModal] = useState(false);
   const [showSignupModal, setSignupModal] = useState(false);
+  const notifications = [
+    {
+      title: "New Notification 1",
+      description: "You have a new notification 1!",
+      profileIcon: "path/to/profile-icon-1.png",
+    },
+    {
+      title: "New Notification 2",
+      description: "You have a new notification 2!",
+      profileIcon: "path/to/profile-icon-2.png",
+    },
+    // Add more notifications here as needed
+  ];
   return (
     <div className="bg-info">
       <Modal
@@ -47,12 +62,12 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
           {/* login button start*/}
           <div className="content-button d-flex justify-content-center align-items-center mb-3 d-lg-none d-md-none d-sm-flex">
             <li className="nav-item dropdown pe-3">
-              <a
+              <div
                 className="nav-link nav-login-btn "
                 onClick={() => setLoginModal(true)}
               >
                 <span>Log in</span>
-              </a>
+              </div>
             </li>
             <li className="nav-item dropdown pe-3">
               <a
@@ -124,10 +139,16 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                   aria-hidden="true"
                 ></i>
               </li>
-              <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="#" className="sidebar-icon">
+              <li
+                onClick={(e) => {
+                  handleModalClose(false);
+                  setNotificationModal(true);
+                }}
+                className="sidebar-list d-flex align-items-center justify-content-between"
+              >
+                <p className="sidebar-icon">
                   <img src={bell} alt="bell" /> Notifications
-                </a>
+                </p>
                 <i
                   className="fa fa-chevron-right"
                   style={{ cursor: "pointer" }}
@@ -185,6 +206,11 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
           setSignupModal(false);
           setLoginModal(true);
         }}
+      />
+      <NotificationModal
+        show={notificationModal}
+        onHide={() => setNotificationModal(false)}
+        notifications={notifications}
       />
     </div>
   );

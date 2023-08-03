@@ -20,6 +20,7 @@ import {
 import { STORAGE_KEYS } from "./constants";
 import Help from "./pages/help";
 import About from "./pages/about";
+import MapComponent from "./components/modals/map-modal";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const App = () => {
         <div style={{ minHeight: window.innerHeight }}>
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/" element={<MarketPlace />} />
+            <Route index path="/" element={<MarketPlace />} />
             <Route path="/stores" element={<Stores />} />
             <Route path="/store-dashboard/:id" element={<SideDasboard />} />
             <Route path="/product-detail/:id" element={<ProductDetails />} />

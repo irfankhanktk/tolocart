@@ -10,10 +10,10 @@ const CollapsibleView = ({
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
-    <div class="accordion-item">
-      <h2 class="accordion-header" id={`heading${index}`}>
+    <div className="accordion-item">
+      <h2 className="accordion-header" id={`heading${index}`}>
         <button
-          class="accordion-button collapsed"
+          className="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target={`#flush-collapseOne${index}`}
@@ -25,11 +25,11 @@ const CollapsibleView = ({
       </h2>
       <div
         id={`flush-collapseOne${index}`}
-        class="accordion-collapse collapse"
+        className="accordion-collapse collapse"
         aria-labelledby={`heading${index}`}
         data-bs-parent="#accordionFlushExample"
       >
-        <div class="accordion-body">{content}</div>
+        <div className="accordion-body">{content}</div>
       </div>
     </div>
     // <div className="accordion-item">

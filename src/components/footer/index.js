@@ -72,6 +72,7 @@ const Footer = () => {
                 {["Services", "Safety", "About", "Careers"]?.map(
                   (item, index) => (
                     <a
+                      key={index}
                       href="#"
                       className="csm-service-links"
                       style={{ color: "#fff" }}
@@ -107,7 +108,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div class="border border-white" />
+        <div className="border border-white" />
         <div className="" style={{ background: "#FF5A00" }}>
           <div className="row m-0 p-2">
             <div className="col-md-6">

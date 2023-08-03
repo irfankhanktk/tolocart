@@ -14,11 +14,14 @@ import "./topmenu.css";
 import PlaceOrderModal from "../modals/placeOrder-modal";
 import TrackOrderModal from "../modals/trackOrder-modal";
 import { setIsReqLogin } from "../../store/reducers/user-reducer";
+import MapModal from "../modals/map-modal";
 
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
   const dispatch = useDispatch();
   const { userInfo } = user;
+  const [showMapModal, setShowMapModal] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const [orderDetails, setOrderDetails] = React.useState({});
   const [showModal, setShowModal] = useState(false);
   const [checkoutModal, setCheckoutModal] = useState(false);
@@ -122,7 +125,8 @@ export function TopMenu() {
                   <button className="btn btn-link nav-link nav-icon nav-address">
                     <span
                       onClick={(e) => {
-                        dispatch(getCurrentLocation());
+                        setShowMapModal(true);
+                        // dispatch(getCurrentLocation());
                       }}
                     >
                       <i className="fa fa-map-marker" aria-hidden="true"></i>
@@ -213,6 +217,11 @@ export function TopMenu() {
         orderId={currentOrderId}
         show={trackOrderModal}
         setShow={setTrackOrderModal}
+      />
+      <MapModal
+        show={showMapModal}
+        onHide={setShowMapModal}
+        onLocationSelected={setSelectedLocation}
       />
     </>
   );

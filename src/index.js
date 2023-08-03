@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./store";
 import "./services/axios-interceptor";
 import { PersistGate } from "redux-persist/integration/react";
+import { TopMenu } from "./components/top-menu";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
