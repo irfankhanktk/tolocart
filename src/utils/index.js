@@ -42,7 +42,7 @@ export const UTILS = {
   },
   returnError: (error) => {
     console.log("error.response:::", error.response);
-
+    if (error.message) return `${error.message}`;
     if (error.response) {
       if (error.response?.data?.Message || error.response?.data?.message) {
         return `${

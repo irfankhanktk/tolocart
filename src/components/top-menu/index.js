@@ -13,8 +13,9 @@ import SignupModal from "../modals/signup-modal";
 import "./topmenu.css";
 import PlaceOrderModal from "../modals/placeOrder-modal";
 import TrackOrderModal from "../modals/trackOrder-modal";
-import { setIsReqLogin } from "../../store/reducers/user-reducer";
+import { setIsReqLogin, setLocation } from "../../store/reducers/user-reducer";
 import MapModal from "../modals/map-modal";
+import { UTILS } from "../../utils";
 
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
@@ -113,22 +114,23 @@ export function TopMenu() {
             </li>
             {userInfo?.id ? (
               <>
-                <li className="nav-item dropdown d-flex flex-column">
+                {/* <li className="nav-item dropdown d-flex flex-column">
                   <a className="takeaway active" href="#">
                     Pickup
                   </a>
                   <a className="takeaway" href="#">
                     Delivery
                   </a>
-                </li>
-                <li className="nav-item dropdown">
+                </li> */}
+                <li
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMapModal(true);
+                  }}
+                  className="nav-item dropdown"
+                >
                   <button className="btn btn-link nav-link nav-icon nav-address">
-                    <span
-                      onClick={(e) => {
-                        setShowMapModal(true);
-                        // dispatch(getCurrentLocation());
-                      }}
-                    >
+                    <span>
                       <i className="fa fa-map-marker" aria-hidden="true"></i>
                     </span>
                     <span> {user?.location?.address?.slice(0, 20)}</span>
@@ -221,7 +223,18 @@ export function TopMenu() {
       <MapModal
         show={showMapModal}
         onHide={setShowMapModal}
-        onLocationSelected={setSelectedLocation}
+        onConfirmLocation={async (data) => {
+          const lat = data[0],
+            lng = data[1];
+          const res = await UTILS?._returnAddress(lat, lng);
+          dispatch(
+            setLocation({
+              latitude: lat,
+              longitude: lng,
+              address: res?.fulladdress,
+            })
+          );
+        }}
       />
     </>
   );

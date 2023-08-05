@@ -25,7 +25,7 @@ const OrderHistoryCard = ({ order, onClick = () => {}, loading }) => {
             <div className="d-flex flex-column ps-2 w-100 justify-content-between">
               <span className="line-clamp">{order?.shopName}</span>
               <span className="line-clamp">{order?.shopAddress}</span>
-              <span>TYR-{order?.id}</span>
+              <span>Oder id : TYR-{order?.id}</span>
               <p className="card-text">{order.totalPrice}</p>
               <div className="d-flex flex-row justify-content-between align-items-center">
                 <p>{order.status}</p>

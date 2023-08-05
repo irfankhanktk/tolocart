@@ -1,0 +1,9 @@
+.search-container {
+  position: absolute;
+  z-index: 1001;
+  top: 20px;
+  width: "100%";
+  background-color: white;
+  left: 60px;
+  max-width: 200px;
+}

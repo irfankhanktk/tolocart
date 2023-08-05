@@ -25,18 +25,18 @@ const Stores = () => {
     window.scrollTo(0, 0); //
     getStores();
   }, []);
-  if (loading) {
-    return <Loader />;
-  }
+
   if (error) return <ErrorPage error={error} />;
   return (
     <div>
       <h2 className="p-3">Popular store in Ygnico by Area</h2>
       <StoreCardHeader />
       <div className="d-md-flex flex-wrap">
-        {stores?.map((item, index) => (
-          <StoreCard item={item} />
-        ))}
+        {loading
+          ? [0, 1, 2, 3, 4, 4, 5]?.map((item, index) => (
+              <StoreCard item={item} key={index} loading={true} />
+            ))
+          : stores?.map((item, index) => <StoreCard key={index} item={item} />)}
       </div>
       {/* <LoginModal show={show} setShow={setShow} /> */}
     </div>
