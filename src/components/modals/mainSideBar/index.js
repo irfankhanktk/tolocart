@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import {
   bell,
-  credit_card,
-  discount_voucher,
   info,
   location,
   profile,
@@ -11,12 +10,15 @@ import {
   shopping_beg,
   user_profile_img,
 } from "../../../assets/images";
-import "./mainSidebar.css"; // Import the CSS file
-import { useDispatch, useSelector } from "react-redux";
+import MapModal from "../map-modal";
+
+import { setLocation, setUserInfo } from "../../../store/reducers/user-reducer";
 import LoginModal from "../login-modal";
-import SignupModal from "../signup-modal";
-import { resetUser, setUserInfo } from "../../../store/reducers/user-reducer";
 import NotificationModal from "../notifications-modal";
+import SignupModal from "../signup-modal";
+import "./mainSidebar.css"; // Import the CSS file
+import ProfileModal from "../profile-modal";
+import { UTILS } from "../../../utils";
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
   const { user } = useSelector((s) => s);
@@ -25,19 +27,9 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [showSignupModal, setSignupModal] = useState(false);
-  const notifications = [
-    {
-      title: "New Notification 1",
-      description: "You have a new notification 1!",
-      profileIcon: "path/to/profile-icon-1.png",
-    },
-    {
-      title: "New Notification 2",
-      description: "You have a new notification 2!",
-      profileIcon: "path/to/profile-icon-2.png",
-    },
-    // Add more notifications here as needed
-  ];
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
+
   return (
     <div className="bg-info">
       <Modal
@@ -50,13 +42,20 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
         <div className="modal-body bg-white">
           <div className="user-profile d-flex align-items-center gap-3 mb-5">
             <div className="user-profile-img">
-              <img src={user_profile_img} alt="user-profile" />
+              <img
+                className="rounded-circle"
+                style={{ height: "50px", width: "50px" }}
+                src={userInfo?.image || user_profile_img}
+                alt="user-profile"
+              />
             </div>
             <div className="user-detail">
               <h3 className="mb-1">
-                {userInfo?.userName?.slice(0, 15) || "Guest"}
+                {userInfo?.fullName ||
+                  userInfo?.userName?.slice(0, 15) ||
+                  "Guest"}
               </h3>
-              <p className="m-0">{userInfo?.email}</p>
+              <p className="text-ellipsis">{userInfo?.email}</p>
             </div>
           </div>
           {/* login button start*/}
@@ -93,8 +92,20 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                       aria-hidden="true"
                     ></i>
                   </li>
-                  <li className="sidebar-list d-flex align-items-center justify-content-between">
-                    <a href="#" className="sidebar-icon">
+                  <li
+                    onClick={(e) => {
+                      setShowProfileModal(true);
+                    }}
+                    className="sidebar-list d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowProfileModal(true);
+                      }}
+                      href="#"
+                      className="sidebar-icon"
+                    >
                       {" "}
                       <img src={profile} alt="profile" /> My Details
                     </a>
@@ -106,8 +117,15 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                   </li>
                 </>
               )}
-              <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="#" className="sidebar-icon">
+              <li
+                onClick={() => setShowMapModal(true)}
+                className="sidebar-list d-flex align-items-center justify-content-between"
+              >
+                <a
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                  className="sidebar-icon"
+                >
                   {" "}
                   <img src={location} alt="location" /> Delivery Address
                 </a>
@@ -117,7 +135,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                   aria-hidden="true"
                 ></i>
               </li>
-              <li className="sidebar-list d-flex align-items-center justify-content-between">
+              {/* <li className="sidebar-list d-flex align-items-center justify-content-between">
                 <a href="#" className="sidebar-icon">
                   {" "}
                   <img src={credit_card} alt="credit-card" /> Payment Methods
@@ -127,8 +145,8 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                   style={{ cursor: "pointer" }}
                   aria-hidden="true"
                 ></i>
-              </li>
-              <li className="sidebar-list d-flex align-items-center justify-content-between">
+              </li> */}
+              {/* <li className="sidebar-list d-flex align-items-center justify-content-between">
                 <a href="#" className="sidebar-icon">
                   <img src={discount_voucher} alt="discount-voucher" /> Promo
                   Card
@@ -138,7 +156,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                   style={{ cursor: "pointer" }}
                   aria-hidden="true"
                 ></i>
-              </li>
+              </li> */}
               <li
                 onClick={(e) => {
                   handleModalClose(false);
@@ -146,9 +164,9 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 }}
                 className="sidebar-list d-flex align-items-center justify-content-between"
               >
-                <p className="sidebar-icon">
+                <a onClick={(e) => e.preventDefault()} className="sidebar-icon">
                   <img src={bell} alt="bell" /> Notifications
-                </p>
+                </a>
                 <i
                   className="fa fa-chevron-right"
                   style={{ cursor: "pointer" }}
@@ -207,10 +225,33 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
           setLoginModal(true);
         }}
       />
+      <ProfileModal
+        show={showProfileModal}
+        setShow={setShowProfileModal}
+        onSuccessRegister={() => {
+          setShowProfileModal(false);
+        }}
+      />
       <NotificationModal
         show={notificationModal}
         onHide={() => setNotificationModal(false)}
-        notifications={notifications}
+      />
+      <MapModal
+        show={showMapModal}
+        latlng={[user?.location?.latitude, user?.location?.longitude]}
+        onHide={setShowMapModal}
+        onConfirmLocation={async (data) => {
+          const lat = data[0],
+            lng = data[1];
+          const res = await UTILS?._returnAddress(lat, lng);
+          dispatch(
+            setLocation({
+              latitude: lat,
+              longitude: lng,
+              address: res?.fulladdress,
+            })
+          );
+        }}
       />
     </div>
   );

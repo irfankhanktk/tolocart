@@ -38,11 +38,11 @@ const OrderDetailsModal = ({ show, setShow, order_id }) => {
     <Modal show={show} onHide={setShow} centered className="">
       <Modal.Header
         closeButton
-        className="custom-close-header custom-close-btn d-flex flex-column align-items-start p-2"
+        className="custom-close-header custom-close-btn d-flex flex-column align-items-start"
       ></Modal.Header>
       <Modal.Body className="p-1">
         {loading ? (
-          <Loader />
+          <Loader style={{ height: "550px" }} />
         ) : (
           <div>
             <div className="text-center">

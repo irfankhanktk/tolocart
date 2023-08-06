@@ -11,19 +11,19 @@
   height: 100% !important;
 }
 
-.content-button li{
+.content-button li {
   list-style-type: none;
 }
-.content-button li a{
+.content-button li a {
   padding: 8px 20px !important;
   font-size: 16px !important;
 }
-.content-button{
+.content-button {
   display: none !important;
 }
 
-@media(max-width:768px){
-  .content-button{
+@media (max-width: 768px) {
+  .content-button {
     display: inline-block !important;
   }
 }

@@ -51,7 +51,7 @@ const MyMap = ({
         <div style={{ position: "relative" }}>
           <MapContainer
             center={latlng}
-            zoom={12}
+            zoom={8}
             style={{ height: "400px", width: "100%" }}
           >
             <TileLayer

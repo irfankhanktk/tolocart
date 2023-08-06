@@ -28,7 +28,7 @@ const persistedReducer = persistReducer(
     key: "root",
     storage,
     //by default whole store is persisted unitill mention in whitelist or blacklist
-    whitelist: ["cart"], //mention slice names that are to be persisted,
+    whitelist: ["cart", "user"], //mention slice names that are to be persisted,
     blacklist: [], //mention slice names that are not to be persisted.
   },
   reducers

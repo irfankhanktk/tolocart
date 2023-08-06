@@ -17,7 +17,7 @@ const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
             <span className="signup-title decoration-none">Sign up</span>
             <p className="privacy-policy">
               By continuing you agree to our{" "}
-              <a href="#">Terms of Service and Privacy Policy.</a>
+              <a href="/terms-policy">Terms of Service and Privacy Policy.</a>
             </p>
             <RegistrationForm setShow={onSuccessRegister} />
             <a href="#" className="social-links">

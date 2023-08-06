@@ -2,11 +2,13 @@ export const URLS = {
   base_url: "http://hamiddawod-001-site2.htempurl.com/api/",
   image_url: "http://efuikwaku-001-site16.etempurl.com/UploadedFiles/",
   faqs: "v1/Faqs/GetAll",
+  get_notifications: "v1/Notification",
   auth: {
     login: "account/authenticate",
     login_phone: "account/loginwithphone",
     // register: "account/register",
     register: "account/register-with-email",
+    update_profile: "account/update",
   },
   get_slides: "v1/SliderImages/GetAll",
   shop: {

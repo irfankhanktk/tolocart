@@ -11,7 +11,12 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.text-ellipsis {
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflow */
+  width: 200px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -237,4 +242,8 @@ main {
   flex-direction: column;
   /* background-color: #000000; */
   justify-content: end;
+}
+a.disabled {
+  pointer-events: none;
+  cursor: default;
 }

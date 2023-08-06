@@ -20,7 +20,7 @@ import { UTILS } from "../../utils";
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
   const dispatch = useDispatch();
-  const { userInfo } = user;
+  const { userInfo, location } = user;
   const [showMapModal, setShowMapModal] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [orderDetails, setOrderDetails] = React.useState({});
@@ -222,6 +222,7 @@ export function TopMenu() {
       />
       <MapModal
         show={showMapModal}
+        latlng={[location?.latitude, location?.longitude]}
         onHide={setShowMapModal}
         onConfirmLocation={async (data) => {
           const lat = data[0],

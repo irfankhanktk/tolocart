@@ -28,3 +28,5 @@ export const onLogin = (
   };
 };
 export const onSignup = (values) => postData(URLS.auth.register, values);
+export const onUpdateProfile = (values) =>
+  postFormData(URLS.auth.update_profile, values);

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { onSignup } from "../../services/api/auth-api-actions";
 import { UTILS } from "../../utils";
 import "./style.css";
-import { user_img } from "../../assets/images";
 const RegistrationForm = ({ setShow = (bool) => {} }) => {
-  const fileInputRef = React.useRef(null);
   const [loading, setLoading] = React.useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -12,14 +10,7 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
     confirmPassword: "",
     // role: "Customer",
   });
-  // const handleProfilePictureChange = (event) => {
-  //   const file = event.target.files[0];
-  //   setFormData({ ...formData, profilePicture: file });
-  // };
 
-  // const handleProfilePictureClick = () => {
-  //   fileInputRef.current.click();
-  // };
   const handleInputChange = (e) => {
     setFormData({
       ...formData,

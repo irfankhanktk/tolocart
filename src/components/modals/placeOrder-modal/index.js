@@ -7,6 +7,7 @@ import {
   updateOrderPayment,
 } from "../../../services/api/api-actions";
 import { waiting } from "../../../assets/svgs";
+import { UTILS } from "../../../utils";
 const PlaceOrderModal = ({
   show,
   setShow,
@@ -41,6 +42,7 @@ const PlaceOrderModal = ({
       onPlaceClick();
     } catch (error) {
       console.log("error::", error);
+      alert(UTILS.returnError(error));
     } finally {
       setLoading(false);
     }
@@ -91,7 +93,8 @@ const PlaceOrderModal = ({
                 >
                   <h1 className="select-title">Payment</h1>
                   <div className="d-flex gap-2 align-items-center">
-                    <img src={Payment_card} />
+                    {/* <img src={Payment_card} /> */}
+                    <span>Cash</span>
                     <i
                       className={`fa fa-angle-right ${isOpen ? "open" : ""}`}
                       aria-hidden="true"
@@ -113,10 +116,10 @@ const PlaceOrderModal = ({
                 >
                   <li>
                     <a className="dropdown-item" href="#">
-                      Action
+                      Cash
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a className="dropdown-item" href="#">
                       Another action
                     </a>
@@ -125,10 +128,10 @@ const PlaceOrderModal = ({
                     <a className="dropdown-item" href="#">
                       Something else here
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
-              <div
+              {/* <div
                 className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
                 style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
               >
@@ -139,9 +142,9 @@ const PlaceOrderModal = ({
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded={isOpen ? "true" : "false"}
-                  onClick={handleArrowClick}
+                  // onClick={handleArrowClick}
                 >
-                  <h1 className="select-title">Promo Code</h1>
+                   <h1 className="select-title">Promo Code</h1>
                   <div className="d-flex gap-2 align-items-center">
                     <span className="select-detail-dsc">Pick discount</span>
                     <i
@@ -153,7 +156,7 @@ const PlaceOrderModal = ({
                         transition: "transform 0.3s ease",
                       }}
                     ></i>
-                  </div>
+                  </div> 
                 </a>
 
                 <ul
@@ -179,7 +182,7 @@ const PlaceOrderModal = ({
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div
                 className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
                 style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
@@ -191,7 +194,7 @@ const PlaceOrderModal = ({
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                   aria-expanded={isOpen ? "true" : "false"}
-                  onClick={handleArrowClick}
+                  // onClick={handleArrowClick}
                 >
                   <h1 className="select-title">Total Cost</h1>
                   <div className="d-flex gap-2 align-items-center">
@@ -205,14 +208,14 @@ const PlaceOrderModal = ({
                       aria-hidden="true"
                       style={{
                         fontSize: "20px",
-                        transform: `rotate(${arrowRotation}deg)`,
-                        transition: "transform 0.3s ease",
+                        // transform: `rotate(${arrowRotation}deg)`,
+                        // transition: "transform 0.3s ease",
                       }}
                     ></i>
                   </div>
                 </a>
 
-                <ul
+                {/* <ul
                   className={`dropdown-menu custom-dropdown-menu ${
                     isOpen ? "show" : ""
                   }`}
@@ -234,7 +237,7 @@ const PlaceOrderModal = ({
                       Something else here
                     </a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
 
               <div className="termsConditon-order">

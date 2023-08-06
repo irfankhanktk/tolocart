@@ -21,6 +21,8 @@ import { STORAGE_KEYS } from "./constants";
 import Help from "./pages/help";
 import About from "./pages/about";
 import MapComponent from "./components/modals/map-modal";
+import ErrorPage from "./pages/error-page";
+import TermsAndPrivacy from "./pages/terms-and-policy";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -51,7 +53,9 @@ const App = () => {
             <Route path="/order-history" element={<OrderHistory />} />
             <Route path="/about" element={<About />} />
             <Route path="/help" element={<Help />} />
-            <Route path="/" element={<MarketPlace />} />
+            <Route index path="/" element={<MarketPlace />} />
+            <Route index path="/terms-policy" element={<TermsAndPrivacy />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
           {/* <div className="layout"> */}
         </div>

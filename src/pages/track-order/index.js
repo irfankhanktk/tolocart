@@ -1,14 +1,18 @@
 import { GoogleApiWrapper, Map, Marker, Polyline } from "google-maps-react";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/loader";
 import { getOrderDetails } from "../../services/api/api-actions";
 import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
 import "./style.css";
+import PlaceOrderModal from "../../components/modals/placeOrder-modal";
 const TrackOrder = (props) => {
+  const navigate = useNavigate();
   const [directions, setDirections] = React.useState(null);
   const [orderDetails, setOrderDetails] = React.useState(null);
+  const [placeOrderModal, setPlaceOrderModal] = React.useState(false);
+
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
 
@@ -26,6 +30,7 @@ const TrackOrder = (props) => {
       if (!id) return;
       setLoading(true);
       const res = await getOrderDetails(id);
+      setPlaceOrderModal(!res?.data?.isAssigned);
       setOrderDetails(res?.data);
     } catch (error) {
       console.log("error::", error);
@@ -67,8 +72,6 @@ const TrackOrder = (props) => {
     };
 
     directionsService.route(request, (result, status) => {
-      console.log("result::", result);
-      console.log("status:::", status);
       if (status === google.maps.DirectionsStatus.OK) {
         setDirections(result);
       }
@@ -80,6 +83,21 @@ const TrackOrder = (props) => {
     <div className="m-container">
       {loading ? (
         <Loader />
+      ) : !orderDetails?.isAssigned ? (
+        <PlaceOrderModal
+          orderId={orderDetails?.id}
+          show={placeOrderModal}
+          setShow={() => {
+            setPlaceOrderModal(false);
+            navigate("/order-history");
+          }}
+          onPlaceClick={() => {
+            // setTrackOrderModal(true);
+            setPlaceOrderModal(false);
+          }}
+          orderDetails={orderDetails}
+          setOrderDetails={setOrderDetails}
+        />
       ) : (
         <>
           <div className="container-fluid">

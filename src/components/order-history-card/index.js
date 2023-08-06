@@ -20,25 +20,27 @@ const OrderHistoryCard = ({ order, onClick = () => {}, loading }) => {
             <img
               src={order?.shopImage}
               className="rounded"
-              style={{ height: "120px", width: "100px" }}
+              style={{ height: "130px", width: "110px" }}
             />
             <div className="d-flex flex-column ps-2 w-100 justify-content-between">
-              <span className="line-clamp">{order?.shopName}</span>
+              <h6 className="line-clamp order-shop-title">{order?.shopName}</h6>
               <span className="line-clamp">{order?.shopAddress}</span>
               <span>Oder id : TYR-{order?.id}</span>
-              <p className="card-text">{order.totalPrice}</p>
+              <span>Total Amount :$ {order?.totalAmount}</span>
               <div className="d-flex flex-row justify-content-between align-items-center">
                 <p>{order.status}</p>
+                {/* {order?.isAssigned && ( */}
                 <a
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
                   href={`/track-order/${order?.id}`}
-                  className="login-btn w-50 p-0"
+                  className={`login-btn w-50 p-0`}
                   style={{ height: "30px" }}
                 >
-                  Track
+                  {order?.isAssigned ? "Track" : "Waiting"}
                 </a>
+                {/* )} */}
               </div>
             </div>
           </div>

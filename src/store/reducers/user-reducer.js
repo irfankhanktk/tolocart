@@ -17,10 +17,11 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo: (state, action) => {
-      localStorage.setItem(
-        STORAGE_KEYS.token,
-        action?.payload?.data?.jwToken || null
-      );
+      if (action?.payload?.data?.jwToken)
+        localStorage.setItem(
+          STORAGE_KEYS.token,
+          action?.payload?.data?.jwToken || null
+        );
       localStorage.setItem(
         STORAGE_KEYS.user,
         JSON.stringify(action?.payload?.data)

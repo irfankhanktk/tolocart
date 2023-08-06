@@ -46,24 +46,27 @@ export const getVehicleDetails = (type = "Bike") => {
 export const getCurrentLocation = () => {
   return async (dispatch, getState) => {
     try {
-      UTILS.get_current_location(
-        async (position) => {
-          const res = await UTILS?._returnAddress(
-            position?.coords?.latitude,
-            position?.coords?.longitude
-          );
-          dispatch(
-            setLocation({
-              latitude: position?.coords?.latitude,
-              longitude: position?.coords?.longitude,
-              address: res?.fulladdress,
-            })
-          );
-        },
-        (error) => {
-          // alert("Location Error", UTILS?.returnError(error));
-        }
-      );
+      const { location } = getState()?.user;
+      if (!location) {
+        UTILS.get_current_location(
+          async (position) => {
+            const res = await UTILS?._returnAddress(
+              position?.coords?.latitude,
+              position?.coords?.longitude
+            );
+            dispatch(
+              setLocation({
+                latitude: position?.coords?.latitude,
+                longitude: position?.coords?.longitude,
+                address: res?.fulladdress,
+              })
+            );
+          },
+          (error) => {
+            // alert("Location Error", UTILS?.returnError(error));
+          }
+        );
+      }
       // const res = await ;
       // dispatch(setVehicle(res?.data));
     } catch (error) {
@@ -112,6 +115,7 @@ export const getSearchProducts = (term) =>
   getData(`${URLS.product.search_products}${term}`);
 export const getPopularItems = () =>
   getData(`${URLS.product.get_popular_products}`);
+export const getNotifications = () => getData(`${URLS.get_notifications}`);
 export const getRecommendedProducts = () =>
   getData(
     `${URLS.product.get_remmmended}ShopType=Store&PageNumber=1&PageSize=10&VendorShopId=3`

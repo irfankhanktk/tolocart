@@ -113,11 +113,11 @@ const MarketPlace = () => {
                   ))}
             </div>
           </div>
-          {homeData?.compaignBanners?.length && (
+          {homeData?.compaignBanners?.length ? (
             <p className="home-bg heading-title mx-3">
               Daily campaigns comfort your life
             </p>
-          )}
+          ) : null}
           <div className="mx-5">
             <div className="card-container">
               <Slider
@@ -175,11 +175,11 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          {homeData?.popularProducts?.length && (
+          {homeData?.popularProducts?.length ? (
             <p className="home-bg heading-title">
               Best Reviewed items which sale faster
             </p>
-          )}
+          ) : null}
           <div className="mx-3">
             <div className="card-container">
               <Slider
@@ -216,7 +216,6 @@ const MarketPlace = () => {
                   },
                 ]}
               >
-                {/* className='card-slider'> */}
                 {loading
                   ? new Array(10)
                       ?.fill("")
