@@ -15,6 +15,7 @@ import {
 } from "../../../services/api/api-actions";
 import Loader from "../../loader";
 import { setIsReqLogin } from "../../../store/reducers/user-reducer";
+import { Link } from "react-router-dom";
 
 const CheckoutModal = ({ show, setShow, onNextClick }) => {
   const { cart, user } = useSelector((s) => s);
@@ -280,7 +281,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
             {/* table end*/}
 
             <div style={{ marginTop: "25px" }}>
-              <a
+              <Link
                 disabled={orderLoading}
                 onClick={() => {
                   onPlaceOrder({
@@ -308,12 +309,12 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                     preferencePhone: "",
                   });
                 }}
-                href="#"
+                to="#"
                 className="element-custom-btn"
                 style={{ textDecoration: "none" }}
               >
                 {orderLoading ? "Loading" : "Next"}
-              </a>
+              </Link>
             </div>
           </div>
         ) : (

@@ -1,42 +1,58 @@
-import React from 'react';
-import { Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import './sidemenu.css'; // Import the CSS file
+import React from "react";
+import { Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import "./sidemenu.css"; // Import the CSS file
+import { Link } from "react-router-dom";
 
 const SideMenu = () => {
-    return (
-        <>
-        <aside id="sidebar" class="sidebar">
-            <ul class="sidebar-nav" id="sidebar-nav">
-                <li class="side-nav-item">
-                    <a class="side-nav-link active d-flex align-items-center" href="#">
-                        <i class="fa fa-shopping-bag" aria-hidden="true" style={{marginRight:'10px'}}></i>
-                        <span>Shop</span>
-                    </a>
-                </li>
-                <li class="side-nav-item">
-                    <a class="side-nav-link d-flex align-items-center" href="#">
-                        <i class="fa fa-bookmark" aria-hidden="true" style={{marginRight:'10px'}}></i>
-                        <span>Deals</span>
-                    </a>
-                </li>
-                <li class="side-nav-item">
-                    <a class="side-nav-link d-flex align-items-center" href="#">
-                        <i class="fa fa-refresh" aria-hidden="true" style={{marginRight:'10px'}}></i>
-                        <span>Buy it again </span>
-                    </a>
-                </li>
-                <li class="side-nav-item">
-                    <a class="side-nav-link d-flex align-items-center" href="#">
-                        <i class="fa fa-list" aria-hidden="true" style={{marginRight:'10px'}}></i>
-                        <span>Lists</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
-        
-        </>
-    );
+  return (
+    <>
+      <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+          <li class="side-nav-item">
+            <Link class="side-nav-link active d-flex align-items-center" to="#">
+              <i
+                class="fa fa-shopping-bag"
+                aria-hidden="true"
+                style={{ marginRight: "10px" }}
+              ></i>
+              <span>Shop</span>
+            </Link>
+          </li>
+          <li class="side-nav-item">
+            <Link class="side-nav-link d-flex align-items-center" to="#">
+              <i
+                class="fa fa-bookmark"
+                aria-hidden="true"
+                style={{ marginRight: "10px" }}
+              ></i>
+              <span>Deals</span>
+            </Link>
+          </li>
+          <li class="side-nav-item">
+            <Link class="side-nav-link d-flex align-items-center" to="#">
+              <i
+                class="fa fa-refresh"
+                aria-hidden="true"
+                style={{ marginRight: "10px" }}
+              ></i>
+              <span>Buy it again </span>
+            </Link>
+          </li>
+          <li class="side-nav-item">
+            <Link class="side-nav-link d-flex align-items-center" to="#">
+              <i
+                class="fa fa-list"
+                aria-hidden="true"
+                style={{ marginRight: "10px" }}
+              ></i>
+              <span>Lists</span>
+            </Link>
+          </li>
+        </ul>
+      </aside>
+    </>
+  );
 };
 
 export default SideMenu;

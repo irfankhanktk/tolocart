@@ -3,6 +3,7 @@ import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
 import "./signup.css"; // Import the CSS file
 import { fb, google } from "../../../assets/images";
 import RegistrationForm from "../../registeration-form";
+import { Link } from "react-router-dom";
 
 const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
   return (
@@ -17,27 +18,29 @@ const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
             <span className="signup-title decoration-none">Sign up</span>
             <p className="privacy-policy">
               By continuing you agree to our{" "}
-              <a href="/terms-policy">Terms of Service and Privacy Policy.</a>
+              <Link to="/terms-policy">
+                Terms of Service and Privacy Policy.
+              </Link>
             </p>
             <RegistrationForm setShow={onSuccessRegister} />
-            <a href="#" className="social-links">
+            <Link to="#" className="social-links">
               Or connect with social media
-            </a>
+            </Link>
 
             <div className="continue-with-links">
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="d-flex gap-3 align-items-center justify-content-center"
               >
                 {" "}
                 <img src={google} /> Continue with Google
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="#"
                 className="d-flex gap-3 align-items-center justify-content-center"
               >
                 <img src={fb} /> Continue with Facebook
-              </a>
+              </Link>
             </div>
           </div>
         </Modal.Body>

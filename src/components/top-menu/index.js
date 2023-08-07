@@ -16,6 +16,7 @@ import TrackOrderModal from "../modals/trackOrder-modal";
 import { setIsReqLogin, setLocation } from "../../store/reducers/user-reducer";
 import MapModal from "../modals/map-modal";
 import { UTILS } from "../../utils";
+import { Link } from "react-router-dom";
 
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
@@ -80,9 +81,9 @@ export function TopMenu() {
             // data-bs-target="#exampleModal"
             style={{ fontSize: "30px", cursor: "pointer" }}
           ></i>
-          <a href="/" className="logo d-flex align-items-center">
+          <Link to="/" className="logo d-flex align-items-center">
             <img src={logo_main} alt="tolocart" />
-          </a>
+          </Link>
         </div>
         <div className="search-bar">
           <form
@@ -108,19 +109,19 @@ export function TopMenu() {
         <nav className="header-nav ms-auto">
           <ul className="d-flex align-items-center">
             <li className="nav-item d-block d-lg-none">
-              <a className="nav-link nav-icon search-bar-toggle " href="#">
+              <Link className="nav-link nav-icon search-bar-toggle " to="#">
                 <i className="bi bi-search"></i>
-              </a>
+              </Link>
             </li>
             {userInfo?.id ? (
               <>
                 {/* <li className="nav-item dropdown d-flex flex-column">
-                  <a className="takeaway active" href="#">
+                  <Link className="takeaway active" to="#">
                     Pickup
-                  </a>
-                  <a className="takeaway" href="#">
+                  </Link>
+                  <Link className="takeaway" to="#">
                     Delivery
-                  </a>
+                  </Link>
                 </li> */}
                 <li
                   onClick={(e) => {
@@ -140,35 +141,35 @@ export function TopMenu() {
             ) : (
               <>
                 <li className="nav-item dropdown pe-3 showOntop">
-                  <a
+                  <Link
                     className="nav-link nav-login-btn "
                     onClick={() => dispatch(setIsReqLogin(true))}
                   >
                     <span>Log in</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item dropdown pe-3 showOntop">
-                  <a
+                  <Link
                     className="nav-link nav-signup-btn "
                     onClick={() => setSignupModal(true)}
                   >
                     <span>Sign up</span>
-                  </a>
+                  </Link>
                 </li>
               </>
             )}
 
             <li className="nav-item dropdown pe-3">
-              <a
+              <Link
                 onClick={() => setCheckoutModal(true)}
                 className=" nav-cart-btn d-flex gap-2"
-                href="#"
+                to="#"
               >
                 <span>
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                 </span>
                 <span>{cart?.cart?.length}</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

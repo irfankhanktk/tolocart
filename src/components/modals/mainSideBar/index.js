@@ -23,6 +23,8 @@ import SignupModal from "../signup-modal";
 import "./mainSidebar.css"; // Import the CSS file
 import ProfileModal from "../profile-modal";
 import { UTILS } from "../../../utils";
+import { resetCart } from "../../../store/reducers/cart-slice";
+import { Link } from "react-router-dom";
 
 const MainSideBar = ({ showModal, handleModalClose }) => {
   const { user } = useSelector((s) => s);
@@ -73,12 +75,12 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               </div>
             </li>
             <li className="nav-item dropdown pe-3">
-              <a
+              <Link
                 className="nav-link nav-signup-btn "
                 onClick={() => setSignupModal(true)}
               >
                 <span>Sign up</span>
-              </a>
+              </Link>
             </li>
           </div>
           {/* login button end*/}
@@ -87,9 +89,9 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               {userInfo && (
                 <>
                   <li className="sidebar-list d-flex align-items-center justify-content-between">
-                    <a href="/order-history" className="sidebar-icon">
+                    <Link to="/order-history" className="sidebar-icon">
                       <img src={shopping_beg} alt="shopping-bag" /> Orders
-                    </a>
+                    </Link>
                     <i
                       className="fa fa-chevron-right"
                       style={{ cursor: "pointer" }}
@@ -102,17 +104,17 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                     }}
                     className="sidebar-list d-flex align-items-center justify-content-between"
                   >
-                    <a
+                    <Link
                       onClick={(e) => {
                         e.preventDefault();
                         setShowProfileModal(true);
                       }}
-                      href="#"
+                      to="#"
                       className="sidebar-icon"
                     >
                       {" "}
                       <img src={profile} alt="profile" /> My Details
-                    </a>
+                    </Link>
                     <i
                       className="fa fa-chevron-right"
                       style={{ cursor: "pointer" }}
@@ -121,29 +123,31 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                   </li>
                 </>
               )}
-              <li
-                onClick={() => setShowMapModal(true)}
-                className="sidebar-list d-flex align-items-center justify-content-between"
-              >
-                <a
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                  className="sidebar-icon"
+              {userInfo?.id ? (
+                <li
+                  onClick={() => setShowMapModal(true)}
+                  className="sidebar-list d-flex align-items-center justify-content-between"
                 >
-                  {" "}
-                  <img src={location} alt="location" /> Delivery Address
-                </a>
-                <i
-                  className="fa fa-chevron-right"
-                  style={{ cursor: "pointer" }}
-                  aria-hidden="true"
-                ></i>
-              </li>
+                  <Link
+                    to="#"
+                    onClick={(e) => e.preventDefault()}
+                    className="sidebar-icon"
+                  >
+                    {" "}
+                    <img src={location} alt="location" /> Delivery Address
+                  </Link>
+                  <i
+                    className="fa fa-chevron-right"
+                    style={{ cursor: "pointer" }}
+                    aria-hidden="true"
+                  ></i>
+                </li>
+              ) : null}
               {/* <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="#" className="sidebar-icon">
+                <Link to="#" className="sidebar-icon">
                   {" "}
                   <img src={credit_card} alt="credit-card" /> Payment Methods
-                </a>
+                </Link>
                 <i
                   className="fa fa-chevron-right"
                   style={{ cursor: "pointer" }}
@@ -151,36 +155,41 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 ></i>
               </li> */}
               {/* <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="#" className="sidebar-icon">
+                <Link to="#" className="sidebar-icon">
                   <img src={discount_voucher} alt="discount-voucher" /> Promo
                   Card
-                </a>
+                </Link>
                 <i
                   className="fa fa-chevron-right"
                   style={{ cursor: "pointer" }}
                   aria-hidden="true"
                 ></i>
               </li> */}
-              <li
-                onClick={(e) => {
-                  handleModalClose(false);
-                  setNotificationModal(true);
-                }}
-                className="sidebar-list d-flex align-items-center justify-content-between"
-              >
-                <a onClick={(e) => e.preventDefault()} className="sidebar-icon">
-                  <img src={bell} alt="bell" /> Notifications
-                </a>
-                <i
-                  className="fa fa-chevron-right"
-                  style={{ cursor: "pointer" }}
-                  aria-hidden="true"
-                ></i>
-              </li>
+              {userInfo?.id ? (
+                <li
+                  onClick={(e) => {
+                    handleModalClose(false);
+                    setNotificationModal(true);
+                  }}
+                  className="sidebar-list d-flex align-items-center justify-content-between"
+                >
+                  <Link
+                    onClick={(e) => e.preventDefault()}
+                    className="sidebar-icon"
+                  >
+                    <img src={bell} alt="bell" /> Notifications
+                  </Link>
+                  <i
+                    className="fa fa-chevron-right"
+                    style={{ cursor: "pointer" }}
+                    aria-hidden="true"
+                  ></i>
+                </li>
+              ) : null}
               <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="/help" className="sidebar-icon">
+                <Link to="/help" className="sidebar-icon">
                   <img src={question} alt="question" /> Help
-                </a>
+                </Link>
                 <i
                   className="fa fa-chevron-right"
                   style={{ cursor: "pointer" }}
@@ -188,10 +197,10 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 ></i>
               </li>
               <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <a href="/about" className="sidebar-icon">
+                <Link to="/about" className="sidebar-icon">
                   {" "}
                   <img src={info} alt="info" /> About
-                </a>
+                </Link>
                 <i
                   className="fa fa-chevron-right"
                   style={{ cursor: "pointer" }}
@@ -201,17 +210,17 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
             </ul>
 
             {userInfo && (
-              <a
+              <Link
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(resetUser());
-                  dispatch(resetCar());
+                  dispatch(resetCart());
                 }}
-                href="#"
+                to="#"
                 className="logout-btn"
               >
                 <i className="fa fa-sign-out" aria-hidden="true"></i> Log Out
-              </a>
+              </Link>
             )}
           </div>
         </div>

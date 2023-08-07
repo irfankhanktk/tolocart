@@ -4,6 +4,7 @@ import ProductCounter from "../counter";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { setRemoveFromCart } from "../../store/reducers/cart-slice";
+import { Link } from "react-router-dom";
 const CheckoutProduct = ({ item }) => {
   const dispatch = useDispatch();
   const onRemove = () => {
@@ -24,9 +25,9 @@ const CheckoutProduct = ({ item }) => {
               <h2>{item?.name}</h2>
               <h3>$ 3.49 / lb</h3>
               <ProductCounter item={item} />
-              <a href="#" className="add-instruction">
+              <Link to="#" className="add-instruction">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Add Instruction
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-md-2 d-flex align-items-end justify-content-between flex-column">

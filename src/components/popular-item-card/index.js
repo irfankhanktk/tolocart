@@ -3,6 +3,7 @@ import { popular_img, review_plus } from "../../assets/images";
 import RatingStars from "../rating-stars";
 import "./style.css";
 import { returnImage } from "../../utils";
+import { Link } from "react-router-dom";
 const PopularItemCard = ({ item, onClick = () => {} }) => {
   return (
     <div className="col-md-12 mt-3 px-3">
@@ -28,9 +29,9 @@ const PopularItemCard = ({ item, onClick = () => {} }) => {
             </div>
           </div>
           <div className="col-md-3 d-flex justify-content-end align-items-end">
-            <a href="#">
+            <Link to="#">
               <img src={review_plus} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

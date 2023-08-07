@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 import {
   MapContainer,
-  TileLayer,
   Marker,
   Popup,
-  useMap,
+  TileLayer,
   useMapEvents,
 } from "react-leaflet";
 import PlacesAutocomplete, {
@@ -12,7 +12,6 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import "./style.css";
-import { Modal } from "react-bootstrap";
 
 const MyMap = ({
   onConfirmLocation,
@@ -34,8 +33,6 @@ const MyMap = ({
     try {
       const results = await geocodeByAddress(selectedAddress);
       const latLng = await getLatLng(results[0]);
-      // setAddress(selectedAddress);
-      // updateMarkerPosition(latLng);
       if (map) map.setView([latLng.lat, latLng.lng]);
     } catch (error) {
       console.error("Error fetching location:", error);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BestReviewedCard from "../../components/best-reviewed-card";
 import ProductCounter from "../../components/counter";
 import Loader from "../../components/loader";
@@ -114,10 +114,10 @@ const ProductDetails = () => {
               </div>
               <div className="satisfaction-gurantee d-flex align-items-center gap-2 mb-2 mt-2">
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
-                <a href="#" style={{ color: "#5468FF" }}>
+                <Link to="#" style={{ color: "#5468FF" }}>
                   {" "}
                   100% satisfaction guarantee{" "}
-                </a>
+                </Link>
                 <i
                   class="fa fa-question-circle"
                   aria-hidden="true"
@@ -200,9 +200,9 @@ const ProductDetails = () => {
           </div>
           <div className="col-md-4 mb-3">
             <div class="dropdown mb-2">
-              <a
+              <Link
                 class="btn btn-secondary dropdown-toggle custom-dropdown"
-                href="#"
+                to="#"
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
@@ -217,33 +217,33 @@ const ProductDetails = () => {
                   Set order as a shecdule
                 </div>
                 <i class="fa fa-angle-down" aria-hidden="true"></i>
-              </a>
+              </Link>
 
               <ul
                 class="dropdown-menu custom-dropdown-menu"
                 aria-labelledby="dropdownMenuLink"
               >
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Another action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Something else here
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div class="dropdown mb-2">
-              <a
+              <Link
                 class="btn btn-secondary dropdown-toggle custom-dropdown"
-                href="#"
+                to="#"
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
@@ -258,32 +258,32 @@ const ProductDetails = () => {
                   Add to List
                 </div>
                 <i class="fa fa-angle-down" aria-hidden="true"></i>
-              </a>
+              </Link>
               <ul
                 class="dropdown-menu custom-dropdown-menu"
                 aria-labelledby="dropdownMenuLink"
               >
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Another action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Something else here
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div class="dropdown mb-2">
-              <a
+              <Link
                 class="btn btn-secondary dropdown-toggle custom-dropdown"
-                href="#"
+                to="#"
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
@@ -291,31 +291,31 @@ const ProductDetails = () => {
               >
                 Reviews
                 <i class="fa fa-angle-down" aria-hidden="true"></i>
-              </a>
+              </Link>
 
               <ul
                 class="dropdown-menu custom-dropdown-menu"
                 aria-labelledby="dropdownMenuLink"
               >
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Another action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <Link class="dropdown-item" to="#">
                     Something else here
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
-            <a
-              href="#"
+            <Link
+              to="#"
               className="element-custom-btn decoration-none"
               onClick={(e) => {
                 e.preventDefault();
@@ -323,7 +323,7 @@ const ProductDetails = () => {
               }}
             >
               Add To Basket
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -334,7 +334,7 @@ const ProductDetails = () => {
           <div className="col-md-12">
             <div className="item-title d-flex justify-content-between align-items-center mb-4">
               <h2>Related Items</h2>
-              <a href="#">See all</a>
+              <Link to="#">See all</Link>
             </div>
           </div>
 

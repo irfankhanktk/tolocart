@@ -1,6 +1,7 @@
 import React from "react";
 import { ShimmerCategoryItem } from "react-shimmer-effects";
 import "./style.css";
+import { Link } from "react-router-dom";
 const OrderHistoryCard = ({ order, onClick = () => {}, loading }) => {
   return (
     <div onClick={onClick} className="col-md-4 px-md-3 mb-3">
@@ -30,16 +31,16 @@ const OrderHistoryCard = ({ order, onClick = () => {}, loading }) => {
               <div className="d-flex flex-row justify-content-between align-items-center">
                 <p>{order.status}</p>
                 {/* {order?.isAssigned && ( */}
-                <a
+                <Link
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  href={`/track-order/${order?.id}`}
+                  to={`/track-order/${order?.id}`}
                   className={`login-btn w-50 p-0`}
                   style={{ height: "30px" }}
                 >
                   {order?.isAssigned ? "Track" : "Waiting"}
-                </a>
+                </Link>
                 {/* )} */}
               </div>
             </div>

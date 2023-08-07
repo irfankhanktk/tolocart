@@ -8,6 +8,7 @@ import {
 } from "../../../services/api/api-actions";
 import { waiting } from "../../../assets/svgs";
 import { UTILS } from "../../../utils";
+import { Link } from "react-router-dom";
 const PlaceOrderModal = ({
   show,
   setShow,
@@ -82,9 +83,9 @@ const PlaceOrderModal = ({
                 className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
                 style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
               >
-                <a
+                <Link
                   className="btn btn-secondary dropdown-toggle custom-dropdown"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
@@ -105,7 +106,7 @@ const PlaceOrderModal = ({
                       }}
                     ></i>
                   </div>
-                </a>
+                </Link>
 
                 <ul
                   className={`dropdown-menu custom-dropdown-menu ${
@@ -115,19 +116,19 @@ const PlaceOrderModal = ({
                   style={{ transition: "transform 0.3s ease " }}
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Cash
-                    </a>
+                    </Link>
                   </li>
                   {/* <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Another action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Something else here
-                    </a>
+                    </Link>
                   </li> */}
                 </ul>
               </div>
@@ -135,9 +136,9 @@ const PlaceOrderModal = ({
                 className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
                 style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
               >
-                <a
+                <Link
                   className="btn btn-secondary dropdown-toggle custom-dropdown"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
@@ -157,7 +158,7 @@ const PlaceOrderModal = ({
                       }}
                     ></i>
                   </div> 
-                </a>
+                </Link>
 
                 <ul
                   className={`dropdown-menu custom-dropdown-menu ${
@@ -167,19 +168,19 @@ const PlaceOrderModal = ({
                   style={{ transition: "transform 0.3s ease " }}
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Another action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Something else here
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div> */}
@@ -187,9 +188,9 @@ const PlaceOrderModal = ({
                 className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
                 style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
               >
-                <a
+                <Link
                   className="btn btn-secondary dropdown-toggle custom-dropdown"
-                  href="#"
+                  to="#"
                   role="button"
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
@@ -213,7 +214,7 @@ const PlaceOrderModal = ({
                       }}
                     ></i>
                   </div>
-                </a>
+                </Link>
 
                 {/* <ul
                   className={`dropdown-menu custom-dropdown-menu ${
@@ -223,19 +224,19 @@ const PlaceOrderModal = ({
                   style={{ transition: "transform 0.3s ease " }}
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Another action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       Something else here
-                    </a>
+                    </Link>
                   </li>
                 </ul> */}
               </div>
@@ -243,22 +244,22 @@ const PlaceOrderModal = ({
               <div className="termsConditon-order">
                 <p>
                   By placing an order you agree to our <br />{" "}
-                  <a href="#">Terms and Conditions</a>
+                  <Link to="#">Terms and Conditions</Link>
                 </p>
               </div>
 
               <div style={{ margin: "50px 0px" }}>
-                <a
+                <Link
                   onClick={(e) => {
                     e.preventDefault();
                     onPlace();
                   }}
-                  href="#"
+                  to="#"
                   className="element-custom-btn"
                   style={{ textDecoration: "none" }}
                 >
                   {loading ? "Loading" : "Place Order"}
-                </a>
+                </Link>
               </div>
             </div>
           )}

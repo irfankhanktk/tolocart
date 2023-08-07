@@ -8,6 +8,7 @@ import {
   playstore,
   visa,
 } from "../../assets/svgs";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
@@ -27,12 +28,12 @@ const Footer = () => {
             Download App
           </p>
           <div className="d-flex align-items-center">
-            <a href="https://example.com">
+            <Link to="https://example.com">
               <img src={applestore} />
-            </a>
-            <a href="https://play.google.com/store/games">
+            </Link>
+            <Link to="https://play.google.com/store/games">
               <img src={playstore} className="mx-2" />
-            </a>
+            </Link>
           </div>
         </div>
         <div>
@@ -47,15 +48,15 @@ const Footer = () => {
             Payment Method
           </p>
           <div>
-            <a href="https://example.com">
+            <Link to="https://example.com">
               <img src={visa} alt={"image here"} />
-            </a>
-            <a className="mx-2" href="https://example.com">
+            </Link>
+            <Link className="mx-2" to="https://example.com">
               <img src={visa} alt={"image here"} />
-            </a>
-            <a href="https://example.com">
+            </Link>
+            <Link to="https://example.com">
               <img src={visa} alt={"image here"} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -64,48 +65,48 @@ const Footer = () => {
           <div className="col-lg-6 col-md-9 col-sm-9">
             <div className="row justify-content-between">
               <div className="col-lg-2 col-md-3 col-sm-3 mb-3 text-center">
-                <a href="#">
+                <Link to="#">
                   <img alt="image here" src={footer_log} />
-                </a>
+                </Link>
               </div>
               <div className=" csm-service-links-wrap col-lg-8 col-md-9 col-sm-9">
                 {["Services", "Safety", "About", "Careers"]?.map(
                   (item, index) => (
-                    <a
+                    <Link
                       key={index}
-                      href="#"
+                      to="#"
                       className="csm-service-links"
                       style={{ color: "#fff" }}
                     >
                       {item}
-                    </a>
+                    </Link>
                   )
                 )}
               </div>
             </div>
           </div>
           <div className="col-lg-6 col-md-3 col-sm-3 d-flex justify-content-end align-items-center">
-            <a href="https://example.com">
+            <Link to="https://example.com">
               <img
                 src={fb_footer}
                 alt={"image here"}
                 style={{ height: "30px", width: "30px" }}
               />
-            </a>
-            <a className="mx-2" href="https://example.com">
+            </Link>
+            <Link className="mx-2" to="https://example.com">
               <img
                 src={footer_insta}
                 alt={"image here"}
                 style={{ height: "30px", width: "30px" }}
               />
-            </a>
-            <a href="https://example.com">
+            </Link>
+            <Link to="https://example.com">
               <img
                 src={footer_twitter}
                 alt={"image here"}
                 style={{ height: "30px", width: "30px" }}
               />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="border border-white" />
@@ -118,20 +119,20 @@ const Footer = () => {
             </div>
             <div className="col-md-6 ">
               <div className="justify-content-end d-flex align-items-center gap-4 mt-2 mb-2">
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="text-white all-right-text"
                   style={{ textDecoration: "none" }}
                 >
                   Terms of Service
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="#"
                   className="text-white all-right-text"
                   style={{ textDecoration: "none" }}
                 >
                   Privacy policy
-                </a>
+                </Link>
               </div>
             </div>
           </div>

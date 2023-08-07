@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -260,9 +260,9 @@ const MarketPlace = () => {
 
             {homeData?.popularShops?.length > 9 && (
               <div className="w-100 text-center">
-                <a href="/stores" className="show_all">
+                <Link to="/stores" className="show_all">
                   Show All
-                </a>
+                </Link>
               </div>
             )}
           </div>

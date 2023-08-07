@@ -7,7 +7,7 @@ import {
   fb,
   google,
 } from "../../../assets/images";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { waiting } from "../../../assets/svgs";
 const TrackOrderModal = ({ show, setShow, orderId, orderDetails }) => {
   const navigate = useNavigate();
@@ -31,27 +31,27 @@ const TrackOrderModal = ({ show, setShow, orderId, orderDetails }) => {
               Your Items has been placed and is an it's way to being processed
             </h3>
             <div style={{ margin: "20px 0px" }}>
-              <a
-                href={`/track-order?id=${orderId}`}
+              <Link
+                to={`/track-order?id=${orderId}`}
                 className="element-custom-btn"
                 style={{ textDecoration: "none" }}
               >
                 Track Order{" "}
-              </a>
+              </Link>
             </div>
             <div className="text-center" style={{ margin: "10px 0px" }}>
-              <a
+              <Link
                 onClick={(e) => {
                   e.preventDefault();
                   setShow(false);
                   navigate("/");
                 }}
-                href="#"
+                to="#"
                 className="back-home-btn"
                 style={{ textDecoration: "none" }}
               >
                 Back to home{" "}
-              </a>
+              </Link>
             </div>
           </>
         </Modal.Body>
