@@ -12,7 +12,11 @@ import {
 } from "../../../assets/images";
 import MapModal from "../map-modal";
 
-import { setLocation, setUserInfo } from "../../../store/reducers/user-reducer";
+import {
+  resetUser,
+  setLocation,
+  setUserInfo,
+} from "../../../store/reducers/user-reducer";
 import LoginModal from "../login-modal";
 import NotificationModal from "../notifications-modal";
 import SignupModal from "../signup-modal";
@@ -200,7 +204,8 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               <a
                 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(setUserInfo());
+                  dispatch(resetUser());
+                  dispatch(resetCar());
                 }}
                 href="#"
                 className="logout-btn"

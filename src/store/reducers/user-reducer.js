@@ -49,6 +49,8 @@ export const userSlice = createSlice({
       state.location = action.payload;
     },
     resetUser: (state, action) => {
+      localStorage.removeItem(STORAGE_KEYS.token);
+      localStorage.removeItem(STORAGE_KEYS.user);
       return initialState;
     },
     setNotifications: (state, action) => {

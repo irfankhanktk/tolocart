@@ -65,7 +65,7 @@ export const cartSlice = createSlice({
       }));
       state.cart = newCart;
     },
-    reset: (state, action) => {
+    resetCart: (state, action) => {
       return initialState;
     },
   },
@@ -74,7 +74,7 @@ export const cartSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setCart,
-  reset,
+  resetCart,
   setAddToCart,
   setRemoveFromCart,
   setIncrementQtyCart,
