@@ -1,7 +1,6 @@
 import React from "react";
-import { laptop_home } from "../../assets/images";
-import { returnImage } from "../../utils";
 import { ShimmerThumbnail, ShimmerTitle } from "react-shimmer-effects";
+import { returnImage } from "../../utils";
 const CateryCard = ({
   item,
   style,

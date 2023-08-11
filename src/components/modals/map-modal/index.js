@@ -13,12 +13,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import "./style.css";
 
-const MyMap = ({
-  onConfirmLocation,
-  show,
-  onHide,
-  latlng = [30.14512718337613, 115.1367187500002],
-}) => {
+const MyMap = ({ onConfirmLocation, show, onHide, latlng }) => {
   const [markerPosition, setMarkerPosition] = useState(latlng);
   const [address, setAddress] = useState("");
   const [map, setMap] = useState(null);
