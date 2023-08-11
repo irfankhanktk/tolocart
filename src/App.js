@@ -12,6 +12,7 @@ import Stores from "./pages/stores";
 import TrackOrder from "./pages/track-order";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "./store/reducers/user-reducer";
+import "./firebase-config";
 import {
   getCurrentLocation,
   getSlides,

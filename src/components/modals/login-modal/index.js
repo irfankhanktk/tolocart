@@ -5,6 +5,7 @@ import { fb, google } from "../../../assets/images";
 import { onLogin } from "../../../services/api/auth-api-actions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import GoogleLoginButton from "../../buttons/btn-google-login";
 const LoginModal = ({ show, setShow }) => {
   const [isPhoneTab, setIsPhoneTab] = React.useState("email");
   const dispatch = useDispatch();
@@ -85,13 +86,14 @@ const LoginModal = ({ show, setShow }) => {
                       Or connect with social media
                     </Link>
                     <div className="continue-with-login-links">
-                      <Link
+                      <GoogleLoginButton />
+                      {/* <Link
                         to="#"
                         className="d-flex gap-3 align-items-center justify-content-center"
                       >
                         {" "}
                         <img src={google} /> Continue with Google
-                      </Link>
+                      </Link> */}
                       <Link
                         to="#"
                         className="d-flex gap-3 align-items-center justify-content-center"
