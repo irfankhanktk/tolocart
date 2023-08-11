@@ -224,7 +224,7 @@ export function TopMenu() {
       <MapModal
         show={showMapModal}
         latlng={
-          location?.latitude
+          location?.latitude && location?.longitude
             ? [location?.latitude, location?.longitude]
             : [30.14512718337613, 115.1367187500002]
         }
