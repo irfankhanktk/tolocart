@@ -25,6 +25,7 @@ const CateryCard = ({
         style={{
           background: `${bg}`,
           border: "1px",
+          height: "137px",
           borderColor: `${border}`,
         }}
       >
