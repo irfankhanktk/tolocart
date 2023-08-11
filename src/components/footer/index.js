@@ -120,14 +120,14 @@ const Footer = () => {
             <div className="col-md-6 ">
               <div className="justify-content-end d-flex align-items-center gap-4 mt-2 mb-2">
                 <Link
-                  to="#"
+                  to="/terms"
                   className="text-white all-right-text"
                   style={{ textDecoration: "none" }}
                 >
                   Terms of Service
                 </Link>
                 <Link
-                  to="#"
+                  to="/privacy-policy"
                   className="text-white all-right-text"
                   style={{ textDecoration: "none" }}
                 >

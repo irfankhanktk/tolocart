@@ -18,9 +18,9 @@ const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
             <span className="signup-title decoration-none">Sign up</span>
             <p className="privacy-policy">
               By continuing you agree to our{" "}
-              <Link to="/terms-policy">
-                Terms of Service and Privacy Policy.
-              </Link>
+              <Link to="/terms">Terms of Service</Link>
+              <span> and </span>
+              <Link to="/privacy-policy">Privacy Policy.</Link>
             </p>
             <RegistrationForm setShow={onSuccessRegister} />
             <Link to="#" className="social-links">
