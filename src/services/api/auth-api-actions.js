@@ -11,13 +11,19 @@ export const onLogin = (
   return async (dispatch, getState) => {
     try {
       setLoading(true);
-      const res = await postData(
-        isPhoneAuth ? URLS.auth.login_phone : URLS.auth.login,
-        values
-      );
+      if (isPhoneAuth === "social") {
+        const res = await postData(URLS.auth.social_login, values);
+        dispatch(setUserInfo(res));
+        console.log("res of social onLogin::=>", res);
+      } else {
+        const res = await postData(
+          isPhoneAuth ? URLS.auth.login_phone : URLS.auth.login,
+          values
+        );
+        console.log("res of onLogin::=>", res);
+        dispatch(setUserInfo(res));
+      }
 
-      console.log("res of onLogin::=>", res);
-      dispatch(setUserInfo(res));
       setShow(false);
     } catch (error) {
       console.log("error in login", UTILS.returnError(error));

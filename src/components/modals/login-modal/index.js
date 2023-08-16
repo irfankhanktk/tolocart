@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
-import "./login.css"; // Import the CSS file
-import { fb, google } from "../../../assets/images";
-import { onLogin } from "../../../services/api/auth-api-actions";
+import jwt_decode from "jwt-decode";
+import React from "react";
+import { Form, Modal, Nav, Tab } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { fb, google } from "../../../assets/images";
+import { onLogin } from "../../../services/api/auth-api-actions";
 import GoogleLoginButton from "../../buttons/btn-google-login";
-import ForgetModal from "../forget-modal";
+import "./login.css"; // Import the CSS file
+
 const LoginModal = ({ show, setShow, setForgetModal }) => {
   const [isPhoneTab, setIsPhoneTab] = React.useState("email");
   const dispatch = useDispatch();
@@ -16,6 +17,25 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
     password: "Zikk@1234",
     phoneNumber: "+913425693093",
   });
+  const handleGoogleLogin = (credentialResponse) => {
+    const decoded = jwt_decode(credentialResponse?.credential);
+    console.log("decoded::", decoded);
+    dispatch(
+      onLogin(
+        {
+          name: decoded?.name,
+          email: decoded?.email,
+          password: `Zikk@1234${decoded?.sub}`,
+          confirmPassword: `Zikk@1234${decoded?.sub}`,
+          image: decoded?.picture,
+          phoneNumber: decoded?.phone || "",
+        },
+        (bool) => {},
+        "social",
+        setShow
+      )
+    );
+  };
   const onHandleChange = (e) =>
     setPayload((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   const onSubmit = () => {
@@ -86,7 +106,7 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                     Or connect with social media
                   </Link>
 
-                  <GoogleLoginButton />
+                  <GoogleLoginButton onSuccess={handleGoogleLogin} />
                   <div className="continue-with-login-links">
                     {/* <Link
                         to="#"

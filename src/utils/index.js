@@ -50,7 +50,7 @@ export const UTILS = {
       console.log(concatenatedErrors);
       return concatenatedErrors;
     }
-    if (error.message) return `${error.message}`;
+    // if (error.message) return `${error.message}`;
     if (error.Message) return `${error.Message}`;
     if (error.response) {
       if (error.response?.data?.Message || error.response?.data?.message) {

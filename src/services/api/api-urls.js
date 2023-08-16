@@ -5,6 +5,7 @@ export const URLS = {
   get_notifications: "v1/Notification",
   auth: {
     login: "account/authenticate",
+    social_login: "account/socialLogin",
     login_phone: "account/loginwithphone",
     // register: "account/register",
     register: "account/register-with-email",
