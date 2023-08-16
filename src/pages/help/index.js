@@ -3,7 +3,7 @@ import React from "react";
 
 const Help = () => {
   return (
-    <div>
+    <div className="container-fluid">
       <h1>Help</h1>
       <p>
         Need assistance? We're here to help! If you have any questions,

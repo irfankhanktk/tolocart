@@ -1,6 +1,6 @@
 export const URLS = {
-  base_url: "http://hamiddawod-001-site2.htempurl.com/api/",
-  image_url: "http://efuikwaku-001-site16.etempurl.com/UploadedFiles/",
+  base_url: "https://hamiddawod-001-site2.htempurl.com/api/",
+  image_url: "https://efuikwaku-001-site16.etempurl.com/UploadedFiles/",
   faqs: "v1/Faqs/GetAll",
   get_notifications: "v1/Notification",
   auth: {
@@ -9,6 +9,8 @@ export const URLS = {
     // register: "account/register",
     register: "account/register-with-email",
     update_profile: "account/update",
+    forgot_password: "account/forgot-password",
+    new_password: "account/new-password",
   },
   get_slides: "v1/SliderImages/GetAll",
   shop: {

@@ -13,13 +13,16 @@ import { persistor, store } from "./store";
 import "./services/axios-interceptor";
 import { PersistGate } from "redux-persist/integration/react";
 import { TopMenu } from "./components/top-menu";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <GoogleOAuthProvider clientId="738995038411-v2e4begndc2621k8l4db1o6a9jv5mkaa.apps.googleusercontent.com">
+          <App />
+        </GoogleOAuthProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

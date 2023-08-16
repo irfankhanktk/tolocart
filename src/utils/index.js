@@ -42,21 +42,23 @@ export const UTILS = {
   },
   returnError: (error) => {
     console.log("error.response:::", error.response);
+    if (error?.response?.data && error.response?.data?.errors) {
+      const errorMessages = Object.values(error.response.data.errors).flatMap(
+        (errors) => errors
+      );
+      const concatenatedErrors = errorMessages.join(", ");
+      console.log(concatenatedErrors);
+      return concatenatedErrors;
+    }
     if (error.message) return `${error.message}`;
+    if (error.Message) return `${error.Message}`;
     if (error.response) {
       if (error.response?.data?.Message || error.response?.data?.message) {
         return `${
           error.response?.data?.Message || error.response?.data?.message
         }`;
       }
-      if (error.response.data && error.response.data.errors) {
-        const errorMessages = Object.values(error.response.data.errors).flatMap(
-          (errors) => errors
-        );
-        const concatenatedErrors = errorMessages.join(", ");
-        console.log(concatenatedErrors);
-        return concatenatedErrors;
-      }
+
       console.log(error.response.status);
       console.log(error.response.headers);
       if (error?.message) return error?.message;

@@ -1,0 +1,114 @@
+.element-custom-btn {
+  background: #ff5a00;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  padding: 12px;
+  text-align: center;
+  color: #fff !important;
+  text-decoration: none;
+}
+.element-custom-btn:hover {
+  color: #fff9ff;
+}
+.forgot-password {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 108.1%;
+  letter-spacing: 0.05em;
+  text-decoration-line: underline;
+  color: #181725;
+}
+.forgot-password span {
+  color: rgb(16, 182, 16);
+}
+.verify-code {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 15px;
+  text-decoration-line: underline;
+  color: #7c7c7c;
+}
+.social-login-links {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #828282;
+  text-align: center;
+  display: block;
+  margin-bottom: 15px;
+}
+.social-login-links:hover,
+.continue-with-login-links a:hover,
+.forgot-password:hover {
+  color: #000;
+}
+.continue-with-login-links a {
+  background: rgba(246, 246, 246, 0.35);
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  text-decoration-line: underline;
+  color: #212121;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.login-input-field {
+  background: #ffffff;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 29px;
+  text-decoration-line: underline;
+  color: #7c7c7c;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.nav-item .nav-link.active {
+  border: none;
+  color: #000 !important;
+  padding-bottom: 0px !important;
+}
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  border-color: none !important;
+  border: none !important;
+  outline: none !important;
+  border-bottom: 1px solid #000;
+  color: #000 !important;
+}
+.nav-item .nav-link {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  text-decoration-line: underline;
+  color: #7c7c7c;
+  cursor: pointer;
+}
+.nav-tabs .nav-link {
+  margin-bottom: 0 !important;
+}
+.continue-with-login-links a img {
+  width: 20px;
+}

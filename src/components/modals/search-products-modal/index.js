@@ -22,16 +22,25 @@ const SearchProductsModal = ({
         <Modal.Body className="p-0">
           <div className="search-modal-wrapper">
             <span className="search-signup-title">Search Results</span>
-            {loading ? <Loader /> : null}{" "}
-            {searchResults?.map((item, index) => (
-              <div className="mb-2">
-                <BestReviewedCard
-                  onClick={() => navigate(`/product-detail/${item?.id}`)}
-                  key={index}
-                  item={item}
-                />
+            {loading ? <Loader /> : null}
+            {!searchResults?.length ? (
+              <div
+                className="text-center d-flex flex-column justify-content-center"
+                style={{ height: "150px" }}
+              >
+                <span>No result found</span>
               </div>
-            ))}
+            ) : (
+              searchResults?.map((item, index) => (
+                <div className="mb-2">
+                  <BestReviewedCard
+                    onClick={() => navigate(`/product-detail/${item?.id}`)}
+                    key={index}
+                    item={item}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </Modal.Body>
       </Modal>

@@ -17,6 +17,8 @@ import { setIsReqLogin, setLocation } from "../../store/reducers/user-reducer";
 import MapModal from "../modals/map-modal";
 import { UTILS } from "../../utils";
 import { Link } from "react-router-dom";
+import ForgetModal from "../modals/forget-modal";
+import OTPModal from "../modals/otp-modal";
 
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
@@ -35,6 +37,12 @@ export function TopMenu() {
   const [trackOrderModal, setTrackOrderModal] = useState(false);
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [searchResults, setSearchResults] = React.useState([]);
+  const [forgetModal, setForgetModal] = React.useState(false);
+  const [modlals, setModals] = React.useState({
+    otp: false,
+    forget: false,
+  });
+
   // React.useEffect(() => {
   //   // dispatch(setIsReqLogin(user?.isRequiredLogin));
   //   setLoginModal(user?.isRequiredLogin);
@@ -177,6 +185,7 @@ export function TopMenu() {
       <MainSideBar showModal={showModal} handleModalClose={handleModalClose} />
       <LoginModal
         show={user?.isRequiredLogin}
+        setForgetModal={() => setModals((prev) => ({ ...prev, forget: true }))}
         setShow={(bool) => dispatch(setIsReqLogin(bool))}
       />
       <SignupModal
@@ -241,6 +250,14 @@ export function TopMenu() {
             })
           );
         }}
+      />
+      <ForgetModal
+        setShow={() => setModals((prev) => ({ ...prev, forget: false }))}
+        show={modlals.forget}
+      />
+      <OTPModal
+        setShow={() => setModals((prev) => ({ ...prev, otp: false }))}
+        show={modlals.otp}
       />
     </>
   );
