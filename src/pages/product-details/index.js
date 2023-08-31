@@ -29,7 +29,6 @@ const ProductDetails = () => {
   const handleAddToCart = (item) => {
     try {
       dispatch(setAddToCart(item));
-      alert("Item is added successfully in your cart");
       // Continue with any other logic after successful addToCart
     } catch (error) {
       // Handle the error

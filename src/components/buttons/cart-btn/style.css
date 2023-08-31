@@ -1,0 +1,33 @@
+.cart-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ff5a00;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cart-button:hover .text {
+  display: none;
+}
+
+.cart-button .icon {
+  margin: 0 5px;
+}
+
+.cart-button .quantity {
+  margin: 0 10px;
+}
+
+.cart-button .icon:hover {
+  background-color: #ff5a00;
+}
+
+.cart-button .icon.delete {
+  color: #fff;
+}
+
+.item-in-cart {
+  background-color: #ff5a00;
+}

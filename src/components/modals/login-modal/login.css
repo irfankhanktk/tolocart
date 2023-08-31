@@ -1,3 +1,12 @@
+.my-facebook-button-class {
+  background: #1b74e4;
+  color: white;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+}
 .element-custom-btn {
   background: #ff5a00;
   border-radius: 10px;
@@ -111,4 +120,23 @@
 }
 .continue-with-login-links a img {
   width: 20px;
+}
+.my-google-btn iframe {
+  width: 100% !important;
+}
+.my-google-btn .haAclf {
+  padding: 0px !important;
+  width: 100% !important;
+}
+.my-google-btn .nsm7Bb-HzV7m-LgbsSe {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+.qJTHM .haAclf {
+  width: 100%;
+  padding: 0px !important;
+}
+.haAclf {
+  padding: 0px !important;
+  width: 100%;
 }

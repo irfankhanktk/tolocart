@@ -1,22 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { ShimmerPostItem } from "react-shimmer-effects";
-import { review_plus } from "../../assets/images";
 import { review_start } from "../../assets/svgs";
-import { setAddToCart } from "../../store/reducers/cart-slice";
-import { UTILS, returnImage } from "../../utils";
+import { returnImage } from "../../utils";
+import CartButton from "../buttons/cart-btn/cart-button";
 import "./style.css"; // Import the CSS file
 const BestReviewedCard = ({ item, onClick = () => {}, loading }) => {
-  const dispatch = useDispatch();
-  const onPlusClick = (e) => {
-    try {
-      e.stopPropagation();
-      dispatch(setAddToCart(item));
-      alert("Item is added successfully in your cart");
-    } catch (error) {
-      alert(UTILS.returnError(error));
-    }
-  };
   return (
     // <div className='col-md-2 col-sm-10 mt-5 px-1'>
     <div onClick={onClick} className="col-md-12 position-relative">
@@ -56,18 +44,13 @@ const BestReviewedCard = ({ item, onClick = () => {}, loading }) => {
             <div className="discount-price d-flex gap-3 align-items-end">
               <div className="product-price h-auto ">
                 <span>{item?.discountedPrice || item?.price}$</span>
-                <p className="mb-2">9</p>
+                {/* <p className="mb-2">9</p> */}
               </div>
               <h3 className="m-0">
                 {item?.discountedPrice ? <del>{item?.price}$</del> : null}
               </h3>
             </div>
-            <button
-              onClick={onPlusClick}
-              className="add-to-cart-img decoration-none"
-            >
-              <img className="img-fluid" src={review_plus} alt="image here" />
-            </button>
+            <CartButton item={item} />
           </div>
         </div>
       )}

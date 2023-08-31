@@ -1,11 +1,11 @@
 import React from "react";
-import SideMenu from "../../components/sideMenu";
-import MenuList from "../../components/menuList";
-import StoreCardHeader from "../../components/store-card-header";
-import { UTILS } from "../../utils";
+import { useLocation, useParams } from "react-router-dom";
 import Loader from "../../components/loader";
-import { useParams } from "react-router-dom";
+import MenuList from "../../components/menuList";
+import SideMenu from "../../components/sideMenu";
+import StoreCardHeader from "../../components/store-card-header";
 import { getProductsByCategories } from "../../services/api/api-actions";
+import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
 const StoreDashboard = () => {
   const { id } = useParams();
@@ -36,7 +36,7 @@ const StoreDashboard = () => {
   return (
     <>
       <div className="container-fluid">
-        <StoreCardHeader />
+        <StoreCardHeader imgHeight={"220px"} />
         <div className="row">
           <div className="col-md-2">
             <SideMenu />

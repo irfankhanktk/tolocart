@@ -28,7 +28,10 @@ const MyMap = ({ onConfirmLocation, show, onHide, latlng }) => {
     try {
       const results = await geocodeByAddress(selectedAddress);
       const latLng = await getLatLng(results[0]);
-      if (map) map.setView([latLng.lat, latLng.lng]);
+      if (map) {
+        updateMarkerPosition(latLng);
+        map.setView([latLng.lat, latLng.lng]);
+      }
     } catch (error) {
       console.error("Error fetching location:", error);
     }

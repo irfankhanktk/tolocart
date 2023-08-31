@@ -7,7 +7,7 @@ import { fb, google } from "../../../assets/images";
 import { onLogin } from "../../../services/api/auth-api-actions";
 import GoogleLoginButton from "../../buttons/btn-google-login";
 import "./login.css"; // Import the CSS file
-
+import FacebookLogin from "react-facebook-login";
 const LoginModal = ({ show, setShow, setForgetModal }) => {
   const [isPhoneTab, setIsPhoneTab] = React.useState("email");
   const dispatch = useDispatch();
@@ -105,16 +105,29 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                   <Link to="#" className="social-login-links">
                     Or connect with social media
                   </Link>
+                  <div className="text-center">
+                    <FacebookLogin
+                      textButton=" Continue with Facebook"
+                      size="small"
+                      appId="1943117732727713"
+                      autoLoad={false}
+                      fields="name,email,picture"
+                      callback={(res) => {}}
+                      icon={
+                        <i
+                          className="fa fa-facebook"
+                          style={{ cursor: "pointer" }}
+                          aria-hidden="true"
+                        />
+                      }
+                      cssClass="my-facebook-button-class"
+                    />
+                    <div className="my-google-btn">
+                      <GoogleLoginButton onSuccess={handleGoogleLogin} />
+                    </div>
+                  </div>
 
-                  <GoogleLoginButton onSuccess={handleGoogleLogin} />
                   <div className="continue-with-login-links">
-                    {/* <Link
-                        to="#"
-                        className="d-flex gap-3 align-items-center justify-content-center"
-                      >
-                        {" "}
-                        <img src={google} /> Continue with Google
-                      </Link> */}
                     <Link
                       to="#"
                       className="d-flex gap-3 align-items-center justify-content-center"

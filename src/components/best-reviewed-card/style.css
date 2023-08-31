@@ -123,7 +123,12 @@
   align-items: center;
   color: #7c7c7c;
 }
-.add-to-cart-img img {
-  width: 40px;
+.add-to-cart-img {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #ff5a00;
+  height: 40px;
+  border-radius: 0.25rem;
+  color: white;
 }
 /* .slick-list{padding:0 20% 0 0 !important;} */

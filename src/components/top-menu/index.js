@@ -1,31 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { logo_main } from "../../assets/images";
-import {
-  getCurrentLocation,
-  getSearchProducts,
-} from "../../services/api/api-actions";
+import { getSearchProducts } from "../../services/api/api-actions";
+import { setIsReqLogin, setLocation } from "../../store/reducers/user-reducer";
+import { UTILS } from "../../utils";
 import CheckoutModal from "../modals/checkout-modal";
+import ForgetModal from "../modals/forget-modal";
 import LoginModal from "../modals/login-modal";
 import MainSideBar from "../modals/mainSideBar";
+import MapModal from "../modals/map-modal";
+import OTPModal from "../modals/otp-modal";
+import PlaceOrderModal from "../modals/placeOrder-modal";
 import SearchProductsModal from "../modals/search-products-modal";
 import SignupModal from "../modals/signup-modal";
-import "./topmenu.css";
-import PlaceOrderModal from "../modals/placeOrder-modal";
 import TrackOrderModal from "../modals/trackOrder-modal";
-import { setIsReqLogin, setLocation } from "../../store/reducers/user-reducer";
-import MapModal from "../modals/map-modal";
-import { UTILS } from "../../utils";
-import { Link } from "react-router-dom";
-import ForgetModal from "../modals/forget-modal";
-import OTPModal from "../modals/otp-modal";
+import "./topmenu.css";
 
 export function TopMenu() {
   const { cart, user } = useSelector((s) => s);
   const dispatch = useDispatch();
   const { userInfo, location } = user;
   const [showMapModal, setShowMapModal] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(null);
   const [orderDetails, setOrderDetails] = React.useState({});
   const [showModal, setShowModal] = useState(false);
   const [checkoutModal, setCheckoutModal] = useState(false);
@@ -37,7 +33,6 @@ export function TopMenu() {
   const [trackOrderModal, setTrackOrderModal] = useState(false);
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [searchResults, setSearchResults] = React.useState([]);
-  const [forgetModal, setForgetModal] = React.useState(false);
   const [modlals, setModals] = React.useState({
     otp: false,
     forget: false,
@@ -239,16 +234,22 @@ export function TopMenu() {
         }
         onHide={setShowMapModal}
         onConfirmLocation={async (data) => {
-          const lat = data[0],
-            lng = data[1];
-          const res = await UTILS?._returnAddress(lat, lng);
-          dispatch(
-            setLocation({
-              latitude: lat,
-              longitude: lng,
-              address: res?.fulladdress,
-            })
-          );
+          try {
+            console.log("data:::", data);
+            const lat = data[0],
+              lng = data[1];
+            const res = await UTILS?._returnAddress(lat, lng);
+            console.log("res:::", res);
+            dispatch(
+              setLocation({
+                latitude: lat,
+                longitude: lng,
+                address: res?.fulladdress,
+              })
+            );
+          } catch (error) {
+            console.log("error::::", error);
+          }
         }}
       />
       <ForgetModal
