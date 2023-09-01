@@ -20,3 +20,11 @@
   object-fit: cover;
   border-radius: 50%;
 }
+.input-container {
+  position: relative;
+}
+.input-container .icon-container {
+  position: absolute;
+  top: 7px;
+  right: 0;
+}

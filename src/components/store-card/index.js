@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import StoreCardHeader from "../store-card-header";
 import StoreRating from "../store-rating";
 import "./style.css";

@@ -149,31 +149,35 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                 </Form>
               </Tab.Pane>
               <Tab.Pane eventKey="phone">
-                <Form>
+                <form>
                   <div className="modal-wrapper p-0">
                     <input
+                      required
                       value={payload.phoneNumber}
                       name="phoneNumber"
                       type="tel"
                       placeholder="Phone Number"
                       className="login-input-field"
+                      pattern="^\+1\d{10}$"
+                      title="Please enter a valid phone number (+1 USA code)."
                       onChange={onHandleChange}
                     ></input>
                     <p className="verify-code">
                       We will send a text with a verification code. Message and
                       data rates may apply.
                     </p>
-
-                    <Link
+                    {/* <button onClick={onSubmit} type="submit">
+                      Heloo
+                    </button> */}
+                    <button
+                      type="submit"
                       disabled={loading}
-                      onClick={(e) => {
-                        onSubmit();
-                      }}
+                      onClick={onSubmit}
                       to="#"
                       className="element-custom-btn mb-3"
                     >
                       {loading ? "Loading" : "Continue"}
-                    </Link>
+                    </button>
                     <Link to="#" className="social-login-links">
                       Or connect with social media
                     </Link>
@@ -192,7 +196,7 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                       </Link>
                     </div>
                   </div>
-                </Form>
+                </form>
               </Tab.Pane>
             </Tab.Content>
           </Tab.Container>

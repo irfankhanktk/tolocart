@@ -4,10 +4,19 @@ import { LinkContainer } from "react-router-bootstrap";
 import "./sidemenu.css"; // Import the CSS file
 import { Link } from "react-router-dom";
 
-const SideMenu = () => {
+const SideMenu = ({ item }) => {
   return (
     <>
       <aside id="sidebar" class="sidebar">
+        <div className="d-flex flex-column align-items-center">
+          <img
+            className="store-img"
+            src={item?.image}
+            alt="store pic"
+            // className="rounded"
+          />
+          <span className="text-center mb-5">{item?.name}</span>
+        </div>
         <ul class="sidebar-nav" id="sidebar-nav">
           <li class="side-nav-item">
             <Link class="side-nav-link active d-flex align-items-center" to="#">

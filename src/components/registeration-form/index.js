@@ -4,6 +4,10 @@ import { UTILS } from "../../utils";
 import "./style.css";
 const RegistrationForm = ({ setShow = (bool) => {} }) => {
   const [loading, setLoading] = React.useState(false);
+  const [secure, setSecure] = React.useState({
+    password: true,
+    confirmPassword: true,
+  });
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -58,29 +62,67 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            required
-          />
+          <div className="input-container">
+            <input
+              type={secure?.password ? "password" : "text"}
+              className="form-control"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+            />
+            <button
+              onClick={(e) =>
+                setSecure({ ...secure, password: !secure?.password })
+              }
+              className="decoration-none icon-container px-2"
+            >
+              <i
+                class={secure?.password ? `fa fa-eye` : `fa fa-eye-slash`}
+                aria-hidden="true"
+                style={{ marginRight: "10px" }}
+              ></i>
+            </button>
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="confirmPassword" className="form-label">
             Confirm Password
           </label>
-          <input
-            type="password"
-            className="form-control"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-            required
-          />
+          <div className="input-container">
+            <input
+              class={secure?.confirmPassword ? `fa fa-eye` : `fa fa-eye-slash`}
+              type={secure?.confirmPassword ? "password" : "text"}
+              className="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              required
+            />
+            <button
+              onClick={(e) =>
+                setSecure({
+                  ...secure,
+                  confirmPassword: !secure?.confirmPassword,
+                })
+              }
+              onClick={(e) =>
+                setSecure({
+                  ...secure,
+                  confirmPassword: !secure?.confirmPassword,
+                })
+              }
+              className="decoration-none icon-container px-2"
+            >
+              <i
+                class="fa fa-eye-slash"
+                aria-hidden="true"
+                style={{ marginRight: "10px" }}
+              ></i>
+            </button>
+          </div>
         </div>
         <div className="mb-3 text-center">
           <button disabled={loading} type="submit" className="btn btn-primary">

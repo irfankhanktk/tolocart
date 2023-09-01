@@ -212,11 +212,12 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
             {userInfo && (
               <Link
                 onClick={(e) => {
-                  e.preventDefault();
+                  // e.preventDefault();
                   dispatch(resetUser());
                   dispatch(resetCart());
+                  handleModalClose(false);
                 }}
-                to="#"
+                to="/"
                 className="logout-btn"
               >
                 <i className="fa fa-sign-out" aria-hidden="true"></i> Log Out

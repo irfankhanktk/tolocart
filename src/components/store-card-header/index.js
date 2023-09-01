@@ -5,6 +5,7 @@ import "./style.css";
 import { store_heart } from "../../assets/svgs";
 import { returnImage } from "../../utils";
 const StoreCardHeader = ({ item, imgHeight }) => {
+  console.log("item::", item);
   const containerStyle = {
     backgroundImage: `url(${returnImage(item?.image)})`,
     backgroundSize: "cover",

@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
-import "./checkout.css"; // Import the CSS file
-import { fb, google } from "../../../assets/images";
+import React from "react";
+import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import BestReviewedCard from "../../best-reviewed-card";
-import CheckoutProduct from "../../checkout-product";
-import { useDispatch, useSelector } from "react-redux";
-import { UTILS } from "../../../utils";
 import {
   getSuggestedItems,
   placeOrder,
 } from "../../../services/api/api-actions";
-import Loader from "../../loader";
 import { setIsReqLogin } from "../../../store/reducers/user-reducer";
-import { Link } from "react-router-dom";
+import { UTILS } from "../../../utils";
+import BestReviewedCard from "../../best-reviewed-card";
+import CheckoutProduct from "../../checkout-product";
+import Loader from "../../loader";
+import "./checkout.css"; // Import the CSS file
+import { setCart } from "../../../store/reducers/cart-slice";
 
 const CheckoutModal = ({ show, setShow, onNextClick }) => {
   const { cart, user } = useSelector((s) => s);
@@ -27,11 +27,9 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
   const [distance, setDistance] = React.useState("1");
   const onPlaceOrder = async (data) => {
     try {
-      console.log("data::", data);
       setOrderLoading(true);
       const res = await placeOrder(data);
-      console.log("order place::", res);
-      alert("Order is Placed Successfully");
+      dispatch(setCart([]));
       onNextClick(res);
     } catch (error) {
       console.log("error=>>", error);
@@ -65,25 +63,16 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
   const getDeliveryCharges = async () => {
     try {
       const vendorShop = cart?.cart[0]?.vendorShop;
-      console.log(
-        "jhkl",
-        user?.location?.latitude,
-        vendorShop?.latitude,
-        user?.location?.longitude,
-        vendorShop?.longitude
-      );
+
       const res = await UTILS.getDistance(
         user?.location?.latitude,
         vendorShop?.latitude,
         user?.location?.longitude,
         vendorShop?.longitude
       );
-      console.log("chargesss:::", res);
       setDistance(res);
       setDeliveryCharges((res || 1) * user?.vehicle?.perKmRate);
-    } catch (error) {
-      // alert(UTILS.returnError(error));
-    }
+    } catch (error) {}
   };
   React.useEffect(() => {
     if (cart?.cart?.length) getDeliveryCharges();
@@ -126,10 +115,10 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
     preferencePhone: "",
   };
   return (
-    <Modal show={show} onHide={setShow} centered>
+    <Modal className="modal-outer" show={show} onHide={setShow}>
       <Modal.Header
         closeButton
-        className="custom-close-header custom-close-btn d-flex flex-column align-items-start p-2"
+        className="custom-modal-content custom-close-header custom-close-btn d-flex flex-column align-items-start p-2"
       >
         <h2 className="custom-header_title">
           {cart?.cart[0]?.vendorShop?.name}
@@ -141,51 +130,14 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
           </h3>
         )}
       </Modal.Header>
-      <Modal.Body className="p-2">
+      <Modal.Body className="p-2 custom-modal-body">
         {cart?.cart?.length ? (
           <div className="Checkout-modal-wrapper">
             <div className="card-container">
-              <Slider
-                dots={false}
-                infinite={false}
-                speed={500}
-                slidesToShow={1}
-                slidesToScroll={1}
-                className="card-slider"
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 1,
-                    },
-                  },
-                  {
-                    breakpoint: 992,
-                    settings: {
-                      slidesToShow: 1,
-                    },
-                  },
-                  {
-                    breakpoint: 768,
-                    settings: {
-                      slidesToShow: 1,
-                    },
-                  },
-                  {
-                    breakpoint: 480,
-                    settings: {
-                      slidesToShow: 1,
-                    },
-                  },
-                ]}
-              >
-                {/* className='card-slider'> */}
-                {cart?.cart?.map((item, index) => (
-                  <CheckoutProduct item={item} key={index} />
-                ))}
-              </Slider>
+              {cart?.cart?.map((item, index) => (
+                <CheckoutProduct item={item} key={index} />
+              ))}
             </div>
-            {/* <CheckoutProduct/> */}
             {/* suggestion items start */}
             {cart?.cart?.length ? (
               <div className="mb-0 ms-0 me-0" style={{ marginTop: "11px" }}>
@@ -231,7 +183,6 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                         },
                       ]}
                     >
-                      {/* className='card-slider'> */}
                       {relatedProducts?.map((item, index) => (
                         <BestReviewedCard key={index} item={item} />
                       ))}

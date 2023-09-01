@@ -36,10 +36,13 @@ const StoreDashboard = () => {
   return (
     <>
       <div className="container-fluid">
-        <StoreCardHeader imgHeight={"220px"} />
+        {/* <StoreCardHeader
+          imgHeight={"220px"}
+          item={storeData[0]?.data[0]?.vendorShop}
+        /> */}
         <div className="row">
           <div className="col-md-2">
-            <SideMenu />
+            <SideMenu item={storeData[0]?.data[0]?.vendorShop} />
           </div>
           <div className="col-md-10">
             {storeData?.map((item, index) => (

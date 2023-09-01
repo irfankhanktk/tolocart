@@ -5,6 +5,7 @@ import "./style.css";
 import { useDispatch } from "react-redux";
 import { setRemoveFromCart } from "../../store/reducers/cart-slice";
 import { Link } from "react-router-dom";
+import AddInstruction from "../add-instruction";
 const CheckoutProduct = ({ item }) => {
   const dispatch = useDispatch();
   const onRemove = () => {
@@ -25,16 +26,17 @@ const CheckoutProduct = ({ item }) => {
               <h2>{item?.name}</h2>
               <h3>$ 3.49 / lb</h3>
               <ProductCounter item={item} />
-              <Link to="#" className="add-instruction">
+              <AddInstruction />
+              {/* <Link to="#" className="add-instruction">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Add Instruction
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div className="col-md-2 d-flex align-items-end justify-content-between flex-column">
             <i onClick={onRemove} class="fa fa-times" aria-hidden="true"></i>
             <div className="checkout-price h-auto ">
               <span>${item?.price}</span>
-              <p className="mb-2">49</p>
+              {/* <p className="mb-2">49</p> */}
             </div>
           </div>
           <div className="col-md-12 d-flex align-items-center justify-content-between">
