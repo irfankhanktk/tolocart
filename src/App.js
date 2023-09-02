@@ -15,6 +15,7 @@ import { setUserInfo } from "./store/reducers/user-reducer";
 import "./firebase-config";
 import {
   getCurrentLocation,
+  getFavProductIds,
   getSlides,
   getVehicleDetails,
 } from "./services/api/api-actions";
@@ -38,6 +39,7 @@ const App = () => {
   React.useEffect(() => {
     getData();
     dispatch(getVehicleDetails());
+    dispatch(getFavProductIds());
     dispatch(getSlides());
     dispatch(getCurrentLocation());
   }, []);

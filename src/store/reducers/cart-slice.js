@@ -65,6 +65,9 @@ export const cartSlice = createSlice({
       }));
       state.cart = newCart;
     },
+    setInstructions: (state, action) => {
+      state.cart[action?.payload?.index].instructions = action?.payload?.value;
+    },
     resetCart: (state, action) => {
       return initialState;
     },
@@ -79,6 +82,7 @@ export const {
   setRemoveFromCart,
   setIncrementQtyCart,
   setDecrementQtyCart,
+  setInstructions,
 } = cartSlice.actions;
 
 // export const demoAsyncFun = (amount) => (dispatch) => {

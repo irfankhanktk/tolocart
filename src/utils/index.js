@@ -19,6 +19,31 @@ export const horizontalAnimation = {
 };
 export const returnImage = (url) => `${url}`;
 export const UTILS = {
+  generatePassword: () => {
+    const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+    const specialChars = "!@#$%^&*()_-+=<>?/[]{}|";
+
+    const randomUppercase =
+      uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)];
+    const randomLowercase =
+      lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)];
+    const randomSpecialChar =
+      specialChars[Math.floor(Math.random() * specialChars.length)];
+
+    // Generate additional random characters for the rest of the password
+    const remainingChars =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let restOfPassword = "";
+    for (let i = 0; i < 8; i++) {
+      restOfPassword +=
+        remainingChars[Math.floor(Math.random() * remainingChars.length)];
+    }
+
+    const suggestedPassword =
+      randomUppercase + randomLowercase + randomSpecialChar + restOfPassword;
+    return suggestedPassword;
+  },
   getFormData: (object) => {
     const formData = new FormData();
     Object.keys(object).forEach((key) => formData.append(key, object[key]));

@@ -30,7 +30,7 @@ const Stores = () => {
   return (
     <div>
       <h2 className="p-3">Popular store in Ygnico by Area</h2>
-      <StoreCardHeader />
+
       <div className="d-md-flex flex-wrap">
         {loading
           ? [0, 1, 2, 3, 4, 4, 5]?.map((item, index) => (

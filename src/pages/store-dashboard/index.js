@@ -7,6 +7,7 @@ import StoreCardHeader from "../../components/store-card-header";
 import { getProductsByCategories } from "../../services/api/api-actions";
 import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
+import { Toast } from "react-bootstrap";
 const StoreDashboard = () => {
   const { id } = useParams();
   const [loading, setLoading] = React.useState(true);
@@ -28,9 +29,7 @@ const StoreDashboard = () => {
     window.scrollTo(0, 0); //
     getStores();
   }, []);
-  if (loading) {
-    return <Loader />;
-  }
+
   if (error) return <ErrorPage error={error} />;
 
   return (
@@ -45,9 +44,13 @@ const StoreDashboard = () => {
             <SideMenu item={storeData[0]?.data[0]?.vendorShop} />
           </div>
           <div className="col-md-10">
-            {storeData?.map((item, index) => (
-              <MenuList item={item} />
-            ))}
+            {loading
+              ? [{}, {}, {}, {}]?.map((item, index) => (
+                  <MenuList key={index} item={item} loading />
+                ))
+              : storeData?.map((item, index) => (
+                  <MenuList key={index} item={item} />
+                ))}
           </div>
         </div>
       </div>

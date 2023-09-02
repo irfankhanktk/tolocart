@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setRemoveFromCart } from "../../store/reducers/cart-slice";
 import { Link } from "react-router-dom";
 import AddInstruction from "../add-instruction";
-const CheckoutProduct = ({ item }) => {
+const CheckoutProduct = ({ item, index }) => {
   const dispatch = useDispatch();
   const onRemove = () => {
     dispatch(setRemoveFromCart(item));
@@ -26,7 +26,7 @@ const CheckoutProduct = ({ item }) => {
               <h2>{item?.name}</h2>
               <h3>$ 3.49 / lb</h3>
               <ProductCounter item={item} />
-              <AddInstruction />
+              <AddInstruction item={item} index={index} />
               {/* <Link to="#" className="add-instruction">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Add Instruction
               </Link> */}

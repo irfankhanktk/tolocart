@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { onSignup } from "../../services/api/auth-api-actions";
+import { onLogin, onSignup } from "../../services/api/auth-api-actions";
 import { UTILS } from "../../utils";
 import "./style.css";
-const RegistrationForm = ({ setShow = (bool) => {} }) => {
+import MyToast from "../toast";
+import { useDispatch } from "react-redux";
+const RegistrationForm = ({ setShow = (bool) => {}, show }) => {
+  const [suggestedPassword, setSuggested] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [showToast, setShowToast] = React.useState(false);
+  const dispatch = useDispatch();
+
   const [secure, setSecure] = React.useState({
     password: true,
     confirmPassword: true,
@@ -14,7 +20,14 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
     confirmPassword: "",
     // role: "Customer",
   });
-
+  React.useEffect(() => {
+    if (show) {
+      const interval = setInterval(() => {
+        setSuggested(UTILS.generatePassword());
+      }, 10000);
+      return () => clearInterval(interval);
+    }
+  }, [show]);
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -32,7 +45,9 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
       setLoading(true);
       const res = await onSignup(formData);
       console.log("ress of register::", res);
-      setShow(false);
+      dispatch(onLogin(formData, setLoading, true, setShow));
+      setShowToast(true);
+      // setShow(false);
       // Perform form submission or validation logic here
     } catch (error) {
       alert(UTILS.returnError(error));
@@ -43,6 +58,12 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
 
   return (
     <div className="container">
+      <MyToast
+        title={"Registration"}
+        body={"Register Successfully"}
+        showToast={showToast}
+        setShowToast={setShowToast}
+      />
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -71,8 +92,11 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
               value={formData.password}
               onChange={handleInputChange}
               required
+              pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).+$"
+              title="Passwords must have at least one non alphanumeric character one lower and uppercase letter"
             />
             <button
+              type="button"
               onClick={(e) =>
                 setSecure({ ...secure, password: !secure?.password })
               }
@@ -85,6 +109,7 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
               ></i>
             </button>
           </div>
+          <small>Suggested {suggestedPassword}</small>
         </div>
         <div className="mb-3">
           <label htmlFor="confirmPassword" className="form-label">
@@ -92,7 +117,6 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
           </label>
           <div className="input-container">
             <input
-              class={secure?.confirmPassword ? `fa fa-eye` : `fa fa-eye-slash`}
               type={secure?.confirmPassword ? "password" : "text"}
               className="form-control"
               id="confirmPassword"
@@ -102,12 +126,7 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
               required
             />
             <button
-              onClick={(e) =>
-                setSecure({
-                  ...secure,
-                  confirmPassword: !secure?.confirmPassword,
-                })
-              }
+              type="button"
               onClick={(e) =>
                 setSecure({
                   ...secure,
@@ -117,7 +136,9 @@ const RegistrationForm = ({ setShow = (bool) => {} }) => {
               className="decoration-none icon-container px-2"
             >
               <i
-                class="fa fa-eye-slash"
+                class={
+                  secure?.confirmPassword ? `fa fa-eye` : `fa fa-eye-slash`
+                }
                 aria-hidden="true"
                 style={{ marginRight: "10px" }}
               ></i>

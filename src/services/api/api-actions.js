@@ -4,13 +4,19 @@ import {
   setPastOrders,
 } from "../../store/reducers/order-slice";
 import {
+  setAddFavProduct,
+  setAddFavStore,
+  setFavProductIds,
+  setFavStoreIds,
   setIsReqLogin,
   setLocation,
+  setRemoveFavProduct,
+  setRemoveFavStore,
   setSlides,
   setVehicle,
 } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
-import { getData, postData } from "./";
+import { deleteData, getData, postData } from "./";
 import { URLS } from "./api-urls";
 
 export const getSlides = () => {
@@ -40,6 +46,34 @@ export const getVehicleDetails = (type = "Bike") => {
       } else {
         // alert(UTILS?.returnError(error));
       }
+    }
+  };
+};
+export const getFavProductIds = () => {
+  return async (dispatch, getState) => {
+    try {
+      if (!getState()?.user?.userInfo) {
+        dispatch(setFavProductIds([]));
+      } else {
+        const res = await getData(`${URLS.product.favourite_product_ids}`);
+        dispatch(setFavProductIds(res?.data));
+      }
+    } catch (error) {
+      console.log("error ingetFavProductIds", UTILS?.returnError(error));
+    }
+  };
+};
+export const getFavStoreIds = () => {
+  return async (dispatch, getState) => {
+    try {
+      if (!getState()?.user?.userInfo) {
+        dispatch(setFavStoreIds([]));
+      } else {
+        const res = await getData(`${URLS.shop.favourite_store_ids}`);
+        dispatch(setFavStoreIds(res?.data));
+      }
+    } catch (error) {
+      console.log("error ingetFavProductIds", UTILS?.returnError(error));
     }
   };
 };
@@ -129,3 +163,48 @@ export const getOrderDetails = (order_id) =>
 export const updateOrderPayment = (data) =>
   postData(`${URLS.order.update_payment}`, data);
 export const getFAQs = () => getData(`${URLS.faqs}`);
+//product fav
+
+export const toggleFavouriteProduct = (data, setLoading = () => {}) => {
+  return async (dispatch, getState) => {
+    try {
+      setLoading(true);
+      const isFavourite = getState()?.user?.fav_product_ids?.some(
+        (x) => x == data?.productId
+      );
+      if (isFavourite) {
+        await deleteData(`${URLS.product.favourite_product}`, data);
+        dispatch(setRemoveFavProduct(data?.productId));
+      } else {
+        await postData(`${URLS.product.favourite_product}`, data);
+        dispatch(setAddFavProduct(data?.productId));
+      }
+    } catch (error) {
+      console.log("error in vehicle details", UTILS?.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+};
+export const toggleFavouriteStore = (data, setLoading = () => {}) => {
+  return async (dispatch, getState) => {
+    try {
+      console.log("data:::::", data);
+      setLoading(true);
+      const isFavourite = getState()?.user?.fav_store_ids?.some(
+        (x) => x == data?.shopId
+      );
+      if (isFavourite) {
+        await deleteData(`${URLS.shop.favourite_store}`, data);
+        dispatch(setRemoveFavStore(data?.shopId));
+      } else {
+        await postData(`${URLS.shop.favourite_store}`, data);
+        dispatch(setAddFavStore(data?.shopId));
+      }
+    } catch (error) {
+      console.log("error in vehicle details", UTILS?.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+};

@@ -10,6 +10,7 @@ import "./login.css"; // Import the CSS file
 import FacebookLogin from "react-facebook-login";
 const LoginModal = ({ show, setShow, setForgetModal }) => {
   const [isPhoneTab, setIsPhoneTab] = React.useState("email");
+  const [secure, setSecure] = React.useState(true);
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const [payload, setPayload] = React.useState({
@@ -38,7 +39,8 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
   };
   const onHandleChange = (e) =>
     setPayload((pre) => ({ ...pre, [e.target.name]: e.target.value }));
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     const data = { ...payload };
     if (isPhoneTab === "email") {
       delete data.phoneNumber;
@@ -74,24 +76,53 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
             </Nav>
             <Tab.Content>
               <Tab.Pane eventKey="email">
-                <Form>
+                <form onSubmit={onSubmit}>
                   <input
+                    required
                     value={payload.email}
                     name="email"
                     type="email"
                     placeholder="Email"
                     className="login-input-field"
                     onChange={onHandleChange}
-                  ></input>
-                  <input
-                    value={payload.password}
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    className="login-input-field"
-                    onChange={onHandleChange}
-                  ></input>
-                  <Link
+                  />
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <div className="login-input-container">
+                      <input
+                        required
+                        value={payload.password}
+                        name="password"
+                        type={secure ? "password" : "text"}
+                        placeholder="Password"
+                        className="login-input-field"
+                        onChange={onHandleChange}
+                      />
+                      <button
+                        type="button"
+                        onClick={(e) => setSecure((p) => !p)}
+                        className="decoration-none icon-container px-2"
+                      >
+                        <i
+                          class={
+                            secure?.password ? `fa fa-eye` : `fa fa-eye-slash`
+                          }
+                          aria-hidden="true"
+                          style={{ marginRight: "10px" }}
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="element-custom-btn mb-3"
+                  >
+                    {loading ? "Loading" : "Continue"}
+                  </button>
+                  {/* <Link
                     disabled={loading}
                     to="/"
                     onClick={(e) => {
@@ -101,7 +132,7 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                     className="element-custom-btn mb-3"
                   >
                     {loading ? "Loading" : "Log In"}
-                  </Link>
+                  </Link> */}
                   <Link to="#" className="social-login-links">
                     Or connect with social media
                   </Link>
@@ -146,10 +177,10 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                   >
                     Forgot Password? <span>Reset it</span>{" "}
                   </Link>
-                </Form>
+                </form>
               </Tab.Pane>
               <Tab.Pane eventKey="phone">
-                <form>
+                <form onSubmit={onSubmit}>
                   <div className="modal-wrapper p-0">
                     <input
                       required
@@ -172,7 +203,6 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                     <button
                       type="submit"
                       disabled={loading}
-                      onClick={onSubmit}
                       to="#"
                       className="element-custom-btn mb-3"
                     >

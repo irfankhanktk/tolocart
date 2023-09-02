@@ -140,3 +140,11 @@
   padding: 0px !important;
   width: 100%;
 }
+.login-input-container {
+  position: relative;
+}
+.login-input-container .icon-container {
+  position: absolute;
+  top: 20%;
+  right: 0;
+}

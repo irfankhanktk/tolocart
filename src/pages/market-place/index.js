@@ -23,6 +23,8 @@ import { setIsReqLogin } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
 import "./style.css";
+import { Toast } from "react-bootstrap";
+import MyToast from "../../components/toast";
 const MarketPlace = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,6 +41,7 @@ const MarketPlace = () => {
     faqs: [],
   });
   React.useEffect(() => {
+    window.scrollTo(0, 0); //
     getHomeData();
   }, []);
   const getHomeData = React.useCallback(async () => {

@@ -82,10 +82,12 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
     (res, item) => (res += (item?.discountedPrice || item?.price) * item?.qty),
     0
   );
+  console.log("total:::", total);
   const totalDiscount = cart?.cart?.reduce(
     (res, item) => (res += item?.discountedPrice * item?.qty),
     0
   );
+
   const totalWithoutDiscount = cart?.cart?.reduce(
     (res, item) => (res += item?.price * item?.qty),
     0
@@ -102,6 +104,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
       unitPrice: item?.discountedPrice || item?.price,
       flavor: "",
       size: "",
+      instructions: item?.instructions || "",
     })),
     paymentMethod: "Cash",
     distance: distance || "1",
@@ -115,7 +118,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
     preferencePhone: "",
   };
   return (
-    <Modal className="modal-outer" show={show} onHide={setShow}>
+    <Modal className="modal-outer" centered show={show} onHide={setShow}>
       <Modal.Header
         closeButton
         className="custom-modal-content custom-close-header custom-close-btn d-flex flex-column align-items-start p-2"
@@ -135,11 +138,11 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
           <div className="Checkout-modal-wrapper">
             <div className="card-container">
               {cart?.cart?.map((item, index) => (
-                <CheckoutProduct item={item} key={index} />
+                <CheckoutProduct item={item} key={index} index={index} />
               ))}
             </div>
             {/* suggestion items start */}
-            {cart?.cart?.length ? (
+            {relatedProducts?.length ? (
               <div className="mb-0 ms-0 me-0" style={{ marginTop: "11px" }}>
                 <h2 className="suggestion-title">Suggested items</h2>
                 <h3 className="suggestion-line">
@@ -224,7 +227,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 <tr className="no-border">
                   <td>Total Cost</td>
                   <td className="highlighted">
-                    $ {total + deliveryCharges * 1}
+                    $ {total + deliveryCharges * 1 - totalDiscount}
                   </td>
                 </tr>
               </table>
@@ -236,7 +239,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 disabled={orderLoading}
                 onClick={() => {
                   onPlaceOrder({
-                    totalAmount: total + deliveryCharges * 1,
+                    totalAmount: total + deliveryCharges * 1 - totalDiscount,
                     shopId: cart?.cart[0]?.vendorShopId,
                     deliveryAddress: user?.location?.address,
                     latitude: user?.location?.latitude,

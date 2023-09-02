@@ -15,6 +15,9 @@ export const URLS = {
   },
   get_slides: "v1/SliderImages/GetAll",
   shop: {
+    favourite_store_ids: "v1/UserFavouriteStores/GetAllIds",
+    favourite_store: "v1/UserFavouriteStores",
+
     get_all_offers_shop_details: "v1/ShopOffer/GetAllOfferWithShopDetails",
     get_compaign_banners: "v1/ShopOffer/GetBanners/Store",
     get_popular_shops: "v1/VendorShop?Type=Store",
@@ -25,6 +28,8 @@ export const URLS = {
     get_categories: "MainCategory/GetCategories/", //id
   },
   product: {
+    favourite_product_ids: "v1/FavouriteUserProduct/GetAllUserProductids",
+    favourite_product: "v1/FavouriteUserProduct",
     search_products: "v1/Product/Search?ShopType=Store&Search=",
     get_popular_products: "v1/Product/GetPopular?ShopType=Store",
     get_product_details: "v1/Product/",

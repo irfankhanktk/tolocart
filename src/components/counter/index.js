@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setAddToCart,
   setDecrementQtyCart,
   setIncrementQtyCart,
 } from "../../store/reducers/cart-slice";
@@ -18,9 +19,13 @@ const ProductCounter = ({ item }) => {
     // setQuantity(quantity + 1);
 
     try {
-      dispatch(setIncrementQtyCart(item));
+      if (cartItem) {
+        dispatch(setIncrementQtyCart(item));
+      } else {
+        dispatch(setAddToCart(item));
+      }
     } catch (error) {
-      alert(UTILS.returnError(error));
+      alert(error?.message);
     }
   };
 

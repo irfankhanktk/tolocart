@@ -49,7 +49,12 @@ const CartButton = ({ item }) => {
   };
 
   return (
-    <div className={`cart-button ${cartItem?.qty > 0 ? "item-in-cart" : ""}`}>
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+      className={`cart-button ${cartItem?.qty > 0 ? "item-in-cart" : ""}`}
+    >
       {!cartItem?.qty && (
         <span
           className={`px-2 icon ${

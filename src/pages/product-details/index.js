@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BestReviewedCard from "../../components/best-reviewed-card";
 import ProductCounter from "../../components/counter";
@@ -7,17 +8,18 @@ import CheckoutModal from "../../components/modals/checkout-modal";
 import {
   getProductDetails,
   getSuggestedItems,
+  toggleFavouriteProduct,
 } from "../../services/api/api-actions";
-import { UTILS, returnImage } from "../../utils";
-import "./style.css";
-import { useDispatch } from "react-redux";
 import { setAddToCart } from "../../store/reducers/cart-slice";
+import { UTILS, returnImage } from "../../utils";
 import ErrorPage from "../error-page";
+import "./style.css";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const { fav_product_ids } = useSelector((s) => s?.user);
   const [checkoutModal, setCheckoutModal] = useState(false);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
@@ -26,6 +28,17 @@ const ProductDetails = () => {
     data: {},
     recommended_products: [],
   });
+  const isFavourite = fav_product_ids?.some(
+    (x) => x == productDetails?.data?.id
+  );
+  const postFavourite = async () => {
+    dispatch(
+      toggleFavouriteProduct({
+        productId: productDetails?.data?.id,
+        preferenceId: 0,
+      })
+    );
+  };
   const handleAddToCart = (item) => {
     try {
       dispatch(setAddToCart(item));
@@ -89,13 +102,17 @@ const ProductDetails = () => {
               <div className="singleproduct-title d-flex align-items-center justify-content-between mb-2">
                 <h2>{productDetails?.data?.name}</h2>
                 <div className="icon-list d-flex align-items-center gap-3">
-                  <i
+                  {/* <i
                     class="fa fa-share-alt"
                     aria-hidden="true"
                     style={{ fontSize: "20px" }}
-                  ></i>
+                  ></i> */}
                   <i
-                    class="fa fa-heart-o"
+                    onClick={(e) => {
+                      e?.preventDefault();
+                      postFavourite();
+                    }}
+                    class={`fa fa-heart${isFavourite ? "" : "-o"}`}
                     aria-hidden="true"
                     style={{ fontSize: "20px" }}
                   ></i>
@@ -106,9 +123,9 @@ const ProductDetails = () => {
               <h6 className="stock-product">In stock</h6>
               <div className="add-product-counter d-flex align-items-center justify-content-between">
                 <ProductCounter item={productDetails?.data} />
-                <div className="product-price h-auto ">
+                <div className="product-price h-auto">
                   <span>${productDetails?.data?.price}</span>
-                  <p className="mb-2">49</p>
+                  {/* <p className="mb-2">49</p> */}
                 </div>
               </div>
               <div className="satisfaction-gurantee d-flex align-items-center gap-2 mb-2 mt-2">

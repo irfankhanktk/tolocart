@@ -10,6 +10,8 @@ const initialState = {
   slides: [],
   unreadNotification: 0,
   isRequiredLogin: false,
+  fav_product_ids: [],
+  fav_store_ids: [],
 };
 
 export const userSlice = createSlice({
@@ -30,6 +32,28 @@ export const userSlice = createSlice({
     },
     setVehicle: (state, action) => {
       state.vehicle = action.payload;
+    },
+    setFavProductIds: (state, action) => {
+      state.fav_product_ids = action.payload;
+    },
+    setFavStoreIds: (state, action) => {
+      state.fav_store_ids = action.payload;
+    },
+    setAddFavStore: (state, action) => {
+      state.fav_store_ids = [...state.fav_store_ids, action.payload];
+    },
+    setRemoveFavStore: (state, action) => {
+      state.fav_store_ids = state.fav_store_ids.filter(
+        (x) => x !== action.payload
+      );
+    },
+    setAddFavProduct: (state, action) => {
+      state.fav_product_ids = [...state.fav_product_ids, action.payload];
+    },
+    setRemoveFavProduct: (state, action) => {
+      state.fav_product_ids = state.fav_product_ids.filter(
+        (x) => x !== action.payload
+      );
     },
     setSlides: (state, action) => {
       state.slides = action.payload;
@@ -74,6 +98,12 @@ export const {
   setVehicle,
   setIsReqLogin,
   setSlides,
+  setFavProductIds,
+  setAddFavProduct,
+  setRemoveFavProduct,
+  setFavStoreIds,
+  setAddFavStore,
+  setRemoveFavStore,
   // demoAsync
 } = userSlice.actions;
 

@@ -131,7 +131,7 @@ export function TopMenu() {
                     e.preventDefault();
                     setShowMapModal(true);
                   }}
-                  className="nav-item dropdown"
+                  className="nav-item dropdown d-none d-sm-block"
                 >
                   <button className="btn btn-link nav-link nav-icon nav-address">
                     <span>
@@ -188,8 +188,6 @@ export function TopMenu() {
         setShow={setSignupModal}
         onSuccessRegister={() => {
           setSignupModal(false);
-          // setLoginModal(true);
-          dispatch(setIsReqLogin(true));
         }}
       />
       <SearchProductsModal
