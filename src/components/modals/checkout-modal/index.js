@@ -227,7 +227,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 <tr className="no-border">
                   <td>Total Cost</td>
                   <td className="highlighted">
-                    $ {total + deliveryCharges * 1 - totalDiscount}
+                    $ {total + deliveryCharges - totalDiscount}
                   </td>
                 </tr>
               </table>

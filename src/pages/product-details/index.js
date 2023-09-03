@@ -14,6 +14,7 @@ import { setAddToCart } from "../../store/reducers/cart-slice";
 import { UTILS, returnImage } from "../../utils";
 import ErrorPage from "../error-page";
 import "./style.css";
+import ReviewCard from "../../components/review-card";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -28,6 +29,20 @@ const ProductDetails = () => {
     data: {},
     recommended_products: [],
   });
+  const reviews = [
+    {
+      name: "Irfan",
+      image:
+        "https://img.freepik.com/premium-photo/closeup-portrait-satisfied-positive-smiling-young-man-posing-isolated-light-grey-wall-wearing-beige-casual-shirt-black-hat-fashionable-spectacles-youth-emotions-concept_176532-6770.jpg",
+      rating: 3,
+    },
+    {
+      name: "Kamran",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYV4fKAEsx7KtaiqIsFHXT-bTSs4ZZZ6OxOg&usqp=CAU",
+      rating: 4,
+    },
+  ];
   const isFavourite = fav_product_ids?.some(
     (x) => x == productDetails?.data?.id
   );
@@ -46,7 +61,7 @@ const ProductDetails = () => {
     } catch (error) {
       // Handle the error
       console.error("Error adding item to cart:", error.message);
-      alert(UTILS.returnError(error));
+      alert(error?.message);
       // Display an error message to the user or perform any other error handling action
     }
   };
@@ -167,7 +182,7 @@ const ProductDetails = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item custom-accordion-item">
+                {/* <div class="accordion-item custom-accordion-item">
                   <h2 class="accordion-header" id="headingTwo">
                     <button
                       class="accordion-button collapsed custom-accordion-button"
@@ -210,7 +225,7 @@ const ProductDetails = () => {
                   >
                     <div class="accordion-body"></div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -313,21 +328,16 @@ const ProductDetails = () => {
                 class="dropdown-menu custom-dropdown-menu"
                 aria-labelledby="dropdownMenuLink"
               >
-                <li>
-                  <Link class="dropdown-item" to="#">
-                    Action
-                  </Link>
-                </li>
-                <li>
-                  <Link class="dropdown-item" to="#">
-                    Another action
-                  </Link>
-                </li>
-                <li>
-                  <Link class="dropdown-item" to="#">
-                    Something else here
-                  </Link>
-                </li>
+                {reviews?.map((review, index) => (
+                  <li>
+                    <ReviewCard
+                      key={index}
+                      user={review?.name}
+                      image={review?.image}
+                      rating={review?.rating}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
             <Link
@@ -350,20 +360,27 @@ const ProductDetails = () => {
           <div className="col-md-12">
             <div className="item-title d-flex justify-content-between align-items-center mb-4">
               <h2>Related Items</h2>
-              <Link to="#">See all</Link>
+              {/* <Link to="#">See all</Link> */}
             </div>
           </div>
-
-          {productDetails?.recommended_products?.map((item, index) => (
-            <div key={index} className="col-md-3">
-              <BestReviewedCard
-                item={item}
-                onClick={() => navigate(`/product-detail/${item?.id}`)}
-                title={item?.title}
-                // bg={item?.bg}
-              />
-            </div>
-          ))}
+          <div className="d-flex flex-row flex-wrap mb-3">
+            {[
+              ...productDetails?.recommended_products,
+              ...productDetails?.recommended_products,
+              ...productDetails?.recommended_products,
+              ...productDetails?.recommended_products,
+              ...productDetails?.recommended_products,
+            ]?.map((item, index) => (
+              <div key={index} className="col-md-3 mb-3 col-12">
+                <BestReviewedCard
+                  item={item}
+                  onClick={() => navigate(`/product-detail/${item?.id}`)}
+                  title={item?.title}
+                  // bg={item?.bg}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <CheckoutModal show={checkoutModal} setShow={setCheckoutModal} />
