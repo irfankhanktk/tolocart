@@ -132,6 +132,8 @@ export const getUserOrders = (setLoading, setError) => {
 //order here
 export const placeOrder = (data = PLACE_ORDER_DATA) =>
   postData(`${URLS.order.place_order}`, data);
+export const addProductReview = (data) =>
+  postData(`${URLS.product.add_review}`, data);
 
 export const getCategories = (id) =>
   getData(`${URLS.category.get_categories}${id}`);
@@ -156,6 +158,8 @@ export const getRecommendedProducts = () =>
   );
 export const getProductDetails = (product_id) =>
   getData(`${URLS.product.get_product_details}${product_id}`);
+export const getProductReviews = (product_id) =>
+  getData(`${URLS.product.get_product_reviews}${product_id}`);
 export const getSuggestedItems = (product_ids) =>
   getData(`${URLS.product.get_suggested_items}${product_ids}`);
 export const getOrderDetails = (order_id) =>

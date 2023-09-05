@@ -7,6 +7,7 @@ import Loader from "../../components/loader";
 import CheckoutModal from "../../components/modals/checkout-modal";
 import {
   getProductDetails,
+  getProductReviews,
   getSuggestedItems,
   toggleFavouriteProduct,
 } from "../../services/api/api-actions";
@@ -15,6 +16,7 @@ import { UTILS, returnImage } from "../../utils";
 import ErrorPage from "../error-page";
 import "./style.css";
 import ReviewCard from "../../components/review-card";
+import SubmitReview from "../../components/submit-product-review";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const ProductDetails = () => {
   const { fav_product_ids } = useSelector((s) => s?.user);
   const [checkoutModal, setCheckoutModal] = useState(false);
   const [loading, setLoading] = React.useState(true);
+  const [reviewsLoading, setReviewsLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 
   const [productDetails, setProductDetails] = React.useState({
@@ -81,6 +84,21 @@ const ProductDetails = () => {
       setError(UTILS.returnError(error));
     } finally {
       setLoading(false);
+    }
+  };
+  const getReviews = async () => {
+    try {
+      setReviewsLoading(true);
+      const res = await getProductReviews(id);
+      setProductDetails((pre) => ({
+        ...pre,
+        reviews: res?.data,
+      }));
+    } catch (error) {
+      console.log("error=>>", error);
+      setError(UTILS.returnError(error));
+    } finally {
+      setReviewsLoading(false);
     }
   };
   React.useEffect(() => {
@@ -313,6 +331,7 @@ const ProductDetails = () => {
             </div>
             <div class="dropdown mb-2">
               <Link
+                onClick={getReviews}
                 class="btn btn-secondary dropdown-toggle custom-dropdown"
                 to="#"
                 role="button"
@@ -328,18 +347,32 @@ const ProductDetails = () => {
                 class="dropdown-menu custom-dropdown-menu"
                 aria-labelledby="dropdownMenuLink"
               >
-                {reviews?.map((review, index) => (
+                {reviewsLoading && (
+                  <div className="text-center">
+                    <span
+                      className="align-self-center spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  </div>
+                )}
+                {productDetails?.reviews?.map((review, index) => (
                   <li>
                     <ReviewCard
                       key={index}
-                      user={review?.name}
-                      image={review?.image}
+                      user={review?.customerName || "Irfan Khan"}
+                      image={
+                        review?.customerImage ||
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYV4fKAEsx7KtaiqIsFHXT-bTSs4ZZZ6OxOg&usqp=CAU"
+                      }
                       rating={review?.rating}
+                      description={review?.description}
                     />
                   </li>
                 ))}
               </ul>
             </div>
+            <SubmitReview productId={id} />
             <Link
               to="#"
               className="element-custom-btn decoration-none"

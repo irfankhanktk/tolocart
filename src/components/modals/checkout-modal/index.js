@@ -82,16 +82,12 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
     (res, item) => (res += (item?.discountedPrice || item?.price) * item?.qty),
     0
   );
-  console.log("total:::", total);
-  const totalDiscount = cart?.cart?.reduce(
-    (res, item) => (res += item?.discountedPrice * item?.qty),
-    0
-  );
-
   const totalWithoutDiscount = cart?.cart?.reduce(
     (res, item) => (res += item?.price * item?.qty),
     0
   );
+  const totalDiscount = totalWithoutDiscount - total;
+
   const data = {
     totalAmount: total + deliveryCharges,
     shopId: cart?.cart[0]?.vendorShopId,
@@ -211,7 +207,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 </tr>
                 <tr>
                   <td>Discount</td>
-                  <td>$ {totalDiscount}</td>
+                  <td>$ {Math.trunc(totalDiscount * 100) / 100}</td>
                 </tr>
                 <tr>
                   <td>Tax</td>
@@ -227,7 +223,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 <tr className="no-border">
                   <td>Total Cost</td>
                   <td className="highlighted">
-                    $ {total + deliveryCharges - totalDiscount}
+                    $ {total + deliveryCharges * 1}
                   </td>
                 </tr>
               </table>

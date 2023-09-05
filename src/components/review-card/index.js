@@ -2,7 +2,7 @@
 
 import React from "react";
 import "./style.css";
-const ReviewCard = ({ user, image, rating }) => {
+const ReviewCard = ({ user, image, rating, description }) => {
   const stars = [];
 
   for (let i = 0; i < 5; i++) {
@@ -18,7 +18,8 @@ const ReviewCard = ({ user, image, rating }) => {
     <div className="review">
       <img src={image} alt={`${user}'s avatar`} className="user-avatar" />
       <div className="user-info">
-        <h3>{user}</h3>
+        <h5>{user}</h5>
+        <small>{description}</small>
         <div className="rating">{stars}</div>
       </div>
     </div>

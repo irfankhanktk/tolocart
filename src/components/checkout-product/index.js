@@ -35,7 +35,7 @@ const CheckoutProduct = ({ item, index }) => {
           <div className="col-md-2 d-flex align-items-end justify-content-between flex-column">
             <i onClick={onRemove} class="fa fa-times" aria-hidden="true"></i>
             <div className="checkout-price h-auto ">
-              <span>${item?.price}</span>
+              <span>${item?.discountedPrice || item?.price}</span>
               {/* <p className="mb-2">49</p> */}
             </div>
           </div>

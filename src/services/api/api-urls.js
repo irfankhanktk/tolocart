@@ -28,11 +28,13 @@ export const URLS = {
     get_categories: "MainCategory/GetCategories/", //id
   },
   product: {
+    add_review: "v1/ProductRatings",
     favourite_product_ids: "v1/FavouriteUserProduct/GetAllUserProductids",
     favourite_product: "v1/FavouriteUserProduct",
     search_products: "v1/Product/Search?ShopType=Store&Search=",
     get_popular_products: "v1/Product/GetPopular?ShopType=Store",
     get_product_details: "v1/Product/",
+    get_product_reviews: "v1/ProductRatings/list/",
     get_suggested_items: "v1/Product/GetAllSuggested?ProductIds=", //1,3,5
     get_remmmended: "v1/Product/GetRecommended?", //params ShopType=store&PageNumber=1&PageSize=10&VendorShopId
   },
