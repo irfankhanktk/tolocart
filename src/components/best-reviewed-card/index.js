@@ -7,7 +7,7 @@ import "./style.css"; // Import the CSS file
 const BestReviewedCard = ({ item, onClick = () => {}, loading }) => {
   return (
     // <div className='col-md-2 col-sm-10 mt-5 px-1'>
-    <div onClick={onClick} className="col-md-12 position-relative">
+    <div onClick={onClick} className="col-md-12 w-100 position-relative">
       {loading ? (
         <div className="csm-product-card">
           <ShimmerPostItem imageHeight={121} card title cta />

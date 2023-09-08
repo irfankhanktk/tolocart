@@ -268,7 +268,9 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
             </div>
           </div>
         ) : (
-          <span>You have no item in the cart</span>
+          <div className="h-100 d-flex flex-column justify-content-center  text-center">
+            <span>You have no item in the cart</span>
+          </div>
         )}
       </Modal.Body>
     </Modal>

@@ -40,7 +40,7 @@ export const userSlice = createSlice({
       state.fav_store_ids = action.payload;
     },
     setAddFavStore: (state, action) => {
-      state.fav_store_ids = [...state.fav_store_ids, action.payload];
+      state.fav_store_ids.push(action.payload);
     },
     setRemoveFavStore: (state, action) => {
       state.fav_store_ids = state.fav_store_ids.filter(

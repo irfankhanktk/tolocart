@@ -62,7 +62,7 @@ function SubmitReview({ productId }) {
 
   return (
     <div>
-      <h2>Submit a Review</h2>
+      <h5>Submit a Review</h5>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Rating:</label>

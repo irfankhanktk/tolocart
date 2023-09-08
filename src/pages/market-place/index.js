@@ -9,6 +9,7 @@ import Carousel from "../../components/carousel";
 import CateryCard from "../../components/category-card";
 import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
+import SeeMoreProductsModal from "../../components/modals/see-more-products-modal";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
 import {
@@ -23,12 +24,15 @@ import { setIsReqLogin } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
 import "./style.css";
-import { Toast } from "react-bootstrap";
-import MyToast from "../../components/toast";
+import SeeMoreCategoriesModal from "../../components/modals/see-more-categories-modal";
 const MarketPlace = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = React.useState("");
+  const [showMore, setShowMore] = React.useState(false);
+  const [showMoreCat, setShowMoreCat] = React.useState(false);
+  const [moreProducts, setMoreProducts] = React.useState([]);
+  const [moreCats, setMoreCats] = React.useState([]);
   const { category } = useSelector((state) => state);
   const [loading, setLoading] = React.useState(true);
   const [homeData, setHomeData] = React.useState({
@@ -82,22 +86,31 @@ const MarketPlace = () => {
     <div>
       <>
         <div className="h-25">
-          {/* <img src={home_bg} style={{ width: "100%" }} /> */}
           <Carousel />
         </div>
         <div>
-          <p className="home-bg font-size-heavy">Choose your best category</p>
-          <div className="mx-5">
-            <div
-              className="card-container"
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-              }}
-            >
+          <div className="mx-3 d-flex justify-content-between align-items-center home-bg">
+            <span className="font-size-heavy">Choose your best category</span>
+            <span className="text-center">
+              {homeData?.categories?.length > 18 && (
+                <Link
+                  to="#"
+                  className="show-all"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMoreCat(true);
+                    setMoreCats(homeData?.categories || []);
+                  }}
+                >
+                  Show all <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </Link>
+              )}
+            </span>
+          </div>
+          <div className="mx-3">
+            <div className="card-container row">
               {loading
-                ? new Array(20)
+                ? new Array(18)
                     ?.fill("")
                     ?.map((item, index) => (
                       <CateryCard
@@ -107,21 +120,24 @@ const MarketPlace = () => {
                         item={item}
                       />
                     ))
-                : homeData?.categories?.map((item, index) => (
-                    <CateryCard
-                      key={index}
-                      onClick={() => navigate(`/stores`)}
-                      item={item}
-                    />
-                  ))}
+                : homeData?.categories
+                    ?.slice(0, 18)
+                    ?.map((item, index) => (
+                      <CateryCard
+                        key={index}
+                        onClick={() => navigate(`/stores`)}
+                        item={item}
+                      />
+                    ))}
             </div>
           </div>
+
           {homeData?.compaignBanners?.length ? (
             <p className="home-bg heading-title mx-3">
               Daily campaigns comfort your life
             </p>
           ) : null}
-          <div className="mx-5">
+          <div className="mx-3">
             <div className="card-container">
               <Slider
                 dots={false}
@@ -178,11 +194,27 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          {homeData?.popularProducts?.length ? (
-            <p className="home-bg heading-title">
+          <div className="mx-3 d-flex justify-content-between align-items-center home-bg">
+            <span className="font-size-heavy">
               Best Reviewed items which sale faster
-            </p>
-          ) : null}
+            </span>
+            <span className="text-center">
+              {homeData?.popularProducts?.length > 5 && (
+                <Link
+                  to="#"
+                  className="show-all"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMore(true);
+                    setMoreProducts(homeData?.popularProducts || []);
+                  }}
+                >
+                  Show all <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </Link>
+              )}
+            </span>
+          </div>
+
           <div className="mx-3">
             <div className="card-container">
               <Slider
@@ -245,7 +277,7 @@ const MarketPlace = () => {
               Popular store in Ygnico by Area
             </p>
           )}
-          <div className="d-md-flex flex-wrap">
+          <div className="mx-3 d-md-flex flex-wrap">
             {loading
               ? new Array(10)
                   ?.fill("")
@@ -323,6 +355,22 @@ const MarketPlace = () => {
           <FrequentlyQuestion faqs={homeData?.faqs || []} />
         </div>
       </>
+      <SeeMoreProductsModal
+        products={moreProducts}
+        show={showMore}
+        setShow={() => {
+          setMoreProducts([]);
+          setShowMore(false);
+        }}
+      />
+      <SeeMoreCategoriesModal
+        categories={moreCats}
+        show={showMoreCat}
+        setShow={() => {
+          setMoreCats([]);
+          setShowMoreCat(false);
+        }}
+      />
     </div>
   );
 };

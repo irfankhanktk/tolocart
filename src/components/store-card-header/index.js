@@ -1,16 +1,12 @@
 import React from "react";
-import { vegetable } from "../../assets/images";
 import "./style.css";
 //
-import { store_heart } from "../../assets/svgs";
-import { returnImage } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  toggleFavouriteProduct,
-  toggleFavouriteStore,
-} from "../../services/api/api-actions";
+import { toggleFavouriteStore } from "../../services/api/api-actions";
+import { returnImage } from "../../utils";
 const StoreCardHeader = ({ item, imgHeight }) => {
   const { fav_store_ids } = useSelector((x) => x?.user);
+  console.log("fav_store_ids:::", fav_store_ids);
   const dispatch = useDispatch();
   const isFavourite = fav_store_ids?.some((x) => x == item?.id);
   const postFavourite = async (ele) => {

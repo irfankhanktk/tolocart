@@ -397,13 +397,7 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="d-flex flex-row flex-wrap mb-3">
-            {[
-              ...productDetails?.recommended_products,
-              ...productDetails?.recommended_products,
-              ...productDetails?.recommended_products,
-              ...productDetails?.recommended_products,
-              ...productDetails?.recommended_products,
-            ]?.map((item, index) => (
+            {productDetails?.recommended_products?.map((item, index) => (
               <div key={index} className="col-md-3 mb-3 col-12">
                 <BestReviewedCard
                   item={item}

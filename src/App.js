@@ -16,6 +16,7 @@ import "./firebase-config";
 import {
   getCurrentLocation,
   getFavProductIds,
+  getFavStoreIds,
   getSlides,
   getVehicleDetails,
 } from "./services/api/api-actions";
@@ -40,6 +41,7 @@ const App = () => {
     getData();
     dispatch(getVehicleDetails());
     dispatch(getFavProductIds());
+    dispatch(getFavStoreIds());
     dispatch(getSlides());
     dispatch(getCurrentLocation());
   }, []);
