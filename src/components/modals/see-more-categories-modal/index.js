@@ -1,9 +1,8 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import BestReviewedCard from "../../best-reviewed-card";
-import "./styles.css"; // Import the CSS file
 import CateryCard from "../../category-card";
+import "./styles.css"; // Import the CSS file
 
 const SeeMoreCategoriesModal = ({ show, setShow, categories = [] }) => {
   const navigate = useNavigate();
@@ -15,15 +14,13 @@ const SeeMoreCategoriesModal = ({ show, setShow, categories = [] }) => {
       ></Modal.Header>
       <Modal.Body className="p-0">
         <div className="more-modal-wrapper">
-          <div className="d-flex flex-row flex-wrap">
+          <div className="d-flex row flex-wrap">
             {categories?.map((item, index) => (
-              // <div className="col-md-6 mb-2 p-3">
               <CateryCard
                 key={index}
                 onClick={() => navigate(`/stores`)}
                 item={item}
               />
-              // </div>
             ))}
           </div>
         </div>

@@ -11,13 +11,13 @@ const CateryCard = ({
 }) => {
   if (loading)
     return (
-      <div className="col-lg-6 col-md-6 mt-5 px-md-2" style={{ ...style }}>
+      <div className="col-lg-2 col-md-6 col-sm-6 px-md-2" style={{ ...style }}>
         <ShimmerThumbnail height={137} rounded />
         <ShimmerTitle line={1} />
       </div>
     );
   return (
-    <div className="col-lg-2 col-md-6 col-sm-6 mt-5 px-md-2">
+    <div className="col-lg-2 col-md-6 col-sm-6 px-md-3">
       <div
         onClick={onClick}
         className="rounded justify-content-center"

@@ -118,22 +118,11 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="element-custom-btn mb-3"
+                    className="border-0 element-custom-btn mb-3"
                   >
                     {loading ? "Loading" : "Continue"}
                   </button>
-                  {/* <Link
-                    disabled={loading}
-                    to="/"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onSubmit();
-                    }}
-                    className="element-custom-btn mb-3"
-                  >
-                    {loading ? "Loading" : "Log In"}
-                  </Link> */}
-                  <Link to="#" className="social-login-links">
+                  {/* <Link to="#" className="social-login-links">
                     Or connect with social media
                   </Link>
                   <div className="text-center">
@@ -166,7 +155,7 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                       {" "}
                       <img src={fb} /> Continue with Facebook
                     </Link>
-                  </div>
+                  </div> */}
                   <Link
                     onClick={(e) => {
                       e.preventDefault();
@@ -208,7 +197,7 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                     >
                       {loading ? "Loading" : "Continue"}
                     </button>
-                    <Link to="#" className="social-login-links">
+                    {/* <Link to="#" className="social-login-links">
                       Or connect with social media
                     </Link>
                     <div className="continue-with-login-links">
@@ -224,7 +213,7 @@ const LoginModal = ({ show, setShow, setForgetModal }) => {
                       >
                         <img src={fb} /> Continue with Facebook
                       </Link>
-                    </div>
+                    </div> */}
                   </div>
                 </form>
               </Tab.Pane>

@@ -118,14 +118,14 @@ export function TopMenu() {
             </li>
             {userInfo?.id ? (
               <>
-                {/* <li className="nav-item dropdown d-flex flex-column">
+                <li className="nav-item dropdown d-flex flex-column">
                   <Link className="takeaway active" to="#">
                     Pickup
                   </Link>
                   <Link className="takeaway" to="#">
                     Delivery
                   </Link>
-                </li> */}
+                </li>
                 <li
                   onClick={(e) => {
                     e.preventDefault();

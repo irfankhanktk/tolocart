@@ -15,12 +15,16 @@ const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
           <span className="signup-title decoration-none">Sign up</span>
           <p className="privacy-policy">
             By continuing you agree to our{" "}
-            <Link to="/terms">Terms of Service</Link>
+            <Link onClick={() => setShow(false)} to="/terms">
+              Terms of Service
+            </Link>
             <span> and </span>
-            <Link to="/privacy-policy">Privacy Policy.</Link>
+            <Link onClick={() => setShow(false)} to="/privacy-policy">
+              Privacy Policy.
+            </Link>
           </p>
           <RegistrationForm setShow={onSuccessRegister} show={show} />
-          <Link to="#" className="social-links">
+          {/* <Link to="#" className="social-links">
             Or connect with social media
           </Link>
 
@@ -38,7 +42,7 @@ const SignupModal = ({ show, setShow, onSuccessRegister = (bool) => {} }) => {
             >
               <img src={fb} /> Continue with Facebook
             </Link>
-          </div>
+          </div> */}
         </div>
       </Modal.Body>
     </Modal>

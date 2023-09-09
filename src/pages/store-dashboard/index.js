@@ -8,10 +8,13 @@ import { getProductsByCategories } from "../../services/api/api-actions";
 import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
 import { Toast } from "react-bootstrap";
+import SeeMoreProductsModal from "../../components/modals/see-more-products-modal";
 const StoreDashboard = () => {
   const { id } = useParams();
   const [loading, setLoading] = React.useState(true);
   const [storeData, setStoreData] = React.useState([]);
+  const [showMore, setShowMore] = React.useState(false);
+  const [moreProducts, setMoreProducts] = React.useState([]);
   const [error, setError] = React.useState("");
 
   const getStores = async () => {
@@ -35,10 +38,6 @@ const StoreDashboard = () => {
   return (
     <>
       <div className="container-fluid">
-        {/* <StoreCardHeader
-          imgHeight={"220px"}
-          item={storeData[0]?.data[0]?.vendorShop}
-        /> */}
         <div className="row">
           <div className="col-md-2">
             <SideMenu item={storeData[0]?.data[0]?.vendorShop} />
@@ -49,10 +48,25 @@ const StoreDashboard = () => {
                   <MenuList key={index} item={item} loading />
                 ))
               : storeData?.map((item, index) => (
-                  <MenuList key={index} item={item} />
+                  <MenuList
+                    key={index}
+                    item={item}
+                    onClickSeeMore={(products) => {
+                      setShowMore(true);
+                      setMoreProducts(products);
+                    }}
+                  />
                 ))}
           </div>
         </div>
+        <SeeMoreProductsModal
+          products={moreProducts}
+          show={showMore}
+          setShow={() => {
+            setMoreProducts([]);
+            setShowMore(false);
+          }}
+        />
       </div>
     </>
   );

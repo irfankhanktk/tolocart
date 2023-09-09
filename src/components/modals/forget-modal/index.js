@@ -102,7 +102,7 @@ const ForgetModal = ({ show, setShow }) => {
             </Form>
           ) : isActive && !isVerifyOtp ? (
             <>
-              <h1>Countdown Timer</h1>
+              {/* <h5>Verification Code</h5> */}
               <p className="text-center">
                 {`${count < 10 ? "0" : ""}${count}`} seconds
               </p>

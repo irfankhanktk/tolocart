@@ -9,6 +9,8 @@ import Carousel from "../../components/carousel";
 import CateryCard from "../../components/category-card";
 import CompaignCard from "../../components/compaign-card";
 import FrequentlyQuestion from "../../components/frequently-question/index";
+import HomeHeader from "../../components/home-header";
+import SeeMoreCategoriesModal from "../../components/modals/see-more-categories-modal";
 import SeeMoreProductsModal from "../../components/modals/see-more-products-modal";
 import PopularItemCard from "../../components/popular-item-card";
 import StoreCard from "../../components/store-card";
@@ -24,7 +26,6 @@ import { setIsReqLogin } from "../../store/reducers/user-reducer";
 import { UTILS } from "../../utils";
 import ErrorPage from "../error-page";
 import "./style.css";
-import SeeMoreCategoriesModal from "../../components/modals/see-more-categories-modal";
 const MarketPlace = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -73,7 +74,6 @@ const MarketPlace = () => {
       if (errorMessage === "Request failed with status code 401") {
         dispatch(setIsReqLogin(true));
       } else {
-        // alert(errorMessage);
         setError(errorMessage);
       }
     } finally {
@@ -89,24 +89,14 @@ const MarketPlace = () => {
           <Carousel />
         </div>
         <div>
-          <div className="mx-3 d-flex justify-content-between align-items-center home-bg">
-            <span className="font-size-heavy">Choose your best category</span>
-            <span className="text-center">
-              {homeData?.categories?.length > 18 && (
-                <Link
-                  to="#"
-                  className="show-all"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowMoreCat(true);
-                    setMoreCats(homeData?.categories || []);
-                  }}
-                >
-                  Show all <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </Link>
-              )}
-            </span>
-          </div>
+          <HomeHeader
+            title={"Choose your best category"}
+            onClickSeeMore={() => {
+              setShowMoreCat(true);
+              setMoreCats(homeData?.categories || []);
+            }}
+            seeMore={homeData?.categories?.length > 18}
+          />
           <div className="mx-3">
             <div className="card-container row">
               {loading
@@ -194,26 +184,15 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          <div className="mx-3 d-flex justify-content-between align-items-center home-bg">
-            <span className="font-size-heavy">
-              Best Reviewed items which sale faster
-            </span>
-            <span className="text-center">
-              {homeData?.popularProducts?.length > 5 && (
-                <Link
-                  to="#"
-                  className="show-all"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowMore(true);
-                    setMoreProducts(homeData?.popularProducts || []);
-                  }}
-                >
-                  Show all <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </Link>
-              )}
-            </span>
-          </div>
+
+          <HomeHeader
+            title={"Best Reviewed items which sale faster"}
+            onClickSeeMore={() => {
+              setShowMore(true);
+              setMoreProducts(homeData?.popularProducts || []);
+            }}
+            seeMore={homeData?.categories?.length > 18}
+          />
 
           <div className="mx-3">
             <div className="card-container">
@@ -272,11 +251,13 @@ const MarketPlace = () => {
               </Slider>
             </div>
           </div>
-          {homeData?.popularShops?.length && (
-            <p className="home-bg heading-title">
-              Popular store in Ygnico by Area
-            </p>
-          )}
+          <HomeHeader
+            title={"Popular store in Ygnico by Area"}
+            onClickSeeMore={() => {
+              navigate("/stores");
+            }}
+            seeMore={homeData?.popularShops?.length > 3}
+          />
           <div className="mx-3 d-md-flex flex-wrap">
             {loading
               ? new Array(10)
@@ -290,7 +271,7 @@ const MarketPlace = () => {
                     />
                   ))
               : homeData?.popularShops
-                  ?.slice(0, 9)
+                  ?.slice(0, 6)
                   .map((item, index) => <StoreCard key={index} item={item} />)}
 
             {homeData?.popularShops?.length > 9 && (
@@ -302,9 +283,14 @@ const MarketPlace = () => {
             )}
           </div>
 
-          {homeData?.popularProducts?.length && (
-            <p className="home-bg heading-title">Popular Items Nearby</p>
-          )}
+          <HomeHeader
+            title={"Popular Items Nearby"}
+            onClickSeeMore={() => {
+              setShowMore(true);
+              setMoreProducts(homeData?.popularProducts || []);
+            }}
+            seeMore={homeData?.popularProducts?.length > 3}
+          />
           <div className="mx-3">
             <div className="card-container">
               <Slider

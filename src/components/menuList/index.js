@@ -3,23 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { ShimmerTitle } from "react-shimmer-effects";
 import BestReviewedCard from "../best-reviewed-card";
 import "./menuList.css"; // Import the CSS file
-const MenuList = ({ item, loading }) => {
+import HomeHeader from "../home-header";
+const MenuList = ({ item, loading, onClickSeeMore }) => {
   const navigate = useNavigate();
   return (
     <>
       <div className="menuList container-fluid">
-        <div className="menu-list-title mb-3 d-flex justify-content-between align-items-center">
+        <div className="menu-list-title mb-3 d-flex row justify-content-between align-items-center">
           {loading ? (
             <div className="mt-3" style={{ width: "25%" }}>
               <ShimmerTitle line={1} />
             </div>
           ) : (
-            <>
-              <h2>{item?.category?.title}</h2>
-              <h3>
-                Show all <i class="fa fa-angle-right" aria-hidden="true"></i>
-              </h3>
-            </>
+            <HomeHeader
+              title={item?.category?.title}
+              seeMore={item?.data?.length > 4}
+              onClickSeeMore={() => {
+                onClickSeeMore(item?.data);
+              }}
+            />
           )}
         </div>
         <div className="row mb-3">

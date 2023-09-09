@@ -89,7 +89,13 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               {userInfo && (
                 <>
                   <li className="sidebar-list d-flex align-items-center justify-content-between">
-                    <Link to="/order-history" className="sidebar-icon">
+                    <Link
+                      onClick={(e) => {
+                        handleModalClose(false);
+                      }}
+                      to="/order-history"
+                      className="sidebar-icon"
+                    >
                       <img src={shopping_beg} alt="shopping-bag" /> Orders
                     </Link>
                     <i
@@ -107,6 +113,7 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                     <Link
                       onClick={(e) => {
                         e.preventDefault();
+                        handleModalClose(false);
                         setShowProfileModal(true);
                       }}
                       to="#"
@@ -125,7 +132,10 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
               )}
               {userInfo?.id ? (
                 <li
-                  onClick={() => setShowMapModal(true)}
+                  onClick={() => {
+                    handleModalClose(false);
+                    setShowMapModal(true);
+                  }}
                   className="sidebar-list d-flex align-items-center justify-content-between"
                 >
                   <Link
@@ -187,7 +197,13 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 </li>
               ) : null}
               <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <Link to="/help" className="sidebar-icon">
+                <Link
+                  onClick={(e) => {
+                    handleModalClose(false);
+                  }}
+                  to="/help"
+                  className="sidebar-icon"
+                >
                   <img src={question} alt="question" /> Help
                 </Link>
                 <i
@@ -197,7 +213,13 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                 ></i>
               </li>
               <li className="sidebar-list d-flex align-items-center justify-content-between">
-                <Link to="/about" className="sidebar-icon">
+                <Link
+                  to="/about"
+                  onClick={(e) => {
+                    handleModalClose(false);
+                  }}
+                  className="sidebar-icon"
+                >
                   {" "}
                   <img src={info} alt="info" /> About
                 </Link>
@@ -212,7 +234,6 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
             {userInfo && (
               <Link
                 onClick={(e) => {
-                  // e.preventDefault();
                   dispatch(resetUser());
                   dispatch(resetCart());
                   handleModalClose(false);

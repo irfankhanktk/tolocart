@@ -49,12 +49,12 @@
   font-family: "Gilroy";
   font-style: normal;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 29px;
+  font-size: 20px;
+  /* line-height: 21px; */
   text-align: center;
   color: #000000;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .market-place {
   padding: 20px;
@@ -171,13 +171,13 @@
 /* Media query for larger screens */
 @media (min-width: 768px) {
   .font-size-heavy {
-    font-size: 40px;
-  }
-  /* .font-size-heading {
-    font-size: 36px;
-  } */
-  .font-size-normal {
     font-size: 28px;
+  }
+  .font-size-heading {
+    font-size: 32px;
+  }
+  .font-size-normal {
+    font-size: 16px;
   }
   .font-size-small {
     font-size: 16px;
@@ -186,13 +186,13 @@
 /* Media query for mobile screens */
 @media (min-width: 320px) and (max-width: 768px) {
   .font-size-heavy {
-    font-size: 24px;
+    font-size: 18px;
   }
-  /* .font-size-heading {
-    font-size: 20px;
-  } */
-  .font-size-normal {
+  .font-size-heading {
     font-size: 16px;
+  }
+  .font-size-normal {
+    font-size: 15px;
   }
   .font-size-small {
     font-size: 12px;

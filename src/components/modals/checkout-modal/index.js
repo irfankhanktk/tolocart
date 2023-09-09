@@ -32,8 +32,9 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
       dispatch(setCart([]));
       onNextClick(res);
     } catch (error) {
-      console.log("error=>>", error);
-      if (UTILS?.returnError(error) === "Request failed with status code 401") {
+      console.log("error=>>", error?.status);
+
+      if (error?.message === "Request failed with status code 401") {
         dispatch(setIsReqLogin(true));
       } else {
         alert(UTILS?.returnError(error));
@@ -235,7 +236,7 @@ const CheckoutModal = ({ show, setShow, onNextClick }) => {
                 disabled={orderLoading}
                 onClick={() => {
                   onPlaceOrder({
-                    totalAmount: total + deliveryCharges * 1 - totalDiscount,
+                    totalAmount: total + deliveryCharges * 1,
                     shopId: cart?.cart[0]?.vendorShopId,
                     deliveryAddress: user?.location?.address,
                     latitude: user?.location?.latitude,
