@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
   "pk_test_51I7PnfE9ypFo9enALOun4VJ6liBKJkrr1EsxmCfas57xbMo6zj0ZP5472a5jcyy5Yyy6hNYyuMc79vdDrMi7IRcR00759gNMpH"
 );
 
-const PaymentModal = ({show2,setShow2,setPlaceOnlinePayment,amount}) => {     
+const PaymentModal = ({show2,setShow2,setPlaceOnlinePayment,amount,onStripePay}) => {     
      const [clientSecret,setClientSecret]=useState(null)    
      const [stop,setstop]=useState(true)
       function getClientSecret(){ 
@@ -53,7 +53,7 @@ const PaymentModal = ({show2,setShow2,setPlaceOnlinePayment,amount}) => {
                 clientSecret
             }}
           >
-            <Payment amount={amount} clientSecret={clientSecret}/> 
+            <Payment onStripePay={onStripePay} amount={amount} clientSecret={clientSecret}/> 
 
           </Elements> :undefined}
       
@@ -63,7 +63,7 @@ const PaymentModal = ({show2,setShow2,setPlaceOnlinePayment,amount}) => {
 };
 
 export default PaymentModal;
-const Payment = ({amount,clientSecret}) => {  
+const Payment = ({amount,clientSecret,onStripePay}) => {  
   console.log(clientSecret)
   const stripe = useStripe();
   const elements = useElements();
@@ -72,15 +72,15 @@ const Payment = ({amount,clientSecret}) => {
     event.preventDefault();
     const paymentElement = elements.getElement(PaymentElement);
     console.log(paymentElement);
-
-    const result = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
-      elements,
-      confirmParams: {
-        return_url: "https://yourwebsite.com/success"
-      },
-    });
-    console.log(result);
+    onStripePay();
+    // const result = await stripe.confirmPayment({
+    //   //`Elements` instance that was used to create the Payment Element
+    //   elements,
+    //   confirmParams: {
+    //     return_url: "https://yourwebsite.com/success"
+    //   },
+    // });
+    // console.log(result);
 
     
   };

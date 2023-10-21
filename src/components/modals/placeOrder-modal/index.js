@@ -17,11 +17,11 @@ const PlaceOrderModal = ({
   setOrderDetails,
   isOrderHistory,
 }) => {
-  const [isCash, setCash] = useState(true); 
-  const [show2,setShow2]=useState(true)
-  const [loading, setLoading] = React.useState(false);   
-  const [placeOnlinePayment,setPlaceOnlinePayment]=useState(false)
-  const navigate=useNavigate();
+  const [isCash, setCash] = useState(true);
+  const [show2, setShow2] = useState(true);
+  const [loading, setLoading] = React.useState(false);
+  const [placeOnlinePayment, setPlaceOnlinePayment] = useState(false);
+  const navigate = useNavigate();
   const getDetails = async () => {
     try {
       if ((!orderId && !show) || orderDetails?.isAssigned) return;
@@ -32,12 +32,12 @@ const PlaceOrderModal = ({
       console.log("error::", error);
     }
   };
-  const onPlace = async () => {
+  const onPlace = async (paymentMethod='cash') => {
     try {
       setLoading(true);
       const payload = {
         id: orderDetails?.id,
-        paymentMethod: "cash",
+        paymentMethod,
         totalAmount:
           orderDetails?.totalAmount * 1 + orderDetails?.deliveryFee * 1,
       };
@@ -59,17 +59,29 @@ const PlaceOrderModal = ({
   }, [orderId]);
 
   return (
-    <div>    { 
-       placeOnlinePayment ? <PaymentModal show2={show2} setShow2={()=>{
-        navigate(isOrderHistory?'/order-history':'/');
-        setShow2(false);
-      }} setPlaceOnlinePayment={setPlaceOnlinePayment} amount={orderDetails?.deliveryFee * 1 +
-        orderDetails?.totalAmount * 1} />:undefined
-     }
-      <Modal show={show} onHide={()=>{
-          navigate(isOrderHistory?'/order-history':'/');
-        setShow(false)
-        }} centered className="placeorder-wrap">
+    <div>
+      {" "}
+      {placeOnlinePayment ? (
+        <PaymentModal
+        onStripePay={()=>onPlace('Card')}
+          show2={show2}
+          setShow2={() => {
+            navigate(isOrderHistory ? "/order-history" : "/");
+            setShow2(false);
+          }}
+          setPlaceOnlinePayment={setPlaceOnlinePayment}
+          amount={orderDetails?.deliveryFee * 1 + orderDetails?.totalAmount * 1}
+        />
+      ) : undefined}
+      <Modal
+        show={show}
+        onHide={() => {
+          navigate(isOrderHistory ? "/order-history" : "/");
+          setShow(false);
+        }}
+        centered
+        className="placeorder-wrap"
+      >
         <Modal.Header
           closeButton
           className="custom-close-header custom-close-btn d-flex flex-column align-items-start p-2"
@@ -82,12 +94,10 @@ const PlaceOrderModal = ({
               marginLeft: "-10px",
             }}
           >
-      
             Check Out
           </h2>
         </Modal.Header>
         <Modal.Body className="p-0">
-        
           <div>
             <div
               className={`dropdown mb-2 `}
@@ -112,8 +122,8 @@ const PlaceOrderModal = ({
                     color: `${isCash ? "white" : "grey"}`,
                   }}
                   onClick={() => {
-                    setCash(true);  
-                    setPlaceOnlinePayment(false)
+                    setCash(true);
+                    setPlaceOnlinePayment(false);
                   }}
                 >
                   Cash
@@ -126,7 +136,7 @@ const PlaceOrderModal = ({
                     color: `${isCash ? "grey" : "white"}`,
                   }}
                   onClick={() => {
-                    setCash(false);   
+                    setCash(false);
                   }}
                 >
                   Card
@@ -159,13 +169,10 @@ const PlaceOrderModal = ({
                     aria-hidden="true"
                     style={{
                       fontSize: "20px",
-                     
                     }}
                   ></i>
                 </div>
               </Link>
-
-            
             </div>
 
             <div
@@ -207,16 +214,14 @@ const PlaceOrderModal = ({
               ) : (
                 <Link
                   onClick={(e) => {
-                    e.preventDefault();  
-                    if(isCash){ 
+                    e.preventDefault();
+                    if (isCash) {
                       onPlace();
-                    } 
-                    else{
+                    } else {
                       setShow(false);
                       setShow2(true);
-                       setPlaceOnlinePayment(true)   
+                      setPlaceOnlinePayment(true);
                     }
-                  
                   }}
                   to="#"
                   className="element-custom-btn"
