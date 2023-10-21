@@ -259,3 +259,6 @@ a.disabled {
   outline: none;
   background: none;
 }
+body{ 
+  overflow-x:hidden;
+}

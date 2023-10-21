@@ -82,7 +82,7 @@ export function TopMenu() {
             onClick={handleModalOpen}
             // data-bs-toggle="modal"
             // data-bs-target="#exampleModal"
-            style={{ fontSize: "30px", cursor: "pointer" }}
+            style={{ fontSize: "30px", cursor: "pointer" ,color:"grey"}}
           ></i>
           <Link to="/" className="logo d-flex align-items-center">
             <img src={logo_main} alt="tolocart" />
@@ -98,8 +98,8 @@ export function TopMenu() {
               name="search"
               placeholder="Search Groceris stores"
               title="Enter search keyword"
-              onChange={(e) => setSearchTerm(e?.target?.value)}
-            />
+              onChange={(e) => setSearchTerm(e?.target?.value)}   
+                          />
             <button
               type="submit"
               title="Search"
@@ -119,10 +119,10 @@ export function TopMenu() {
             {userInfo?.id ? (
               <>
                 <li className="nav-item dropdown d-flex flex-column">
-                  <Link className="takeaway active" to="#">
+                  <Link className="takeaway active" to="#" style={{fontFamily:"Roboto",border:"none",borderRadius:"5px",color:"grey"}}>
                     Pickup
                   </Link>
-                  <Link className="takeaway" to="#">
+                  <Link className="takeaway" to="#" style={{fontFamily:"Roboto",border:"none",borderRadius:"5px",color:"grey"}}>
                     Delivery
                   </Link>
                 </li>
@@ -137,7 +137,7 @@ export function TopMenu() {
                     <span>
                       <i className="fa fa-map-marker" aria-hidden="true"></i>
                     </span>
-                    <span> {user?.location?.address?.slice(0, 20)}</span>
+                    <span style={{fontFamily:"Roboto",border:"none",borderRadius:"5px",color:"grey"}}> {user?.location?.address?.slice(0, 20)}</span>
                   </button>
                 </li>
               </>
@@ -207,6 +207,7 @@ export function TopMenu() {
         }}
       />
       <PlaceOrderModal
+        isOrderHistory={false}
         orderId={currentOrderId}
         show={placeOrderModal}
         setShow={setPlaceOrderModal}

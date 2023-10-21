@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
-import "./trackOrder.css"; // Import the CSS file
-import {
-  Payment_card,
-  PlaceOrder_img,
-  fb,
-  google,
-} from "../../../assets/images";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { waiting } from "../../../assets/svgs";
+import {
+  PlaceOrder_img
+} from "../../../assets/images";
+import "./trackOrder.css"; // Import the CSS file
 const TrackOrderModal = ({ show, setShow, orderId, orderDetails }) => {
   const navigate = useNavigate();
 
@@ -32,7 +28,10 @@ const TrackOrderModal = ({ show, setShow, orderId, orderDetails }) => {
             </h3>
             <div style={{ margin: "20px 0px" }}>
               <Link
-                to={`/track-order?id=${orderId}`}
+                onClick={()=>{
+                  setShow(false)
+                }}
+                to={`/track-order/${orderId}`}
                 className="element-custom-btn"
                 style={{ textDecoration: "none" }}
               >

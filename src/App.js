@@ -4,15 +4,20 @@ import "./App.css";
 import Footer from "./components/footer";
 import { TopMenu } from "./components/top-menu";
 // import Home from "./pages/home";
+import { useDispatch } from "react-redux";
+import { STORAGE_KEYS } from "./constants";
+import "./firebase-config";
+import About from "./pages/about";
+import ErrorPage from "./pages/error-page";
+import Help from "./pages/help";
 import MarketPlace from "./pages/market-place";
 import OrderHistory from "./pages/order-history";
+import PrivacyPolicy from "./pages/privacy-policy";
 import ProductDetails from "./pages/product-details";
 import SideDasboard from "./pages/store-dashboard";
 import Stores from "./pages/stores";
+import TermsAndConditions from "./pages/terms-conditions";
 import TrackOrder from "./pages/track-order";
-import { useDispatch } from "react-redux";
-import { setUserInfo } from "./store/reducers/user-reducer";
-import "./firebase-config";
 import {
   getCurrentLocation,
   getFavProductIds,
@@ -20,13 +25,7 @@ import {
   getSlides,
   getVehicleDetails,
 } from "./services/api/api-actions";
-import { STORAGE_KEYS } from "./constants";
-import Help from "./pages/help";
-import About from "./pages/about";
-import MapComponent from "./components/modals/map-modal";
-import ErrorPage from "./pages/error-page";
-import PrivacyPolicy from "./pages/privacy-policy";
-import TermsAndConditions from "./pages/terms-conditions";
+import { setUserInfo } from "./store/reducers/user-reducer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,7 +55,7 @@ const App = () => {
             <Route path="/store-dashboard/:id" element={<SideDasboard />} />
             <Route path="/product-detail/:id" element={<ProductDetails />} />
             <Route path="/track-order/:id" element={<TrackOrder />} />
-            <Route path="/order-history" element={<OrderHistory />} />
+            <Route path="/order-history" element={<OrderHistory />} />       
             <Route path="/about" element={<About />} />
             <Route path="/help" element={<Help />} />
             <Route index path="/" element={<MarketPlace />} />

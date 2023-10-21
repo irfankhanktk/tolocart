@@ -26,7 +26,7 @@ const MyCarousel = () => {
       {slidesData?.map((item, index) => (
         <div key={index}>
           <img
-            style={{ height: "450px", width: "100%" }}
+            style={{ height: "auto", width: "90%" ,marginLeft:"50%",transform:"translate(-50%,0%)",marginTop:"35px",borderRadius:"12px",opacity:".7"}}
             src={item?.image}
             alt="First slide"
           />

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { Button, Modal, Nav, Tab, Form, Row, Col } from "react-bootstrap";
-import "./placeOrder.css"; // Import the CSS file
-import { Payment_card, fb, google } from "../../../assets/images";
+import { Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getOrderDetails,
   updateOrderPayment,
 } from "../../../services/api/api-actions";
-import { waiting } from "../../../assets/svgs";
 import { UTILS } from "../../../utils";
-import { Link } from "react-router-dom";
+import PaymentModal from "../payment";
+import "./placeOrder.css"; // Import the CSS file
 const PlaceOrderModal = ({
   show,
   setShow,
@@ -16,10 +15,13 @@ const PlaceOrderModal = ({
   orderId,
   orderDetails,
   setOrderDetails,
+  isOrderHistory,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [arrowRotation, setArrowRotation] = useState(0);
-  const [loading, setLoading] = React.useState(false);
+  const [isCash, setCash] = useState(true); 
+  const [show2,setShow2]=useState(true)
+  const [loading, setLoading] = React.useState(false);   
+  const [placeOnlinePayment,setPlaceOnlinePayment]=useState(false)
+  const navigate=useNavigate();
   const getDetails = async () => {
     try {
       if ((!orderId && !show) || orderDetails?.isAssigned) return;
@@ -55,200 +57,142 @@ const PlaceOrderModal = ({
       clearInterval(intervalId);
     };
   }, [orderId]);
-  const handleArrowClick = () => {
-    setIsOpen(!isOpen);
-    setArrowRotation(arrowRotation === 0 ? 90 : 0);
-  };
 
   return (
-    <div>
-      <Modal show={show} onHide={setShow} centered className="placeorder-wrap">
+    <div>    { 
+       placeOnlinePayment ? <PaymentModal show2={show2} setShow2={()=>{
+        navigate(isOrderHistory?'/order-history':'/');
+        setShow2(false);
+      }} setPlaceOnlinePayment={setPlaceOnlinePayment} amount={orderDetails?.deliveryFee * 1 +
+        orderDetails?.totalAmount * 1} />:undefined
+     }
+      <Modal show={show} onHide={()=>{
+          navigate(isOrderHistory?'/order-history':'/');
+        setShow(false)
+        }} centered className="placeorder-wrap">
         <Modal.Header
           closeButton
           className="custom-close-header custom-close-btn d-flex flex-column align-items-start p-2"
         >
-          <h2 className="custom-header_title">
-            {!orderDetails?.isAssigned ? "Waiting" : "Check Out"}
+          <h2
+            className="custom-header_title"
+            style={{
+              fontWeight: "normal",
+              fontFamily: "Roboto",
+              marginLeft: "-10px",
+            }}
+          >
+      
+            Check Out
           </h2>
         </Modal.Header>
         <Modal.Body className="p-0">
-          {!orderDetails?.isAssigned ? (
-            <div className="text-center">
-              <img src={waiting} />
-              <p>Please wait we are assigning your order to delivery boy</p>
+        
+          <div>
+            <div
+              className={`dropdown mb-2 `}
+              style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
+            >
+              <h1 className="select-title">Payment</h1>
+
+              <ul
+                id="paymentmethod"
+                style={{
+                  transition: "transform 0.3s ease ",
+                  fontFamily: "Roboto",
+                  color: "grey",
+                  paddingLeft: "25px",
+                }}
+              >
+                <li
+                  style={{
+                    marginTop: "3px",
+                    cursor: "pointer",
+                    background: `${isCash ? "#ff5a00" : "white"}`,
+                    color: `${isCash ? "white" : "grey"}`,
+                  }}
+                  onClick={() => {
+                    setCash(true);  
+                    setPlaceOnlinePayment(false)
+                  }}
+                >
+                  Cash
+                </li>
+                <li
+                  style={{
+                    marginTop: "5px",
+                    cursor: "pointer",
+                    background: `${isCash ? "white" : "#ff5a00"}`,
+                    color: `${isCash ? "grey" : "white"}`,
+                  }}
+                  onClick={() => {
+                    setCash(false);   
+                  }}
+                >
+                  Card
+                </li>
+              </ul>
             </div>
-          ) : (
-            <div>
-              <div
-                className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
-                style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
+
+            <div
+              className={`dropdown mb-2 `}
+              style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
+            >
+              <Link
+                className="btn btn-secondary dropdown-toggle custom-dropdown"
+                to="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+
+                // onClick={handleArrowClick}
               >
-                <Link
-                  className="btn btn-secondary dropdown-toggle custom-dropdown"
-                  to="#"
-                  role="button"
-                  id="dropdownMenuLink"
-                  data-bs-toggle="dropdown"
-                  aria-expanded={isOpen ? "true" : "false"}
-                  onClick={handleArrowClick}
-                >
-                  <h1 className="select-title">Payment</h1>
-                  <div className="d-flex gap-2 align-items-center">
-                    {/* <img src={Payment_card} /> */}
-                    <span>Cash</span>
-                    <i
-                      className={`fa fa-angle-right ${isOpen ? "open" : ""}`}
-                      aria-hidden="true"
-                      style={{
-                        fontSize: "20px",
-                        transform: `rotate(${arrowRotation}deg)`,
-                        transition: "transform 0.3s ease",
-                      }}
-                    ></i>
-                  </div>
-                </Link>
+                <h1 className="select-title">Total Cost</h1>
+                <div className="d-flex gap-2 align-items-center">
+                  <span className="select-detail-dsc">
+                    ${" "}
+                    {orderDetails?.deliveryFee * 1 +
+                      orderDetails?.totalAmount * 1}
+                  </span>
+                  <i
+                    className={`fa fa-angle-right`}
+                    aria-hidden="true"
+                    style={{
+                      fontSize: "20px",
+                     
+                    }}
+                  ></i>
+                </div>
+              </Link>
 
-                <ul
-                  className={`dropdown-menu custom-dropdown-menu ${
-                    isOpen ? "show" : ""
-                  }`}
-                  aria-labelledby="dropdownMenuLink"
-                  style={{ transition: "transform 0.3s ease " }}
-                >
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Cash
-                    </Link>
-                  </li>
-                  {/* <li>
-                    <Link className="dropdown-item" to="#">
-                      Another action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Something else here
-                    </Link>
-                  </li> */}
-                </ul>
-              </div>
-              {/* <div
-                className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
-                style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
-              >
-                <Link
-                  className="btn btn-secondary dropdown-toggle custom-dropdown"
-                  to="#"
-                  role="button"
-                  id="dropdownMenuLink"
-                  data-bs-toggle="dropdown"
-                  aria-expanded={isOpen ? "true" : "false"}
-                  // onClick={handleArrowClick}
-                >
-                   <h1 className="select-title">Promo Code</h1>
-                  <div className="d-flex gap-2 align-items-center">
-                    <span className="select-detail-dsc">Pick discount</span>
-                    <i
-                      className={`fa fa-angle-right ${isOpen ? "open" : ""}`}
-                      aria-hidden="true"
-                      style={{
-                        fontSize: "20px",
-                        transform: `rotate(${arrowRotation}deg)`,
-                        transition: "transform 0.3s ease",
-                      }}
-                    ></i>
-                  </div> 
-                </Link>
+            
+            </div>
 
-                <ul
-                  className={`dropdown-menu custom-dropdown-menu ${
-                    isOpen ? "show" : ""
-                  }`}
-                  aria-labelledby="dropdownMenuLink"
-                  style={{ transition: "transform 0.3s ease " }}
-                >
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Another action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Something else here
-                    </Link>
-                  </li>
-                </ul>
-              </div> */}
-              <div
-                className={`dropdown mb-2 ${isOpen ? "show" : ""}`}
-                style={{ borderBottom: "1px solid rgba(226, 226, 226, 0.7)" }}
-              >
-                <Link
-                  className="btn btn-secondary dropdown-toggle custom-dropdown"
-                  to="#"
-                  role="button"
-                  id="dropdownMenuLink"
-                  data-bs-toggle="dropdown"
-                  aria-expanded={isOpen ? "true" : "false"}
-                  // onClick={handleArrowClick}
-                >
-                  <h1 className="select-title">Total Cost</h1>
-                  <div className="d-flex gap-2 align-items-center">
-                    <span className="select-detail-dsc">
-                      ${" "}
-                      {orderDetails?.deliveryFee * 1 +
-                        orderDetails?.totalAmount * 1}
-                    </span>
-                    <i
-                      className={`fa fa-angle-right ${isOpen ? "open" : ""}`}
-                      aria-hidden="true"
-                      style={{
-                        fontSize: "20px",
-                        // transform: `rotate(${arrowRotation}deg)`,
-                        // transition: "transform 0.3s ease",
-                      }}
-                    ></i>
-                  </div>
-                </Link>
+            <div
+              className="termsConditon-order"
+              style={{ fontFamily: "Roboto" }}
+            >
+              <p style={{ fontWeight: "normal", marginTop: "25px" }}>
+                By placing an order you agree to our <br />{" "}
+                <span style={{ paddingTop: "25px" }}>
+                  <Link
+                    to="#"
+                    style={{
+                      fontWeight: "normal",
+                      fontFamily: "Roboto",
+                      marginLeft: "30%",
+                      textDecoration: "none",
+                      transform: "translate(-20%)",
+                    }}
+                  >
+                    Terms and Conditions
+                  </Link>
+                </span>
+              </p>
+            </div>
 
-                {/* <ul
-                  className={`dropdown-menu custom-dropdown-menu ${
-                    isOpen ? "show" : ""
-                  }`}
-                  aria-labelledby="dropdownMenuLink"
-                  style={{ transition: "transform 0.3s ease " }}
-                >
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Another action
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Something else here
-                    </Link>
-                  </li>
-                </ul> */}
-              </div>
-
-              <div className="termsConditon-order">
-                <p>
-                  By placing an order you agree to our <br />{" "}
-                  <Link to="#">Terms and Conditions</Link>
-                </p>
-              </div>
-
-              <div style={{ margin: "50px 0px" }}>
+            <div style={{ margin: "50px 0px" }}>
+              {isCash ? (
                 <Link
                   onClick={(e) => {
                     e.preventDefault();
@@ -256,13 +200,34 @@ const PlaceOrderModal = ({
                   }}
                   to="#"
                   className="element-custom-btn"
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", fontFamily: "Roboto" }}
                 >
                   {loading ? "Loading" : "Place Order"}
                 </Link>
-              </div>
+              ) : (
+                <Link
+                  onClick={(e) => {
+                    e.preventDefault();  
+                    if(isCash){ 
+                      onPlace();
+                    } 
+                    else{
+                      setShow(false);
+                      setShow2(true);
+                       setPlaceOnlinePayment(true)   
+                    }
+                  
+                  }}
+                  to="#"
+                  className="element-custom-btn"
+                  style={{ textDecoration: "none", fontFamily: "Roboto" }}
+                >
+                  {loading ? "Loading" : "Proceed To Card Payment"}
+                </Link>
+              )}
             </div>
-          )}
+          </div>
+          {/* )} */}
         </Modal.Body>
       </Modal>
     </div>

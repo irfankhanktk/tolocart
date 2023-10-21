@@ -29,7 +29,8 @@ const TrackOrder = (props) => {
     try {
       if (!id) return;
       setLoading(true);
-      const res = await getOrderDetails(id);
+      const res = await getOrderDetails(id); 
+      console.log(res)
       setPlaceOrderModal(!res?.data?.isAssigned);
       setOrderDetails(res?.data);
     } catch (error) {
@@ -85,11 +86,12 @@ const TrackOrder = (props) => {
         <Loader />
       ) : !orderDetails?.isAssigned ? (
         <PlaceOrderModal
+        isOrderHistory={true}
           orderId={orderDetails?.id}
           show={placeOrderModal}
           setShow={() => {
             setPlaceOrderModal(false);
-            navigate("/order-history");
+            // navigate("/order-history");
           }}
           onPlaceClick={() => {
             // setTrackOrderModal(true);

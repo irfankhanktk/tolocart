@@ -103,6 +103,22 @@ const MainSideBar = ({ showModal, handleModalClose }) => {
                       style={{ cursor: "pointer" }}
                       aria-hidden="true"
                     ></i>
+                  </li>  
+                  <li className="sidebar-list d-flex align-items-center justify-content-between">
+                    <Link
+                      onClick={(e) => {
+                        handleModalClose(false);
+                      }}
+                      to="/payment-processing"
+                      className="sidebar-icon"
+                    >
+                      <img src={shopping_beg} alt="shopping-bag" /> Payments
+                    </Link>
+                    <i
+                      className="fa fa-chevron-right"
+                      style={{ cursor: "pointer" }}
+                      aria-hidden="true"
+                    ></i>
                   </li>
                   <li
                     onClick={(e) => {
